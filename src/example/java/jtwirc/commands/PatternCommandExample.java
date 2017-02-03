@@ -1,0 +1,37 @@
+package com.gikk.twirk.commands;
+
+import com.gikk.twirk.Twirk;
+import jtwirc.enums.USER_TYPE;
+import jtwirc.types.twitchMessage.TwitchMessage;
+import jtwirc.types.users.TwitchUser;
+
+public class PatternCommandExample extends CommandExampleBase
+{
+    private static String PATTERN = "tick";
+
+    private final Twirk twirk;
+
+    public PatternCommandExample(Twirk twirk)
+    {
+        super(CommandType.CONTENT_COMMAND);
+        this.twirk = twirk;
+    }
+
+    @Override
+    protected String getCommandWords()
+    {
+        return PATTERN;
+    }
+
+    @Override
+    protected USER_TYPE getMinUserPrevilidge()
+    {
+        return USER_TYPE.DEFAULT;
+    }
+
+    @Override
+    protected void performCommand(String command, TwitchUser sender, TwitchMessage message)
+    {
+        twirk.channelMessage("Tock");
+    }
+}
