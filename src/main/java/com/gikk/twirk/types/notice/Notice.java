@@ -5,7 +5,7 @@ import com.gikk.twirk.types.AbstractType;
 
 /**
  * Class for representing a NOTICE from Twitch.<br><br>
- * <p/>
+ * <p>
  * A NOTICE means that there were some event occured on Twitch's side that they want to inform us of. There are
  * a lot of different reasons for receiving a notice, and it is impossible to explicitly cover them all. Thus, I've
  * chosen to cover those that Twitch have stated in their documentation:

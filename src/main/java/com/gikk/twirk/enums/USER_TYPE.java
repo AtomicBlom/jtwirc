@@ -4,10 +4,10 @@ package com.gikk.twirk.enums;
  * Enum for representing different types of users, as labeled by Twitch. <br>
  * DEFAULT in this case means that no information was given, and it can be assumed that a user
  * with DEFAULT user type is a normal user, without any special privileges is this channel.<br><br>
- * <p/>
+ * <p>
  * USER_TYPE comes with a value. OWNER = 9, MOD = 2, GLOBAL_MOD = ADMIN = STAFF = 1, DEFAULT = 0.<br>
  * These values can be used to make sure that only users of a certain type can do something.<br><br>
- * <p/>
+ * <p>
  * For example:<br>
  * <pre><code>if( user.USER_TYPE.value &gt;= USER_TYPE.MOD.value )</code>
  * 	<code>doSomething();</code></pre>
@@ -45,7 +45,7 @@ public enum USER_TYPE
     /**
      * This types value. Useful for regulating which kind of users should trigger / can perform
      * certain actions. <br><br>
-     * <p/>
+     * <p>
      * For example:<br>
      * <pre><code>if( user.USER_TYPE.value == USER_TYPE.MOD.value )</code>
      * 	<code>doSomething();</code></pre>

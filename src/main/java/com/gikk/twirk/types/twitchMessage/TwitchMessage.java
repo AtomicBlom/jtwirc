@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * An encapsulation of a message sent via Twitch chat. <br><br>
- * <p/>
+ * <p>
  * A message can have many different structures, but since they are based on the
  * IRC protocol, they will have 1 to 5 different segments, each segment separated
  * with a space (the last segment, the actual message, may contain any amount of spaces).
@@ -47,10 +47,10 @@ public interface TwitchMessage extends AbstractType
 
     /**
      * Retrieves the message's prefix.<br><br>
-     * <p/>
+     * <p>
      * A typical Twitch message looks something line this:<br>
      * <code>:name!name@name.tmi.twitch.tv COMMAND #channel :message</code> <br><br>
-     * <p/>
+     * <p>
      * The prefix is the part before the first space. It usually only contains data about the sender of
      * the message, but it might sometimes contain other information (PING messages for example just have PING as
      * their prefix).<br><br>
@@ -70,7 +70,7 @@ public interface TwitchMessage extends AbstractType
     /**
      * Retrieves the message's target.<br>
      * The target tells us whom the message is intended towards. It can be a user, a channel, or something else.<br><br>
-     * <p/>
+     * <p>
      * This segment is not always present.
      *
      * @return The message's target, or {@code ""} if no target
@@ -81,7 +81,7 @@ public interface TwitchMessage extends AbstractType
      * Retrieves the message's content.<br>
      * The content is the commands parameters. Most often, this is the actual chat message, but it may be many
      * other things for other commands.<br><br>
-     * <p/>
+     * <p>
      * This segment is not always present.
      *
      * @return The message's content, or {@code ""} if no content

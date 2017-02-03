@@ -5,11 +5,11 @@ import com.gikk.twirk.types.users.TwitchUser;
 
 /**
  * Class for representing a MODE from Twitch. A MODE means that a user gained or lost mod status. <br><br>
- * <p/>
+ * <p>
  * <b>IMPORTANT</b> Twitch's MODE messages are not reliable. Sometimes users lose mod status for a few moments without explanation. It might
  * also take up to 1 minute to fire a MODE event after you grant someone mod status. Therefore, I recommend relying on the {@link TwitchUser} object
  * which is accompanied each PRIVMSG and WHISPER sent from Twitch, and check from mod status in that instead.<br><br>
- * <p/>
+ * <p>
  * If you still use MODE messages, this is what you need to know:<br>
  * MODE messages come it two forms:<ul>
  * <li>GAINED_MOD - Someone was granted mod status. The {@code user} field tells you whom gained mod.

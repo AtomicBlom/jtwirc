@@ -7,7 +7,7 @@ import java.net.SocketException;
 
 /**
  * This class handles all outgoing IRC traffic.<br><br>
- * <p/>
+ * <p>
  * The implementation is intended to be thread safe and handle all potential errors (<u>keyword: INTENDED</u>).
  * That means that we can have multiple threads feeding the message queue safely and still operate without any trouble.
  *

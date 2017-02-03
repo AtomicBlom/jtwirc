@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 /**
  * Class for representing a Twitch emote, which can be embedded into chat messages.<br><br>
- * <p/>
+ * <p>
  * An emote has three features: <ul>
  * <li>EmoteID - The numeric ID for the emote.
  * <li>Pattern - The emote's string pattern (Ex. 'Kappa')
@@ -33,7 +33,7 @@ public interface Emote
 
     /**
      * A list of pairs on indices. Each pair is a BEGIN-END pair of a emote occurrence in the message.<br><br>
-     * <p/>
+     * <p>
      * For example, if the message is: {@code Kappa PogChamp Kappa}<br> the list for emote 'Kappa' will include these pairs:<ul>
      * <li> (0,5)
      * <li> (15,20)

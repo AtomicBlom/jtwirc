@@ -4,7 +4,7 @@ import com.gikk.twirk.types.AbstractType;
 
 /**
  * Class for representing a ROOMSTATE from Twitch.<br><br>
- * <p/>
+ * <p>
  * A ROOMSTATE means that there were some changes to the rooms attributes. When you first join a room, you will get a snapshot
  * of the rooms current ROOMSTATE. If changes occur, only the relevant changes will be included in the ROOMSTATE
  * A room has four different attributes <ul>

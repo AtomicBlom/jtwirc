@@ -24,9 +24,8 @@ import com.gikk.twirk.types.users.UserstateBuilder;
 /**
  * Class for creating instances of {@link Twirk}.<br>
  * To build an instance of {@link Twirk}, the user has to supply the bot's nick and
- * oAuth token. To generate a oAuth token, visit <a href="https://twitchapps.com/tmi/">https://twitchapps.com/tmi/</a><br><br>
- * <p/>
- * <p/>
+ * oAuth token. To generate a oAuth token, visit <a href="https://twitchapps.com/tmi/">https://twitchapps.com/tmi/</a>
+ * <p>
  * If you want to change any setting except the required once, use one of the
  * setter methods related to this object. When all settings are performed, use the
  * {@link #build()} method.

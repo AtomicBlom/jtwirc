@@ -31,22 +31,22 @@ import java.util.*;
 /**
  * Class for communicating with the TwitchIrc chat.<br>
  * To create instances of Twirk, see {@link TwirkBuilder}.<br><br>
- * <p/>
+ * <p>
  * TwitchIrc behaves a bit different from regular IRC, in that it uses only a few types of message types
  * and it has a few message types of its own. This class is intended to cover all of Twitch's special
  * features, and thus making it easier to communicate with Twitch chat programmatically. <br><br>
- * <p/>
+ * <p>
  * To connect to Twitch chat, you need to generate a Twitch account and you need to generate an IRC oAuth
  * token for that account. To generate a oAuth token, visit <a href="https://twitchapps.com/tmi/">https://twitchapps.com/tmi/</a><br><br>
- * <p/>
+ * <p>
  * This library is very basic, and only intended for simplistic bots. I would not recommend using this
  * in a advanced, long term or commercial product. For those kinds of applications, consider looking
  * into a more robust and well tested library, such as IrcAPI or PircBotX.<br><br>
- * <p/>
+ * <p>
  * For documentation about how Twitch communicates via IRC,
  * see <a href="https://github.com/justintv/Twitch-API/blob/master/IRC.md">
  * https://github.com/justintv/Twitch-API/blob/master/IRC.md </a>
- * <p/>
+ * <p>
  * Code inspired by <a href="http://archive.oreilly.com/pub/h/1966#code">http://archive.oreilly.com/pub/h/1966#code</a>
  *
  * @author Gikkman
@@ -181,10 +181,10 @@ public class Twirk
      * Fetches a set of all the users that are <b>currently</b> online in the joined channel. Note that this set is
      * <b>copy</b> of the underlying set of online users. Thus, changes to the original set will not be visible
      * in the returned set, and changes to the returned set will not affect the original set.<br><br>
-     * <p/>
+     * <p>
      * For getting all users online as soon as we connect, and the server has told us who are online,
      * see {@link TwirkListener#onNamesList(java.util.Collection)}
-     * <p/>
+     * <p>
      * Also worth noting is that the set only contains the users names in lower case letters.
      *
      * @return A copy of the Set of online users.
@@ -206,7 +206,7 @@ public class Twirk
      * Fetches a set of all the moderators that are <b>currently</b> online in the joined channel. Note that this set is
      * <b>copy</b> of the underlying set of online moderators. Thus, changes to the original set will not be visible
      * in the returned set, and changes to the returned set will not affect the original set.<br><br>
-     * <p/>
+     * <p>
      * Also worth noting is that the set only contains the moderators names in lower case letters.
      *
      * @return A copy of the Set of online moderators.
@@ -319,9 +319,9 @@ public class Twirk
     /**
      * Closes the connection to the IrcServer, leaves all channels, terminates the input- and output thread and
      * frees all resources. <br><br>
-     * <p/>
+     * <p>
      * It is safe to call this method even if connections are already closed.<br><br>
-     * <p/>
+     * <p>
      * This method is different from {@link #close()} in that it calls the {@link TwirkListener#onDisconnect()} method
      * of all the listeners. A listener may thus attempt to reconnect
      */
@@ -349,9 +349,9 @@ public class Twirk
     /**
      * Closes the connection to the IrcServer, leaves all channels, terminates the input- and output thread and
      * frees all resources. <br><br>
-     * <p/>
+     * <p>
      * It is safe to call this method even if connections are already closed.<br><br>
-     * <p/>
+     * <p>
      * This method is different from {@link Twirk#disconnect()} in that it <b>does not</b> call the {@link TwirkListener#onDisconnect()} method
      * of any of the listeners. Thus, this method is intended to be called if you want to make sure no reconnect attempts are performed.
      */

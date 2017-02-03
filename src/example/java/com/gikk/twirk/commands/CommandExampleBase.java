@@ -102,7 +102,7 @@ public abstract class CommandExampleBase extends TwirkListenerBaseImpl
      * This method must return the minimum {@link USER_TYPE} required to invoke this command.<br>
      * For example, if only USER_TYPE.MOD or higher should be able to invoke the command, this
      * method should return USER_TYPE.MOD. <br><br>
-     * <p/>
+     * <p>
      * If everyone should be able to invoke it, simply return {@link USER_TYPE#DEFAULT}
      *
      * @return The minimum {@link USER_TYPE} which can invoke this command.

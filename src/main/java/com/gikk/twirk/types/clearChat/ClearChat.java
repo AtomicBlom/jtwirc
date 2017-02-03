@@ -5,7 +5,7 @@ import com.gikk.twirk.types.AbstractType;
 
 /**
  * Class for representing a CLEARCHAT from Twitch.<br><br>
- * <p/>
+ * <p>
  * A CLEARCHAT means that some parts of chat have been purged. This can be because a user was purged or banned, or because the entire
  * chat was clear. CLEARCHAT comes in two forms: USER and COMPLETE. <ul>
  * <li>USER - A user has been purged. <code>target</code> tells us the name of the user whom was purged

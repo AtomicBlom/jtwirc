@@ -44,7 +44,7 @@ public interface TwirkListener
      * PART messages, so we might receive a JOIN from a user who we never saw PART. Another
      * important thing to note is that for large channels (1k chatters +), Twitch only sends
      * JOINS/PARTS for moderators.<br><br>
-     * <p/>
+     * <p>
      * Also worth noting is that we don't see any properties for the joining user, we only see his/her
      * Twitch user name in lower case
      *
@@ -57,7 +57,7 @@ public interface TwirkListener
      * JOIN messages, so we might receive a PART from a user who we never saw JOIN. Another
      * important thing to note is that for large channels (1k chatters +), Twitch only sends
      * JOINS/PARTS for moderators.<br><br>
-     * <p/>
+     * <p>
      * Also worth noting is that we don't see any properties for the parting user, we only see his/her
      * Twitch user name in lower case
      *

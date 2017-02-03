@@ -2,7 +2,7 @@ package com.gikk.twirk.enums;
 
 /**
  * Enum for representing different sizes of Twitch Emotes.<br><br>
- * <p/>
+ * <p>
  * Emotes comes in three different sizes: Small, Medium and Large.
  *
  * @author Gikkman

@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 /**
  * Simple example of how Twirk can be used. <br><br>
- * <p/>
+ * <p>
  * Make sure that you replace the <code>SETTINGS.MY_NICK</code> and <code>SETTINGS.MY_PASS</code> with the
  * proper values. To generate a Twitch Irc password, visit
  * <a href="https://twitchapps.com/tmi/"> https://twitchapps.com/tmi/ </a>

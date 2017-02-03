@@ -9,7 +9,7 @@ import java.util.LinkedList;
  * </ul>
  * We also want the {@link #next()} method to block until there is anything to send to the IRC server in the
  * queue.<br><br>
- * <p/>
+ * <p>
  * Due to these reasons, we cannot use a normal queue. Thus we use this thread safe and blocking implementation.
  *
  * @author Gikkman

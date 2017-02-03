@@ -5,11 +5,11 @@ import com.gikk.twirk.types.AbstractType;
 
 /**
  * Class for representing a CLEARCHAT from Twitch.<br><br>
- * <p/>
+ * <p>
  * Twitch sends us USERSTATE as a response whenever we send them a message. The USERSTATE message will tell
  * us certain properties related to ourselves, such as our display name, our color, if we're mod and so on. Objects
  * of this class can thus be used to inspect what properties we have on Twitch's side.<br><br>
- * <p/>
+ * <p>
  * For documentation about how Twitch communicates via IRC,
  * see <a href="https://github.com/justintv/Twitch-API/blob/master/IRC.md">
  * https://github.com/justintv/Twitch-API/blob/master/IRC.md </a>
@@ -65,11 +65,11 @@ public interface Userstate extends AbstractType
     /**
      * Retrieves the emote sets that are available to this account. You can uses the emote set's names to request information
      * about those emotes from Twitch.<br><br>
-     * <p/>
+     * <p>
      * For example, if we have emote set 0, we can request information about the emotes in that set by visiting:<br>
      * <a href="https://api.twitch.tv/kraken/chat/emoticon_images?emotesets=0">https://api.twitch.tv/kraken/chat/emoticon_images?emotesets=0</a>
      * A request to that adress will return a JSON file with all emotes in that set.<br><br>
-     * <p/>
+     * <p>
      * You can request information about several sets at once, by listing emote sets after one another separated by a comma ( , )<br>
      * For example: <a href="https://api.twitch.tv/kraken/chat/emoticon_images?emotesets=0,12">https://api.twitch.tv/kraken/chat/emoticon_images?emotesets=0,12</a>
      *

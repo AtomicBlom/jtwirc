@@ -57,10 +57,10 @@ public interface Usernotice extends AbstractType
     /**
      * Retrieves the users set of badges in Twitch chat. A badge looks like this: <br>
      * {@code broadcaster/1} <br><br>
-     * <p/>
+     * <p>
      * There are several different badges, such as {@code broadcaster/1}, {@code turbo/1} and so on. I do
      * not know all of them explicitly, or what to do with them.
-     * <p/>
+     * <p>
      * TODO: Find out more about badges
      *
      * @return Arrays of strings, representing this users badges. Might be empty if user has none.
@@ -101,7 +101,7 @@ public interface Usernotice extends AbstractType
     /**
      * The system message contains the text which'll be printed in the Twitch Chat on Twitch's side. It might look like this: <br>
      * {@code system-msg=TWITCH_UserName\shas\ssubscribed\sfor\s6\smonths!;}.<br><br>
-     * <p/>
+     * <p>
      * This method returns the system message like it looks from server side. It will, however, change all {@code \s} to spaces.
      *
      * @return The system message

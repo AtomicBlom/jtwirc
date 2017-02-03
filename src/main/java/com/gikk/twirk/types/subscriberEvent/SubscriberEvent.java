@@ -6,7 +6,7 @@ import com.gikk.twirk.types.usernotice.Usernotice;
 
 /**
  * Class for representing a Subscription Event from Twitch.<br><br>
- * <p/>
+ * <p>
  * These events are caught by scraping chat for certain messages from the user 'twitchnotify'.
  * There are 5 types of subscriber events: <ul>
  * <li>NEW - A new subscriber, whom have not subscribed before
@@ -16,7 +16,7 @@ import com.gikk.twirk.types.usernotice.Usernotice;
  * <li>HOST_RESUB - The channel you are hosting had a re-subscriber
  * <li>UNKNOWN - Safety valve. Only returned if we received a notice we could not parse
  * </ul>
- * <p/>
+ * <p>
  * The {@link #getValue()} method will return different information depending on what type of notification
  * we received. If it is a re-sub event (host or local) it will contain how many months the subscriber has subscribed
  * for thus far. If it is a resub-away event, it will tell us how many subscribers re-subbed when we were away. In any
