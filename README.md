@@ -1,32 +1,24 @@
-# Java-Twirk
-[![](https://jitpack.io/v/gikkman/java-twirk.svg)](https://jitpack.io/#gikkman/java-twirk)
+# jtwirc
+[![](https://jitpack.io/v/techbrew-mc/jtwirc.svg)](https://jitpack.io/#techbrew-mc/jtwirc)
 
-Small, basic library for creating an IRC connection to the Twitch chat.
+Java library for Twitch Chat Bot functionality.
 
 The library is intended to make communication via Twitch chat as easy as possible, and uses Java objects to represent most events that can occur in Twitch chat. 
 
-Java 6 compatible.
+Java 8 compatible.
 
 ##Installation
-Include the following in your pom.xml
 
+Add this project as a Gradle dependency via [jitpack.io](https://github.com/techbrew-mc/jtwirc):
+
+```groovy
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+dependencies {
+    compile "com.github.urgrue:Java-Twitch-Api-Wrapper:0.3.1"
+}
 ```
-    <repositories>
-		<repository>
-		    <id>jitpack.io</id>
-		    <url>https://jitpack.io</url>
-		</repository>
-	</repositories>
-	
-	...
-	
-	<dependency>
-	    <groupId>com.github.gikkman</groupId>
-	    <artifactId>Java-Twirk</artifactId>
-	    <version>LATEST_RELEASE_VERION_HERE</version>
-	</dependency>
-```
-Or simply download the latest version of the library jar from the release page.
 
 #Usage
 ####Basic usage
@@ -37,7 +29,7 @@ Or simply download the latest version of the library jar from the release page.
   twirk.close();
 ```
 ####Events
-All events which can be reacted to are listed in [TwirkListener.java](https://github.com/Gikkman/Java-Twirk/blob/master/twirc/src/main/java/com/gikk/twirk/events/TwirkListener.java) This snippet will make your bot respond to any channel
+All events which can be reacted to are listed in [TwirkListener.java](https://github.com/techbrew-mc/jtwirc/blob/master/twirc/src/main/java/com/gikk/twirk/events/TwirkListener.java) This snippet will make your bot respond to any channel
 message with a "pong USER_NAME".
 ```Java
   twirk.addIrcListener( new TwirkListenerBaseImpl() { 
@@ -58,10 +50,6 @@ You can make Twirk use your own implementation of all event types by using custo
 ```
 This will make the Twirk instance build instances of your custom implementation of `SubscriberEvent`
 
-#Contribute
-If you find any issues, or have suggestions for features (which does not clutter the library), feel free to submit an [Issue](https://github.com/Gikkman/Java-Twirk/issues) or make a pull request. You can also reach me on [Twitter](twitter.com/gikkman) or on [Twitch](twitch.com/gikkman)
-
-
 #License
-This library is licensed under the [MIT License](https://tldrlegal.com/license/mit-license). If you use it, a link to this GitHub page is also greatly appriciated, if possible :)
+This library is a fork of https://github.com/Gikkman/Java-Twirk and is licensed under the [MIT License](https://tldrlegal.com/license/mit-license). 
 
