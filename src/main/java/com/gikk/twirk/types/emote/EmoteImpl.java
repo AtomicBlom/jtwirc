@@ -10,7 +10,7 @@ public class EmoteImpl implements Emote
     private final static String EMOTE_URL_BASE = "http://static-cdn.jtvnw.net/emoticons/v1/";
 
     private int emoteID;
-    private LinkedList<EmoteIndices> indices = new LinkedList<EmoteIndices>();
+    private LinkedList<EmoteIndices> indices = new LinkedList<>();
     private String pattern;
 
     public EmoteImpl addIndices(int begin, int end)

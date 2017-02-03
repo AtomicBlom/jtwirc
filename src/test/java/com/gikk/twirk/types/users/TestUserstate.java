@@ -1,7 +1,7 @@
 package com.gikk.twirk.types.users;
 
 import com.gikk.twirk.enums.USER_TYPE;
-import com.gikk.twirk.types.twitchMessage.GikkDefault_TwitchMessageBuilder;
+import com.gikk.twirk.types.twitchMessage.DefaultTwitchMessageBuilder;
 import com.gikk.twirk.types.twitchMessage.TwitchMessage;
 
 import static org.junit.Assert.assertTrue;
@@ -21,8 +21,8 @@ public class TestUserstate
 
     private static void doTest(String STRING, String displayName, int color, USER_TYPE UserType, int[] emotes)
     {
-        TwitchMessage message = new GikkDefault_TwitchMessageBuilder().build(STRING);
-        Userstate state = new GikkDefault_UserstateBuilder().build(message);
+        TwitchMessage message = new DefaultTwitchMessageBuilder().build(STRING);
+        UserStateEvent state = new DefaultUserstateBuilder().build(message);
 
         assertTrue(state.getRaw().equals(STRING));
         assertTrue(state.getColor() == color);

@@ -11,12 +11,14 @@ class TwitchMessageImpl implements TwitchMessage
     // 				VARIABLES
     //***********************************************************
     private final String line, tag, prefix, command, target, content;
+    private final boolean containsBits;
+    private final int totalBits, bits;
     private final LinkedList<Emote> emotes;
 
     //***********************************************************
     // 				CONSTRUCTOR
     //***********************************************************
-    TwitchMessageImpl(GikkDefault_TwitchMessageBuilder builder)
+    TwitchMessageImpl(DefaultTwitchMessageBuilder builder)
     {
         this.line = builder.line;
         this.tag = builder.tag;
@@ -25,6 +27,9 @@ class TwitchMessageImpl implements TwitchMessage
         this.target = builder.target;
         this.content = builder.content;
         this.emotes = builder.emotes;
+        this.containsBits = builder.containsBits;
+        this.totalBits = builder.totalBits;
+        this.bits = builder.bits;
     }
 
     //***********************************************************
@@ -75,4 +80,18 @@ class TwitchMessageImpl implements TwitchMessage
         return line;
     }
 
+    public boolean containBits()
+    {
+        return containsBits;
+    }
+
+    public int getTotalBits()
+    {
+        return totalBits;
+    }
+
+    public int getBitsThisCheer()
+    {
+        return bits;
+    }
 }

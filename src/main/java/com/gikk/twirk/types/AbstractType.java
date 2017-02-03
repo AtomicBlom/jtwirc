@@ -2,8 +2,6 @@ package com.gikk.twirk.types;
 
 /**
  * Base interface for all types
- *
- * @author Gikkman
  */
 public interface AbstractType
 {
@@ -12,5 +10,5 @@ public interface AbstractType
      *
      * @return The raw chat line, just as seen from the server
      */
-    public String getRaw();
+    String getRaw();
 }

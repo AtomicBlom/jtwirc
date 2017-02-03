@@ -1,6 +1,6 @@
 package com.gikk.twirk.enums;
 
-import com.gikk.twirk.types.notice.Notice;
+import com.gikk.twirk.types.notice.NoticeEvent;
 
 /**
  * Represents different types of NOTICE events.<br>
@@ -21,7 +21,7 @@ public enum NOTICE_EVENT
     /**
      * We default to this one if we do not recognize this NOTICE's event type. Since Twitch uses a lot of different undocumented
      * NOTICE types, there is need for a event type that works as a catch-all. <br>
-     * Consider parsing the {@link Notice#getRawNoticeID()}.
+     * Consider parsing the {@link NoticeEvent#getRawNoticeID()}.
      */
     OTHER
-};
+}

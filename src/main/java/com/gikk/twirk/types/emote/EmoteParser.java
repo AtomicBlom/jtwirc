@@ -20,7 +20,7 @@ public class EmoteParser
 		 * Then, check that the message actually contains an emotes section and that
 		 * the emote section actually contains data.
 		 */
-        LinkedList<Emote> emotes = new LinkedList<Emote>();
+        LinkedList<Emote> emotes = new LinkedList<>();
 
         int begin = tag.indexOf(EMOTES_IDENTIFIER);
         int end = tag.indexOf(';', begin);

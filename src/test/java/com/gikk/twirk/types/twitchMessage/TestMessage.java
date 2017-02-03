@@ -4,7 +4,7 @@ import com.gikk.twirk.enums.USER_TYPE;
 import com.gikk.twirk.types.emote.Emote;
 import com.gikk.twirk.types.emote.Emote.EmoteIndices;
 import com.gikk.twirk.types.emote.EmoteImpl;
-import com.gikk.twirk.types.users.GikkDefault_TwitchUserBuilder;
+import com.gikk.twirk.types.users.DefaultTwitchUserBuilder;
 import com.gikk.twirk.types.users.TwitchUser;
 
 import java.util.LinkedList;
@@ -48,8 +48,8 @@ public class TestMessage
                                        String displayName, boolean hasEmotes,
                                        LinkedList<Emote> emotes, String[] badges, USER_TYPE userType)
     {
-        TwitchMessage message = new GikkDefault_TwitchMessageBuilder().build(line);
-        TwitchUser user = new GikkDefault_TwitchUserBuilder().build(message);
+        TwitchMessage message = new DefaultTwitchMessageBuilder().build(line);
+        TwitchUser user = new DefaultTwitchUserBuilder().build(message);
 
         //Assert message properties
         assertTrue(!message.getTag().isEmpty());
@@ -75,7 +75,7 @@ public class TestMessage
                 EmoteIndices argIndex = argEmote.getIndices().get(j);
                 EmoteIndices msgIndex = msgEmote.getIndices().get(j);
 
-                assertTrue(argIndex.beingIndex == msgIndex.beingIndex);
+                assertTrue(argIndex.beginIndex == msgIndex.beginIndex);
                 assertTrue(argIndex.endIndex == msgIndex.endIndex);
             }
         }

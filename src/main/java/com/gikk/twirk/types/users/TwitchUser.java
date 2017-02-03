@@ -10,8 +10,6 @@ import com.gikk.twirk.events.TwirkListener;
  * information about the sender, such as what color the user has in chat on Twitch, how the users name should
  * be capitalized, if the user has Turbo, and so on. This class encapsulates all that info, and makes it easy
  * to work with.
- *
- * @author Gikkman
  */
 public interface TwitchUser
 {
@@ -21,28 +19,56 @@ public interface TwitchUser
      *
      * @return The user name
      */
-    public String getName();
+    String getName();
+
+    /**
+     * Retrieves info whether this user is twitch staff or not
+     *
+     * @return {@code true} if the user is mod, {@code false} if not
+     */
+    boolean isStaff();
+
+    /**
+     * Retrieves info whether this user is a twitch admin or not
+     *
+     * @return {@code true} if the user is mod, {@code false} if not
+     */
+    boolean isAdmin();
+
+    /**
+     * Retrieves info whether this user is a global mod or not
+     *
+     * @return {@code true} if the user is mod, {@code false} if not
+     */
+    boolean isGlobalMod();
+
+    /**
+     * Retrieves info whether this user is the broadcaster or not
+     *
+     * @return {@code true} if the user is mod, {@code false} if not
+     */
+    boolean isBroadcaster();
 
     /**
      * Retrieves info whether this user is a mod in this channel or not
      *
      * @return {@code true} if the user is mod, {@code false} if not
      */
-    public boolean isMod();
+    boolean isMod();
 
     /**
      * Retrieves info whether this user has turbo or not
      *
      * @return {@code true} if the user has turbo, {@code false} if not
      */
-    public boolean isTurbo();
+    boolean isTurbo();
 
     /**
      * Retrieves info whether this user is a sub to this channel or not
      *
      * @return {@code true} if the user is a sub, {@code false} if not
      */
-    public boolean isSub();
+    boolean isSub();
 
     /**
      * Retrieves this users {@link USER_TYPE} <br>
@@ -50,7 +76,7 @@ public interface TwitchUser
      *
      * @return The user's USER_TYPE
      */
-    public USER_TYPE getUserType();
+    USER_TYPE getUserType();
 
     /**
      * Retrieves this users display color, as seen in Twitch chat.<br>
@@ -58,7 +84,7 @@ public interface TwitchUser
      *
      * @return The users display color, as a hex number
      */
-    public int getColor();
+    int getColor();
 
     /**
      * Retrieves the users set of badges in Twitch chat. A badge looks like this: <br>
@@ -71,7 +97,7 @@ public interface TwitchUser
      *
      * @return Arrays of strings, representing this users badges. Might be empty if user has none.
      */
-    public String[] getBadges();
+    String[] getBadges();
 
     /**
      * Retrieves this user's unique user ID. This ID is decided by Twitch, and will
@@ -79,5 +105,5 @@ public interface TwitchUser
      *
      * @return The users unique user ID
      */
-    public int getUserID();
+    int getUserID();
 }

@@ -1,6 +1,6 @@
 package com.gikk.twirk.types.roomstate;
 
-class RoomstateImpl implements Roomstate
+class RoomstateImpl implements RoomstateEvent
 {
     private static final String LANGUAGE_IDENTIFIER = "broadcaster-lang=";
     private static final String R9K_IDENTIFIER = "r9k=";
@@ -13,7 +13,7 @@ class RoomstateImpl implements Roomstate
     private final int slowModeTimer;
     private final String rawLine;
 
-    RoomstateImpl(GikkDefault_RoomstateBuilder builder)
+    RoomstateImpl(DefaultRoomstateBuilder builder)
     {
         this.broadcasterLanguage = builder.broadcasterLanguage;
         this.r9kMode = builder.r9kMode;

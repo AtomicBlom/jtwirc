@@ -2,8 +2,6 @@ package com.gikk.twirk.types.twitchMessage;
 
 /**
  * Constructs a {@link TwitchMessage} object. To create a {@link TwitchMessage} object, call the {@link #build(String)} method
- *
- * @author Gikkman
  */
 public interface TwitchMessageBuilder
 {
@@ -19,5 +17,5 @@ public interface TwitchMessageBuilder
      * @param chatLine The chat line, <b>exactly</b> as received from Twitch
      * @return A {@link TwitchMessage}, or <code>null</code> if a {@link TwitchMessage} could not be created
      */
-    public TwitchMessage build(String chatLine);
+    TwitchMessage build(String chatLine);
 }

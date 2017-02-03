@@ -1,7 +1,7 @@
 package com.gikk.twirk.types.notice;
 
 import com.gikk.twirk.enums.NOTICE_EVENT;
-import com.gikk.twirk.types.twitchMessage.GikkDefault_TwitchMessageBuilder;
+import com.gikk.twirk.types.twitchMessage.DefaultTwitchMessageBuilder;
 import com.gikk.twirk.types.twitchMessage.TwitchMessage;
 
 import static org.junit.Assert.assertTrue;
@@ -33,8 +33,8 @@ public class TestNotice
 
     private static void doTest(String line, NOTICE_EVENT EVENT, String theMessage, String rawNoticeID)
     {
-        TwitchMessage message = new GikkDefault_TwitchMessageBuilder().build(line);
-        Notice notice = new GikkDefault_NoticeBuilder().build(message);
+        TwitchMessage message = new DefaultTwitchMessageBuilder().build(line);
+        NoticeEvent notice = new DefaultNoticeBuilder().build(message);
 
         assertTrue(notice.getEvent() == EVENT);
         assertTrue(notice.getMessage().equals(theMessage));

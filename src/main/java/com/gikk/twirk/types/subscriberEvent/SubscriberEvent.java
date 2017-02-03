@@ -2,7 +2,7 @@ package com.gikk.twirk.types.subscriberEvent;
 
 import com.gikk.twirk.enums.SUB_EVENT;
 import com.gikk.twirk.types.AbstractType;
-import com.gikk.twirk.types.usernotice.Usernotice;
+import com.gikk.twirk.types.usernotice.UserNoticeEvent;
 
 /**
  * Class for representing a Subscription Event from Twitch.<br><br>
@@ -16,15 +16,13 @@ import com.gikk.twirk.types.usernotice.Usernotice;
  * <li>HOST_RESUB - The channel you are hosting had a re-subscriber
  * <li>UNKNOWN - Safety valve. Only returned if we received a notice we could not parse
  * </ul>
- * <p>
  * The {@link #getValue()} method will return different information depending on what type of notification
  * we received. If it is a re-sub event (host or local) it will contain how many months the subscriber has subscribed
  * for thus far. If it is a resub-away event, it will tell us how many subscribers re-subbed when we were away. In any
  * other case, it will return 0.
  *
- * @author Gikkman
  * @version 0.2
- *          All SubscriberEvents, except for NEW, will now be delivered via a {@link Usernotice}. <b> This type will probably be depricated
+ *          All SubscriberEvents, except for NEW, will now be delivered via a {@link UserNoticeEvent}. <b> This type will probably be depricated
  *          in the future, when Twitch extends their Subscriber system.</b>
  */
 public interface SubscriberEvent extends AbstractType
@@ -37,7 +35,7 @@ public interface SubscriberEvent extends AbstractType
      *
      * @return The name of the subscriber (might be empty)
      */
-    public String getSubscriber();
+    String getSubscriber();
 
     /**
      * Fetches what type of {@link SUB_EVENT} this event is.
@@ -52,7 +50,7 @@ public interface SubscriberEvent extends AbstractType
      *
      * @return {@link SUB_EVENT} for this subscriber event
      */
-    public SUB_EVENT getEventType();
+    SUB_EVENT getEventType();
 
     /**
      * This method will return different information depending on what type of notification
@@ -62,5 +60,5 @@ public interface SubscriberEvent extends AbstractType
      *
      * @return The value associated with this event
      */
-    public int getValue();
+    int getValue();
 }

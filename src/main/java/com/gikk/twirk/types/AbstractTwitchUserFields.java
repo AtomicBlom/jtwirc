@@ -2,13 +2,16 @@ package com.gikk.twirk.types;
 
 import com.gikk.twirk.enums.USER_TYPE;
 import com.gikk.twirk.types.twitchMessage.TwitchMessage;
-import com.gikk.twirk.types.users.Userstate;
+import com.gikk.twirk.types.users.UserStateEvent;
+import com.gikk.twirk.utils.ParsingUtil;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Since many types shares these typical User-fields, it is easier to have one class which does all the parsing
  * and then let the respective types Builder classes use it
- *
- * @author Gikkman
  */
 public abstract class AbstractTwitchUserFields
 {
@@ -29,11 +32,15 @@ public abstract class AbstractTwitchUserFields
     public int color;
     public int userID;
     public int[] emoteSets;
+    public boolean isStaff;
+    public boolean isAdmin;
+    public boolean isGlobalMod;
+    public boolean isBroadcaster;
     public boolean isMod;
     public boolean isSub;
     public boolean isTurbo;
     public USER_TYPE userType;
-    public Userstate userstate;
+    public UserStateEvent userstate;
     public String[] badges;
     public String rawLine;
 
@@ -45,37 +52,43 @@ public abstract class AbstractTwitchUserFields
         String tag = message.getTag();
         String channelOwner = message.getTarget().substring(1);    //Strip the # from the channel name
 
-        String temp = _PARSING_UTIL.parseString(NAMES_IDENTIFIER, tag);
+        String temp = ParsingUtil.parseString(NAMES_IDENTIFIER, tag);
         this.displayName = temp.isEmpty()
                 ? Character.toUpperCase(sender.charAt(1)) + sender.substring(2, sender.indexOf("!"))
                 : temp;
 
-        temp = _PARSING_UTIL.parseString(COLOR_IDENTIFIER, tag);
+        temp = ParsingUtil.parseString(COLOR_IDENTIFIER, tag);
         this.color = temp.isEmpty() ? getDefaultColor() : Integer.decode(temp);
 
-        temp = _PARSING_UTIL.parseString(MOD_IDENTIFIER, tag);
-        this.isMod = temp.equals("1") ? true : false;
+        temp = ParsingUtil.parseString(MOD_IDENTIFIER, tag);
+        this.isMod = temp.equals("1");
 
-        temp = _PARSING_UTIL.parseString(SUB_IDENTIFIER, tag);
-        this.isSub = temp.equals("1") ? true : false;
+        temp = ParsingUtil.parseString(SUB_IDENTIFIER, tag);
+        this.isSub = temp.equals("1");
 
-        temp = _PARSING_UTIL.parseString(TURBO_IDENTIFIER, tag);
-        this.isTurbo = temp.equals("1") ? true : false;
+        temp = ParsingUtil.parseString(TURBO_IDENTIFIER, tag);
+        this.isTurbo = temp.equals("1");
 
-        temp = _PARSING_UTIL.parseString(EMOTE_SET_IDENTIFIER, tag);
+        temp = ParsingUtil.parseString(EMOTE_SET_IDENTIFIER, tag);
         this.emoteSets = parseEmoteSets(temp);
 
-        temp = _PARSING_UTIL.parseString(USERTYPE_IDENTIFIER, tag);
+        temp = ParsingUtil.parseString(USERTYPE_IDENTIFIER, tag);
         this.userType = parseUserType(temp, displayName, channelOwner);
 
-        temp = _PARSING_UTIL.parseString(BADGE_IDENTIFIER, message.getTag());
+        temp = ParsingUtil.parseString(BADGE_IDENTIFIER, message.getTag());
         this.badges = temp.isEmpty() ? new String[0] : temp.split(",");
 
-        temp = _PARSING_UTIL.parseString(USER_ID_IDENTIFIER, message.getTag());
+        temp = ParsingUtil.parseString(USER_ID_IDENTIFIER, message.getTag());
         this.userID = temp.isEmpty() ? -1 : Integer.parseInt(temp);
 
         this.rawLine = message.getRaw();
+        List<String> temp1 = new ArrayList<>();
+        Collections.addAll(temp1, badges);
+        isStaff = temp1.contains("staff/1");
+        isAdmin = temp1.contains("admin/1");
+        isGlobalMod = temp1.contains("global_mod/1");
 
+        isBroadcaster = temp1.contains("broadcaster/1");
     }
 
     private int[] parseEmoteSets(String emoteSet)

@@ -23,8 +23,6 @@ import java.util.List;
  * </ul>
  * In some cases, the message will contain less segments than 5. In that case that a segments
  * aren't present, their content will be empty.<br><br>
- *
- * @author Gikkman
  */
 public interface TwitchMessage extends AbstractType
 {
@@ -34,7 +32,7 @@ public interface TwitchMessage extends AbstractType
      *
      * @return The unformatted chat line
      */
-    public String getRaw();
+    String getRaw();
 
     /**
      * Retrieves this message's tag segment. Should always starts with a @. Note that the
@@ -43,7 +41,7 @@ public interface TwitchMessage extends AbstractType
      *
      * @return The tag segment, or {@code ""} if no tag was present
      */
-    public String getTag();
+    String getTag();
 
     /**
      * Retrieves the message's prefix.<br><br>
@@ -57,7 +55,7 @@ public interface TwitchMessage extends AbstractType
      *
      * @return The messages prefix
      */
-    public String getPrefix();
+    String getPrefix();
 
     /**
      * Retrieves the message's command.<br>
@@ -65,7 +63,7 @@ public interface TwitchMessage extends AbstractType
      *
      * @return The message's command
      */
-    public String getCommand();
+    String getCommand();
 
     /**
      * Retrieves the message's target.<br>
@@ -75,7 +73,7 @@ public interface TwitchMessage extends AbstractType
      *
      * @return The message's target, or {@code ""} if no target
      */
-    public String getTarget();
+    String getTarget();
 
     /**
      * Retrieves the message's content.<br>
@@ -86,14 +84,14 @@ public interface TwitchMessage extends AbstractType
      *
      * @return The message's content, or {@code ""} if no content
      */
-    public String getContent();
+    String getContent();
 
     /**
      * Tells us if this message contained emotes or not. Only PRIVMSG and WHISPER can contain emotes.
      *
      * @return {@code true} if the message contained emotes, <code>false</code> otherwise
      */
-    public boolean hasEmotes();
+    boolean hasEmotes();
 
     /**
      * Fetches a list of all all emotes in this message. Each emote is encapsulated in a {@link EmoteImpl}.
@@ -101,7 +99,14 @@ public interface TwitchMessage extends AbstractType
      *
      * @return List of emotes (might be empty)
      */
-    public List<Emote> getEmotes();
+    List<Emote> getEmotes();
 
-    public String toString();
+    String toString();
+
+    boolean containBits();
+
+    int getTotalBits();
+
+    int getBitsThisCheer();
+
 }

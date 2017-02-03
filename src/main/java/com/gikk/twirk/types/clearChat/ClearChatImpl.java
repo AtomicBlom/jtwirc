@@ -2,7 +2,7 @@ package com.gikk.twirk.types.clearChat;
 
 import com.gikk.twirk.enums.CLEARCHAT_MODE;
 
-class ClearChatImpl implements ClearChat
+class ClearChatImpl implements ClearChatEvent
 {
 
     public final CLEARCHAT_MODE mode;
@@ -11,7 +11,7 @@ class ClearChatImpl implements ClearChat
     private final String rawLine;
     private final int duration;
 
-    ClearChatImpl(GikkDefault_ClearChatBuilder builder)
+    ClearChatImpl(DefaultClearChatBuilder builder)
     {
         this.mode = builder.mode;
         this.target = builder.target;

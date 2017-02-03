@@ -1,6 +1,6 @@
 package com.gikk.twirk.types.roomstate;
 
-import com.gikk.twirk.types.twitchMessage.GikkDefault_TwitchMessageBuilder;
+import com.gikk.twirk.types.twitchMessage.DefaultTwitchMessageBuilder;
 import com.gikk.twirk.types.twitchMessage.TwitchMessage;
 
 import static org.junit.Assert.assertTrue;
@@ -28,8 +28,8 @@ public class TestRoomstate
 
     private static void doTest(String STRING, String lang, int r9k, int sub, int slow)
     {
-        TwitchMessage message = new GikkDefault_TwitchMessageBuilder().build(STRING);
-        Roomstate room = new GikkDefault_RoomstateBuilder().build(message);
+        TwitchMessage message = new DefaultTwitchMessageBuilder().build(STRING);
+        RoomstateEvent room = new DefaultRoomstateBuilder().build(message);
 
         assertTrue("Got: " + room.getBroadcasterLanguage() + " Expected: " + lang, room.getBroadcasterLanguage().equals(lang));
         assertTrue("Got: " + room.get9kMode() + " Expected: " + r9k, room.get9kMode() == r9k);

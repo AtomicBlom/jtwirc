@@ -7,12 +7,10 @@ import java.net.SocketTimeoutException;
 
 /**
  * Class for handling all incoming IRC traffic (after the initial connection is established). <br><br>
- *
- * @author Gikkman
  */
 class InputThread extends Thread
 {
-    //***********************************************************************************************
+	//***********************************************************************************************
     //											VARIABLES
     //***********************************************************************************************
     private final Twirk connection;
@@ -24,7 +22,7 @@ class InputThread extends Thread
     //***********************************************************************************************
     //											CONSTRUCTOR
     //***********************************************************************************************
-    public InputThread(Twirk connection, BufferedReader reader, BufferedWriter writer)
+    InputThread(Twirk connection, BufferedReader reader, BufferedWriter writer)
     {
         this.connection = connection;
         this.reader = reader;
@@ -41,7 +39,7 @@ class InputThread extends Thread
             {
                 try
                 {
-                    String line = null;
+                    String line;
                     while ((line = reader.readLine()) != null)
                     {
                         havePinged = false;
@@ -78,15 +76,11 @@ class InputThread extends Thread
                 {
                     //This probably means we force closed the socket. In case something else occurred, we print the StackTrace
                     String message = e.getMessage();
-                    if ((message.contains("Socket Closed")))
-                    {
-                        //Ignore
-                    }
-                    else if (message.contains("Connection reset") || message.contains("Stream closed"))
+                    if (message.contains("Connection reset") || message.contains("Stream closed"))
                     {
                         System.err.println(message);
                     }
-                    else
+                    else if (!(message.contains("Socket Closed")))
                     {
                         e.printStackTrace();
                     }
@@ -96,7 +90,7 @@ class InputThread extends Thread
         }
         catch (Exception e)
         {
-            /*
+		    /*
 			 * This catch-block should only be reached if an exception occurred while we were inside one of the 
 			 * inner catch-blocks. That should be very rare, but can occur if the thread is interrupted while 
 			 * handling another exception
@@ -106,10 +100,10 @@ class InputThread extends Thread
 
         //If we have been disconnected, we close the connection and clean up the resources held by the IrcConnection.
         //However, if we are disconnected intentionally, we don't need to try to disconnect again
-        if (connection.isConnected())
-        {
-            connection.disconnect();
-        }
+		if (connection.isConnected())
+		{
+			connection.disconnect();
+		}
     }
 
     //***********************************************************************************************
@@ -122,7 +116,7 @@ class InputThread extends Thread
      * makes the InputThread not start listening for messages again. To finish the
      * InputThread, close the socket afterwards.
      */
-    public void end()
+    void end()
     {
         isConnected = false;
     }

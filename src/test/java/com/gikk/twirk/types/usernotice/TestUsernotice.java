@@ -4,7 +4,7 @@ import com.gikk.twirk.enums.USER_TYPE;
 import com.gikk.twirk.types.emote.Emote;
 import com.gikk.twirk.types.emote.Emote.EmoteIndices;
 import com.gikk.twirk.types.emote.EmoteImpl;
-import com.gikk.twirk.types.twitchMessage.GikkDefault_TwitchMessageBuilder;
+import com.gikk.twirk.types.twitchMessage.DefaultTwitchMessageBuilder;
 import com.gikk.twirk.types.twitchMessage.TwitchMessage;
 
 import java.util.LinkedList;
@@ -33,8 +33,8 @@ public class TestUsernotice
     private static void testMessage(String line, String subMessage, int months, String displayName, String loginName,
                                     int userID, int color, String systemMessage, USER_TYPE UserType, LinkedList<Emote> emotes, String[] badges)
     {
-        TwitchMessage message = new GikkDefault_TwitchMessageBuilder().build(line);
-        Usernotice notice = new GikkDefault_UsernoticeBuilder().build(message);
+        TwitchMessage message = new DefaultTwitchMessageBuilder().build(line);
+        UserNoticeEvent notice = new DefaultUsernoticeBuilder().build(message);
 
         assertTrue(notice.getMessage().equals(subMessage));
         assertTrue(notice.getMonths() == months);
@@ -63,7 +63,7 @@ public class TestUsernotice
             {
                 EmoteIndices i1 = e1.getIndices().get(j);
                 EmoteIndices i2 = e2.getIndices().get(j);
-                assertTrue(i1.beingIndex == i2.beingIndex);
+                assertTrue(i1.beginIndex == i2.beginIndex);
                 assertTrue(i1.endIndex == i2.endIndex);
             }
         }

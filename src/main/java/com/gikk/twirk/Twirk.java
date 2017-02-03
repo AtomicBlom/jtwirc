@@ -1,25 +1,29 @@
 package com.gikk.twirk;
 
 import com.gikk.twirk.events.TwirkListener;
-import com.gikk.twirk.types.clearChat.ClearChat;
+import com.gikk.twirk.types.action.ActionBuilder;
+import com.gikk.twirk.types.action.ActionEvent;
 import com.gikk.twirk.types.clearChat.ClearChatBuilder;
-import com.gikk.twirk.types.hostTarget.HostTarget;
+import com.gikk.twirk.types.clearChat.ClearChatEvent;
+import com.gikk.twirk.types.globaluserstate.GlobalUserStateBuilder;
+import com.gikk.twirk.types.globaluserstate.GlobalUserStateEvent;
 import com.gikk.twirk.types.hostTarget.HostTargetBuilder;
-import com.gikk.twirk.types.mode.Mode;
+import com.gikk.twirk.types.hostTarget.HostTargetEvent;
 import com.gikk.twirk.types.mode.ModeBuilder;
-import com.gikk.twirk.types.notice.Notice;
+import com.gikk.twirk.types.mode.ModeEvent;
 import com.gikk.twirk.types.notice.NoticeBuilder;
-import com.gikk.twirk.types.roomstate.Roomstate;
+import com.gikk.twirk.types.notice.NoticeEvent;
 import com.gikk.twirk.types.roomstate.RoomstateBuilder;
+import com.gikk.twirk.types.roomstate.RoomstateEvent;
 import com.gikk.twirk.types.subscriberEvent.SubscriberEvent;
 import com.gikk.twirk.types.subscriberEvent.SubscriberEventBuilder;
 import com.gikk.twirk.types.twitchMessage.TwitchMessage;
 import com.gikk.twirk.types.twitchMessage.TwitchMessageBuilder;
-import com.gikk.twirk.types.usernotice.Usernotice;
+import com.gikk.twirk.types.usernotice.UserNoticeEvent;
 import com.gikk.twirk.types.usernotice.UsernoticeBuilder;
 import com.gikk.twirk.types.users.TwitchUser;
 import com.gikk.twirk.types.users.TwitchUserBuilder;
-import com.gikk.twirk.types.users.Userstate;
+import com.gikk.twirk.types.users.UserStateEvent;
 import com.gikk.twirk.types.users.UserstateBuilder;
 
 import javax.net.ssl.SSLSocketFactory;
@@ -39,17 +43,9 @@ import java.util.*;
  * To connect to Twitch chat, you need to generate a Twitch account and you need to generate an IRC oAuth
  * token for that account. To generate a oAuth token, visit <a href="https://twitchapps.com/tmi/">https://twitchapps.com/tmi/</a><br><br>
  * <p>
- * This library is very basic, and only intended for simplistic bots. I would not recommend using this
- * in a advanced, long term or commercial product. For those kinds of applications, consider looking
- * into a more robust and well tested library, such as IrcAPI or PircBotX.<br><br>
- * <p>
  * For documentation about how Twitch communicates via IRC,
  * see <a href="https://github.com/justintv/Twitch-API/blob/master/IRC.md">
  * https://github.com/justintv/Twitch-API/blob/master/IRC.md </a>
- * <p>
- * Code inspired by <a href="http://archive.oreilly.com/pub/h/1966#code">http://archive.oreilly.com/pub/h/1966#code</a>
- *
- * @author Gikkman
  */
 public class Twirk
 {
@@ -59,6 +55,7 @@ public class Twirk
     //***********************************************************************************************
     //											VARIABLES
     //***********************************************************************************************
+    private final BotType type;
     private final String nick;
     private final String pass;
     private final String server;
@@ -66,7 +63,7 @@ public class Twirk
     private final int port;
     private final boolean useSSL;
     private final OutputQueue queue;
-    private final ArrayList<TwirkListener> listeners = new ArrayList<TwirkListener>();
+    private final ArrayList<TwirkListener> listeners = new ArrayList<>();
     private final ClearChatBuilder clearChatBuilder;
     private final HostTargetBuilder hostTargetBuilder;
     private final ModeBuilder modeBuilder;
@@ -77,6 +74,8 @@ public class Twirk
     private final UserstateBuilder userstateBuilder;
     private final SubscriberEventBuilder subscriberBuilder;
     private final UsernoticeBuilder usernoticeBuilder;
+    private final GlobalUserStateBuilder globalUserStateBuilder;
+    private final ActionBuilder actionBuilder;
     private OutputThread outThread;
     private InputThread inThread;
     private boolean resourcesCreated = false;
@@ -91,6 +90,7 @@ public class Twirk
     //***********************************************************************************************
     Twirk(TwirkBuilder builder)
     {
+        this.type = builder.type;
         this.nick = builder.nick;
         this.pass = builder.oauth;
         this.server = builder.server;
@@ -109,16 +109,18 @@ public class Twirk
         this.twitchMessageBuilder = builder.getTwitchMessageBuilder();
         this.subscriberBuilder = builder.getSubscriberEventBuilder();
         this.usernoticeBuilder = builder.getUsernoticeBuilder();
-
+        this.globalUserStateBuilder = builder.getGlobalUserStateBuilder();
+        this.actionBuilder = builder.getActionBuilder();
 
         this.queue = new OutputQueue();
 
-        addIrcListener(new TwirkMaintainanceListener(this));
+        addIRCListener(new TwirkMaintainanceListener(this));
     }
 
-    //***********************************************************************************************
-    //											PUBLIC
-    //***********************************************************************************************
+    public BotType getType()
+    {
+        return type;
+    }
 
     /**
      * Sends a message directly to the server. The message will not be formated in
@@ -133,6 +135,10 @@ public class Twirk
     {
         outThread.quickSend(message);
     }
+
+    //***********************************************************************************************
+    //											PUBLIC
+    //***********************************************************************************************
 
     /**
      * Enqueues a message at the end of the message queue. The message will be
@@ -161,7 +167,7 @@ public class Twirk
      *
      * @return <code>True</code> if we are connected
      */
-    public boolean isConnected()
+    boolean isConnected()
     {
         return isConnected;
     }
@@ -172,7 +178,7 @@ public class Twirk
      *
      * @return <code>True</code> if it is disposed
      */
-    public boolean isDisposed()
+    private boolean isDisposed()
     {
         return isDisposed;
     }
@@ -191,7 +197,7 @@ public class Twirk
      */
     public Set<String> getUsersOnline()
     {
-        Set<String> out = new HashSet<String>();
+        Set<String> out = new HashSet<>();
         synchronized (online)
         {
             for (String s : online)
@@ -213,7 +219,7 @@ public class Twirk
      */
     public Set<String> getModsOnline()
     {
-        Set<String> out = new HashSet<String>();
+        Set<String> out = new HashSet<>();
         synchronized (moderators)
         {
             for (String s : moderators)
@@ -239,7 +245,7 @@ public class Twirk
      *
      * @param listener Listener to be added
      */
-    public void addIrcListener(TwirkListener listener)
+    public void addIRCListener(TwirkListener listener)
     {
         synchronized (listeners)
         {
@@ -253,7 +259,7 @@ public class Twirk
      * @param listener Listener to be removed
      * @return <code>true</code> if the listener was removed
      */
-    public boolean removeIrcListener(TwirkListener listener)
+    public boolean removeIRCListener(TwirkListener listener)
     {
         synchronized (listeners)
         {
@@ -297,7 +303,7 @@ public class Twirk
             outThread.start();
 
             //Add capacities to the bot and wait for them to take effect
-            addCapacies();
+            addCapacities();
             Thread.sleep(1000);
 
             //Start the input thread
@@ -325,7 +331,7 @@ public class Twirk
      * This method is different from {@link #close()} in that it calls the {@link TwirkListener#onDisconnect()} method
      * of all the listeners. A listener may thus attempt to reconnect
      */
-    public synchronized void disconnect()
+    synchronized void disconnect()
     {
         //Since several sources can call this method on program shutdown, we avoid entering it again if
         //we've already disconnected
@@ -370,7 +376,6 @@ public class Twirk
         System.out.println("\tDisposing of IRC completed\n");
     }
 
-
     //***********************************************************************************************
     //										PRIVATE and PACKAGE
     //***********************************************************************************************
@@ -407,7 +412,7 @@ public class Twirk
         {
             socket.close();
         }
-        catch (IOException e)
+        catch (IOException ignored)
         {
         }
 
@@ -415,7 +420,7 @@ public class Twirk
         {
             reader.close();
         }
-        catch (IOException e)
+        catch (IOException ignored)
         {
         }
 
@@ -423,34 +428,33 @@ public class Twirk
         {
             writer.close();
         }
-        catch (IOException e)
+        catch (IOException ignored)
         {
         }
     }
-
 
     private boolean doConnect() throws IOException
     {
         // Log on to the server.
         writer.write("PASS " + pass + "\r\n");
         writer.write("NICK " + nick + "\r\n");
-        writer.write("USER " + nick + " 8 * : GikkBot\r\n");
+        writer.write("USER " + nick + "\r\n");
         writer.flush();
 
 
         // Read lines from the server until it tells us we have connected.
-        String line = null;
+        String line;
         try
         {
             while ((line = reader.readLine()) != null)
             {
                 System.out.println("IN  " + line);
                 //When we get a message containing 004, we have successfully logged in
-                if (line.indexOf("004") >= 0)
+                if (line.contains("004"))
                 {
                     return true;
                 }
-                else if (line.indexOf("Error logging in") >= 0)
+                else if (line.contains("Error logging in"))
                 {
                     return false;
                 }
@@ -466,11 +470,11 @@ public class Twirk
     }
 
     /**
-     * Gives us the appropriate Twitch capacities, such as seing JOIN/PART messages,
+     * Gives us the appropriate Twitch capacities, such as seeing JOIN/PART messages,
      * to send Twitch commands (such as .timeout, .mod and so on) and to see
      * users tags (such as display color)
      */
-    private void addCapacies()
+    private void addCapacities()
     {
         serverMessage("CAP REQ :twitch.tv/membership");
         serverMessage("CAP REQ :twitch.tv/commands");
@@ -511,7 +515,6 @@ public class Twirk
                 {
                     l.onJoin(userName);
                 }
-                return;
             }
             else if (message.getCommand().equals("PART"))
             {
@@ -520,7 +523,6 @@ public class Twirk
                 {
                     l.onPart(userName);
                 }
-                return;
             }
             else if (message.getCommand().equals("PRIVMSG"))
             {
@@ -536,7 +538,6 @@ public class Twirk
                         l.onPrivMsg(user, message);
                     }
                 }
-                return;
             }
             else if (message.getCommand().equals("WHISPER"))
             {
@@ -545,37 +546,34 @@ public class Twirk
                 {
                     l.onWhisper(user, message);
                 }
-                return;
             }
             else if (message.getCommand().equals("NOTICE"))
             {
-                Notice notice = noticeBuilder.build(message);
+                NoticeEvent notice = noticeBuilder.build(message);
                 for (TwirkListener l : listeners)
                 {
                     l.onNotice(notice);
                 }
-                return;
             }
             else if (message.getCommand().equals("MODE"))
             {
-                Mode mode = modeBuilder.build(message);
+                ModeEvent mode = modeBuilder.build(message);
                 for (TwirkListener l : listeners)
                 {
                     l.onMode(mode);
                 }
-                return;
             }
             else if (message.getCommand().equals("USERSTATE"))
             {
-                Userstate userstate = userstateBuilder.build(message);
+                UserStateEvent userstate = userstateBuilder.build(message);
                 for (TwirkListener l : listeners)
                 {
-                    l.onUserstate(userstate);
+                    l.onUserState(userstate);
                 }
             }
             else if (message.getCommand().equals("USERNOTICE"))
             {
-                Usernotice usernotice = usernoticeBuilder.build(message);
+                UserNoticeEvent usernotice = usernoticeBuilder.build(message);
                 for (TwirkListener l : listeners)
                 {
                     l.onUsernotice(usernotice);
@@ -583,15 +581,24 @@ public class Twirk
             }
             else if (message.getCommand().equals("ROOMSTATE"))
             {
-                Roomstate roomstate = roomstateBuilder.build(message);
+                RoomstateEvent roomstate = roomstateBuilder.build(message);
                 for (TwirkListener l : listeners)
                 {
                     l.onRoomstate(roomstate);
                 }
             }
+            else if (message.getCommand().equals("ACTION"))
+            {
+                ActionEvent action = actionBuilder.build(message);
+                TwitchUser user = twitchUserBuilder.build(message);
+                for (TwirkListener l : listeners)
+                {
+                    l.onAction(user, message);
+                }
+            }
             else if (message.getCommand().equals("CLEARCHAT"))
             {
-                ClearChat clearChat = clearChatBuilder.build(message);
+                ClearChatEvent clearChat = clearChatBuilder.build(message);
                 for (TwirkListener l : listeners)
                 {
                     l.onClearChat(clearChat);
@@ -599,7 +606,7 @@ public class Twirk
             }
             else if (message.getCommand().equals("HOSTTARGET"))
             {
-                HostTarget hostTarget = hostTargetBuilder.build(message);
+                HostTargetEvent hostTarget = hostTargetBuilder.build(message);
                 for (TwirkListener l : listeners)
                 {
                     l.onHost(hostTarget);
@@ -607,9 +614,18 @@ public class Twirk
             }
             else if (message.getCommand().equals("CAP"))
             {
-                return;
+                System.out.println("a CAP event??");
+                //ChirpBot.log.info("Oh shit a CAP event");
+                //Twitch might in the future implement more of these...
             }
-            //Twitch might in the future implement more of these...
+            else if (message.getCommand().equals("GLOBALUSERSTATE"))
+            {
+                GlobalUserStateEvent globalUserState = globalUserStateBuilder.build(message);
+                for (TwirkListener l : listeners)
+                {
+                    l.onGlobalUserstate(globalUserState);
+                }
+            }
             else if (message.getCommand().equals("[0-9]+"))
             {
                 //Code 353 is USER LIST messages, which lists users online separated by a space
@@ -626,8 +642,6 @@ public class Twirk
                         l.onNamesList(users);
                     }
                 }
-
-                return;
             }
             else
             {
@@ -656,9 +670,14 @@ public class Twirk
     {
         /* The user name is extracted from the message's prefix.
 		 * JOIN or PART messages are formated like this:
-		 * 
+		 *
 		 * :twitch_username!twitch_username@twitch_username.tmi.twitch.tv JOIN #channel
 		 */
         return prefix.substring(prefix.charAt(0) == ':' ? 1 : 0, prefix.indexOf('!'));
+    }
+
+    public enum BotType
+    {
+        COMMANDS, MUSIC, WHISPER
     }
 }

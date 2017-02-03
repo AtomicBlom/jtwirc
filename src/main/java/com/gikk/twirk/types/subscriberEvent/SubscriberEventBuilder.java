@@ -4,8 +4,6 @@ import com.gikk.twirk.types.twitchMessage.TwitchMessage;
 
 /**
  * Constructs a {@link SubscriberEvent} object. To create a {@link SubscriberEvent} object, call the {@link #build(TwitchMessage)} method
- *
- * @author Gikkman
  */
 public interface SubscriberEventBuilder
 {
@@ -18,5 +16,5 @@ public interface SubscriberEventBuilder
      * @param message The message we received from Twitch
      * @return A {@link SubscriberEvent}, or <code>null</code> if a {@link SubscriberEvent} could not be created
      */
-    public SubscriberEvent build(TwitchMessage message);
+    SubscriberEvent build(TwitchMessage message);
 }	

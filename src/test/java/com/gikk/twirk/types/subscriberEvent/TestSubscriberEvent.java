@@ -1,7 +1,7 @@
 package com.gikk.twirk.types.subscriberEvent;
 
 import com.gikk.twirk.enums.SUB_EVENT;
-import com.gikk.twirk.types.twitchMessage.GikkDefault_TwitchMessageBuilder;
+import com.gikk.twirk.types.twitchMessage.DefaultTwitchMessageBuilder;
 import com.gikk.twirk.types.twitchMessage.TwitchMessage;
 
 import static org.junit.Assert.assertTrue;
@@ -26,8 +26,8 @@ public class TestSubscriberEvent
 
     private static void testEvent(String EVENT, SUB_EVENT EVENT_TYPE, String subscriber, int value)
     {
-        TwitchMessage message = new GikkDefault_TwitchMessageBuilder().build(EVENT);
-        SubscriberEvent subEvent = new GikkDefault_SubscriberEventBuilder().build(message);
+        TwitchMessage message = new DefaultTwitchMessageBuilder().build(EVENT);
+        SubscriberEvent subEvent = new DefaultSubscriberEventBuilder().build(message);
 
         assertTrue("Got: " + subEvent.getEventType() + " Expected: " + EVENT_TYPE, subEvent.getEventType() == EVENT_TYPE);
         assertTrue("Got: " + subEvent.getSubscriber() + " Expected: " + subscriber, subEvent.getSubscriber().equals(subscriber));

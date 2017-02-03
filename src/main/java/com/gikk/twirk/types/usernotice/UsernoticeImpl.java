@@ -5,7 +5,7 @@ import com.gikk.twirk.types.emote.Emote;
 
 import java.util.List;
 
-class UsernoticeImpl implements Usernotice
+class UsernoticeImpl implements UserNoticeEvent
 {
     private final String rawLine;
     private final String displayName;
@@ -23,7 +23,7 @@ class UsernoticeImpl implements Usernotice
     private final String subMessage;
     private final String systemMessage;
 
-    public UsernoticeImpl(GikkDefault_UsernoticeBuilder builder)
+    UsernoticeImpl(DefaultUsernoticeBuilder builder)
     {
         this.rawLine = builder.rawLine;
         this.displayName = builder.displayName;

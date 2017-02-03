@@ -2,8 +2,6 @@ package com.gikk.twirk.enums;
 
 /**
  * Enum for representing different types of subscriber events.
- *
- * @author Gikkman
  */
 public enum SUB_EVENT
 {
@@ -33,4 +31,4 @@ public enum SUB_EVENT
      * (Darn Twitch changing stuff all the time...)
      */
     UNKNOWN
-};
+}

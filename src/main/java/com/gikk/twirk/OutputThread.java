@@ -24,12 +24,10 @@ class OutputThread extends Thread
 
     private boolean isConnected = true;
 
-    private int MESSAGE_GAP_MILLIS = 1500;    //We may not send more than 20 messages to the Twitch server / 30 seconds
-
     //***********************************************************************************************
     //											CONSTRUCTOR
     //***********************************************************************************************
-    public OutputThread(Twirk connection, OutputQueue queue, BufferedReader reader, BufferedWriter writer)
+    OutputThread(Twirk connection, OutputQueue queue, BufferedReader reader, BufferedWriter writer)
     {
         this.connection = connection;
         this.queue = queue;
@@ -57,12 +55,13 @@ class OutputThread extends Thread
                     // and wants us to shut down.
                     isConnected = connection.isConnected();
                 }
+                int MESSAGE_GAP_MILLIS = 1500;
                 Thread.sleep(MESSAGE_GAP_MILLIS);
             }
             catch (Exception ignored)
             {
                 /* Being interrupted probably means that we are about to shut down.
-        		 * If the socket is closed, it also means that we are about to shut down.
+	    		 * If the socket is closed, it also means that we are about to shut down.
         		 * 
         		 * If we are about to close down, isConnected will be set to false so we can just go back
         		 * to the loop and automatically terminate from there.  */
@@ -78,9 +77,9 @@ class OutputThread extends Thread
      * Circumvents the message queue completely and attempts to send the message at once. Should only be used for sending
      * PING responses.
      *
-     * @param message
+     * @param message the message
      */
-    public void quickSend(String message)
+    void quickSend(String message)
     {
         try
         {
@@ -96,7 +95,7 @@ class OutputThread extends Thread
      * Tells the thread to stop execution. Future messages written to the {@code OutputQueue} will
      * not be sent by this {@code OutputThread} unless it is started again.
      */
-    public void end()
+    void end()
     {
         isConnected = false;
         this.queue.releaseWaitingThreads();
@@ -121,13 +120,13 @@ class OutputThread extends Thread
         {
             System.err.println("Twirk is not connected! Sending messages will not succeed!");
         }
-        /**An IRC message may not be longer than 512 characters. Also, they must end with \r\n,
-         * so if the supplied message is longer than 510 characters, we have to cut it short.
-         *
-         * While it might be an alternative to split the message and send it in different batches,
-         * that would mean that we lose potential commands and such. Hence, instead we just drop
-         * everything beyond the 510th character.
-         */
+		/*An IRC message may not be longer than 512 characters. Also, they must end with \r\n,
+		  so if the supplied message is longer than 510 characters, we have to cut it short.
+
+		  While it might be an alternative to split the message and send it in different batches,
+		  that would mean that we lose potential commands and such. Hence, instead we just drop
+		  everything beyond the 510th character.
+		 */
         if (message.length() > 510)
         {
             message = message.substring(0, 511);

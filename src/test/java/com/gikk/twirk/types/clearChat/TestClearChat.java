@@ -1,7 +1,7 @@
 package com.gikk.twirk.types.clearChat;
 
 import com.gikk.twirk.enums.CLEARCHAT_MODE;
-import com.gikk.twirk.types.twitchMessage.GikkDefault_TwitchMessageBuilder;
+import com.gikk.twirk.types.twitchMessage.DefaultTwitchMessageBuilder;
 import com.gikk.twirk.types.twitchMessage.TwitchMessage;
 
 import static org.junit.Assert.assertTrue;
@@ -27,8 +27,8 @@ public class TestClearChat
 
     private static void testMessage(String MESSAGE, CLEARCHAT_MODE mode, String target, int duration, String reason)
     {
-        TwitchMessage message = new GikkDefault_TwitchMessageBuilder().build(MESSAGE);
-        ClearChat clearChat = new GikkDefault_ClearChatBuilder().build(message);
+        TwitchMessage message = new DefaultTwitchMessageBuilder().build(MESSAGE);
+        ClearChatEvent clearChat = new DefaultClearChatBuilder().build(message);
 
         assertTrue("Got: " + clearChat.getMode() + " Expected: " + mode, clearChat.getMode() == mode);
         assertTrue("Got: " + clearChat.getDuration() + " Expected: " + duration, clearChat.getDuration() == duration);

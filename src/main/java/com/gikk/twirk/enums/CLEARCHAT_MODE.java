@@ -2,8 +2,6 @@ package com.gikk.twirk.enums;
 
 /**
  * Enum for representing different types of CLEARCHAT messages
- *
- * @author Gikkman
  */
 public enum CLEARCHAT_MODE
 {
@@ -16,4 +14,4 @@ public enum CLEARCHAT_MODE
      * The entire chat has been pruged
      */
     COMPLETE
-};
+}

@@ -1,12 +1,12 @@
 package com.gikk.twirk.types.mode;
 
-class ModeImpl implements Mode
+class ModeImpl implements ModeEvent
 {
     private final String user;
     private final MODE_EVENT event;
     private final String rawLine;
 
-    ModeImpl(GikkDefault_ModeBuilder builder)
+    ModeImpl(DefaultModeBuilder builder)
     {
         this.event = builder.event;
         this.user = builder.user;

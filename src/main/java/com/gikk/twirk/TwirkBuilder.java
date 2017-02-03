@@ -1,36 +1,39 @@
 package com.gikk.twirk;
 
+import com.gikk.twirk.Twirk.BotType;
+import com.gikk.twirk.types.action.ActionBuilder;
+import com.gikk.twirk.types.action.DefaultActionBuilder;
 import com.gikk.twirk.types.clearChat.ClearChatBuilder;
-import com.gikk.twirk.types.clearChat.GikkDefault_ClearChatBuilder;
-import com.gikk.twirk.types.hostTarget.GikkDefault_HostTargetBuilder;
+import com.gikk.twirk.types.clearChat.DefaultClearChatBuilder;
+import com.gikk.twirk.types.globaluserstate.DefaultGlobalStateBuilder;
+import com.gikk.twirk.types.globaluserstate.GlobalUserStateBuilder;
+import com.gikk.twirk.types.hostTarget.DefaultHostTargetBuilder;
 import com.gikk.twirk.types.hostTarget.HostTargetBuilder;
-import com.gikk.twirk.types.mode.GikkDefault_ModeBuilder;
+import com.gikk.twirk.types.mode.DefaultModeBuilder;
 import com.gikk.twirk.types.mode.ModeBuilder;
-import com.gikk.twirk.types.notice.GikkDefault_NoticeBuilder;
+import com.gikk.twirk.types.notice.DefaultNoticeBuilder;
 import com.gikk.twirk.types.notice.NoticeBuilder;
-import com.gikk.twirk.types.roomstate.GikkDefault_RoomstateBuilder;
+import com.gikk.twirk.types.roomstate.DefaultRoomstateBuilder;
 import com.gikk.twirk.types.roomstate.RoomstateBuilder;
-import com.gikk.twirk.types.subscriberEvent.GikkDefault_SubscriberEventBuilder;
+import com.gikk.twirk.types.subscriberEvent.DefaultSubscriberEventBuilder;
 import com.gikk.twirk.types.subscriberEvent.SubscriberEventBuilder;
-import com.gikk.twirk.types.twitchMessage.GikkDefault_TwitchMessageBuilder;
+import com.gikk.twirk.types.twitchMessage.DefaultTwitchMessageBuilder;
 import com.gikk.twirk.types.twitchMessage.TwitchMessageBuilder;
-import com.gikk.twirk.types.usernotice.GikkDefault_UsernoticeBuilder;
+import com.gikk.twirk.types.usernotice.DefaultUsernoticeBuilder;
 import com.gikk.twirk.types.usernotice.UsernoticeBuilder;
-import com.gikk.twirk.types.users.GikkDefault_TwitchUserBuilder;
-import com.gikk.twirk.types.users.GikkDefault_UserstateBuilder;
+import com.gikk.twirk.types.users.DefaultTwitchUserBuilder;
+import com.gikk.twirk.types.users.DefaultUserstateBuilder;
 import com.gikk.twirk.types.users.TwitchUserBuilder;
 import com.gikk.twirk.types.users.UserstateBuilder;
 
 /**
  * Class for creating instances of {@link Twirk}.<br>
  * To build an instance of {@link Twirk}, the user has to supply the bot's nick and
- * oAuth token. To generate a oAuth token, visit <a href="https://twitchapps.com/tmi/">https://twitchapps.com/tmi/</a>
+ * oAuth token. To generate a oAuth token, visit <a href="https://twitchapps.com/tmi/">https://twitchapps.com/tmi/</a><br><br>
  * <p>
  * If you want to change any setting except the required once, use one of the
  * setter methods related to this object. When all settings are performed, use the
  * {@link #build()} method.
- *
- * @author Gikkman
  */
 public class TwirkBuilder
 {
@@ -40,8 +43,10 @@ public class TwirkBuilder
     boolean verboseMode = false;
 
     String server = "irc.chat.twitch.tv";
-    int port = 6697;
-    boolean useSSL = true;
+    int port = 80;
+    boolean useSSL = false;
+
+    BotType type;
 
     String nick = "";
     String oauth = "";
@@ -57,6 +62,8 @@ public class TwirkBuilder
     private UserstateBuilder userstateBuilder;
     private SubscriberEventBuilder subEventBuilder;
     private UsernoticeBuilder usernoticeBuilder;
+    private GlobalUserStateBuilder globalUserStateBuilder;
+    private ActionBuilder actionBuilder;
 
     //***********************************************************
     // 				CONSTRUCTOR
@@ -70,12 +77,14 @@ public class TwirkBuilder
      * @param channel The channel the bot should join
      * @param nick    The bot's account name (on Twitch)
      * @param oauth   The bot's IRC oAuth token (on Twitch)
+     * @param type    bot type
      */
-    public TwirkBuilder(String channel, String nick, String oauth)
+    public TwirkBuilder(String channel, String nick, String oauth, BotType type)
     {
         this.channel = channel;
         this.nick = nick;
         this.oauth = oauth;
+        this.type = type;
     }
 
     //***********************************************************
@@ -140,9 +149,9 @@ public class TwirkBuilder
      *
      * @return This builders current {@link ClearChatBuilder}
      */
-    public ClearChatBuilder getClearChatBuilder()
+    ClearChatBuilder getClearChatBuilder()
     {
-        return clearChatBuilder != null ? clearChatBuilder : new GikkDefault_ClearChatBuilder();
+        return clearChatBuilder != null ? clearChatBuilder : new DefaultClearChatBuilder();
     }
 
     /**
@@ -163,9 +172,9 @@ public class TwirkBuilder
      *
      * @return This builders current {@link HostTargetBuilder}
      */
-    public HostTargetBuilder getHostTargetBuilder()
+    HostTargetBuilder getHostTargetBuilder()
     {
-        return hostTargetBuilder != null ? hostTargetBuilder : new GikkDefault_HostTargetBuilder();
+        return hostTargetBuilder != null ? hostTargetBuilder : new DefaultHostTargetBuilder();
     }
 
     /**
@@ -186,9 +195,9 @@ public class TwirkBuilder
      *
      * @return This builders current {@link ModeBuilder}
      */
-    public ModeBuilder getModeBuilder()
+    ModeBuilder getModeBuilder()
     {
-        return modeBuilder != null ? modeBuilder : new GikkDefault_ModeBuilder();
+        return modeBuilder != null ? modeBuilder : new DefaultModeBuilder();
     }
 
     /**
@@ -209,9 +218,9 @@ public class TwirkBuilder
      *
      * @return This builders current {@link NoticeBuilder}
      */
-    public NoticeBuilder getNoticeBuilder()
+    NoticeBuilder getNoticeBuilder()
     {
-        return noticeBuilder != null ? noticeBuilder : new GikkDefault_NoticeBuilder();
+        return noticeBuilder != null ? noticeBuilder : new DefaultNoticeBuilder();
     }
 
     /**
@@ -232,9 +241,9 @@ public class TwirkBuilder
      *
      * @return This builders current {@link RoomstateBuilder}
      */
-    public RoomstateBuilder getRoomstateBuilder()
+    RoomstateBuilder getRoomstateBuilder()
     {
-        return roomstateBuilder != null ? roomstateBuilder : new GikkDefault_RoomstateBuilder();
+        return roomstateBuilder != null ? roomstateBuilder : new DefaultRoomstateBuilder();
     }
 
     /**
@@ -255,9 +264,9 @@ public class TwirkBuilder
      *
      * @return This builders current {@link TwitchMessageBuilder}
      */
-    public TwitchMessageBuilder getTwitchMessageBuilder()
+    TwitchMessageBuilder getTwitchMessageBuilder()
     {
-        return twitchMessageBuilder != null ? twitchMessageBuilder : new GikkDefault_TwitchMessageBuilder();
+        return twitchMessageBuilder != null ? twitchMessageBuilder : new DefaultTwitchMessageBuilder();
     }
 
     /**
@@ -278,9 +287,9 @@ public class TwirkBuilder
      *
      * @return This builders current {@link TwitchUserBuilder}
      */
-    public TwitchUserBuilder getTwitchUserBuilder()
+    TwitchUserBuilder getTwitchUserBuilder()
     {
-        return twitchUserBuilder != null ? twitchUserBuilder : new GikkDefault_TwitchUserBuilder();
+        return twitchUserBuilder != null ? twitchUserBuilder : new DefaultTwitchUserBuilder();
     }
 
     /**
@@ -301,9 +310,9 @@ public class TwirkBuilder
      *
      * @return This builders current {@link UserstateBuilder}
      */
-    public UserstateBuilder getUserstateBuilder()
+    UserstateBuilder getUserstateBuilder()
     {
-        return userstateBuilder != null ? userstateBuilder : new GikkDefault_UserstateBuilder();
+        return userstateBuilder != null ? userstateBuilder : new DefaultUserstateBuilder();
     }
 
     /**
@@ -324,9 +333,9 @@ public class TwirkBuilder
      *
      * @return This builders current {@link SubscriberEventBuilder}
      */
-    public SubscriberEventBuilder getSubscriberEventBuilder()
+    SubscriberEventBuilder getSubscriberEventBuilder()
     {
-        return subEventBuilder != null ? subEventBuilder : new GikkDefault_SubscriberEventBuilder();
+        return subEventBuilder != null ? subEventBuilder : new DefaultSubscriberEventBuilder();
     }
 
     /**
@@ -347,9 +356,37 @@ public class TwirkBuilder
      *
      * @return This builders current {@link UsernoticeBuilder}
      */
-    public UsernoticeBuilder getUsernoticeBuilder()
+    UsernoticeBuilder getUsernoticeBuilder()
     {
-        return usernoticeBuilder != null ? usernoticeBuilder : new GikkDefault_UsernoticeBuilder();
+        return usernoticeBuilder != null ? usernoticeBuilder : new DefaultUsernoticeBuilder();
+    }
+
+    GlobalUserStateBuilder getGlobalUserStateBuilder()
+    {
+        return globalUserStateBuilder != null ? globalUserStateBuilder : new DefaultGlobalStateBuilder();
+    }
+
+    /**
+     * Retrieves the assigned {@link ActionBuilder}, or the default one, if none is assigned.
+     *
+     * @return This builders current {@link ActionBuilder}
+     */
+    ActionBuilder getActionBuilder()
+    {
+        return actionBuilder != null ? actionBuilder : new DefaultActionBuilder();
+    }
+
+    /**
+     * Sets the {@link ActionBuilder}. Useful if you want to use your custom implementations of a {@link ActionBuilder}. If
+     * no {@link ActionBuilder} is assigned, the created {@link Twirk} object will use the default implementation.
+     *
+     * @param actionBuilder The {@link ActionBuilder} you want the {@link Twirk} object to use
+     * @return this
+     */
+    public TwirkBuilder setActionBuilder(ActionBuilder actionBuilder)
+    {
+        this.actionBuilder = actionBuilder;
+        return this;
     }
 
     /**
@@ -358,9 +395,9 @@ public class TwirkBuilder
      *
      * @return A configured Twirk object
      */
-    public Twirk build()
+    public com.gikk.twirk.Twirk build()
     {
-        return new Twirk(this);
+        return new com.gikk.twirk.Twirk(this);
     }
 
 }

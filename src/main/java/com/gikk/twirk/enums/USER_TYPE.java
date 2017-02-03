@@ -11,8 +11,6 @@ package com.gikk.twirk.enums;
  * For example:<br>
  * <pre><code>if( user.USER_TYPE.value &gt;= USER_TYPE.MOD.value )</code>
  * 	<code>doSomething();</code></pre>
- *
- * @author Gikkman
  */
 public enum USER_TYPE
 {
@@ -52,7 +50,7 @@ public enum USER_TYPE
      */
     public final int value;
 
-    private USER_TYPE(int value)
+    USER_TYPE(int value)
     {
         this.value = value;
     }

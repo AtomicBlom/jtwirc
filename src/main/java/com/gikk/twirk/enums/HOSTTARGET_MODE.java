@@ -2,8 +2,6 @@ package com.gikk.twirk.enums;
 
 /**
  * Enum for representing different types of HOSTTARGET events
- *
- * @author Gikkman
  */
 public enum HOSTTARGET_MODE
 {

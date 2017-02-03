@@ -1,15 +1,16 @@
 package com.gikk.twirk.events;
 
-import com.gikk.twirk.types.clearChat.ClearChat;
-import com.gikk.twirk.types.hostTarget.HostTarget;
-import com.gikk.twirk.types.mode.Mode;
-import com.gikk.twirk.types.notice.Notice;
-import com.gikk.twirk.types.roomstate.Roomstate;
+import com.gikk.twirk.types.clearChat.ClearChatEvent;
+import com.gikk.twirk.types.globaluserstate.GlobalUserStateEvent;
+import com.gikk.twirk.types.hostTarget.HostTargetEvent;
+import com.gikk.twirk.types.mode.ModeEvent;
+import com.gikk.twirk.types.notice.NoticeEvent;
+import com.gikk.twirk.types.roomstate.RoomstateEvent;
 import com.gikk.twirk.types.subscriberEvent.SubscriberEvent;
 import com.gikk.twirk.types.twitchMessage.TwitchMessage;
-import com.gikk.twirk.types.usernotice.Usernotice;
+import com.gikk.twirk.types.usernotice.UserNoticeEvent;
 import com.gikk.twirk.types.users.TwitchUser;
-import com.gikk.twirk.types.users.Userstate;
+import com.gikk.twirk.types.users.UserStateEvent;
 
 import java.util.Collection;
 
@@ -21,7 +22,7 @@ public interface TwirkListener
      *
      * @param unformatedMessage The incoming message exactly as it looks from Twitch
      */
-    public void onAnything(String unformatedMessage);
+    void onAnything(String unformatedMessage);
 
     /**
      * Fires for incoming PRIVMSG to the channel the bot is joined in
@@ -29,7 +30,7 @@ public interface TwirkListener
      * @param sender  The user who sent the message. Parsed from the incoming message's tag
      * @param message The message that was sent, with the tag removed
      */
-    public void onPrivMsg(TwitchUser sender, TwitchMessage message);
+    void onPrivMsg(TwitchUser sender, TwitchMessage message);
 
     /**
      * Fires for incoming WHISPERS directed at the bot
@@ -37,7 +38,7 @@ public interface TwirkListener
      * @param sender  The user who sent the whisper. Parsed from the incoming message's tag
      * @param message The whisper that was sent, with the tag removed
      */
-    public void onWhisper(TwitchUser sender, TwitchMessage message);
+    void onWhisper(TwitchUser sender, TwitchMessage message);
 
     /**
      * Fires when the bot receives a JOIN from Twitch. Note that Twitch sometimes drops
@@ -50,7 +51,7 @@ public interface TwirkListener
      *
      * @param joinedNick The joining users Twitch user name, in lower case
      */
-    public void onJoin(String joinedNick);
+    void onJoin(String joinedNick);
 
     /**
      * Fires when the bot receives a PART from Twitch. Note that Twitch sometimes drops
@@ -63,43 +64,43 @@ public interface TwirkListener
      *
      * @param partedNick The parting users Twitch user name, in lower case
      */
-    public void onPart(String partedNick);
+    void onPart(String partedNick);
 
     /**
      * Fires when we've successfully connected to Twitch's server and joined the channel
      */
-    public void onConnect();
+    void onConnect();
 
     /**
      * Fires when we've disconnected from Twitch's server. <br>
      * We can try to reconnect onDisconnect
      */
-    public void onDisconnect();
+    void onDisconnect();
 
     /**
-     * Fires whenever we receive a NOTICE from Twitch. See {@link Notice }<br>
+     * Fires whenever we receive a NOTICE from Twitch. See {@link NoticeEvent }<br>
      * NOTICE tells us about certain events, such as being Timed Out,
      *
      * @param notice The notice we received.
      */
-    public void onNotice(Notice notice);
+    void onNotice(NoticeEvent notice);
 
     /**
-     * Fires whenever we receive a HOSTTARGET from Twitch. See {@link HostTarget }
+     * Fires whenever we receive a HOSTTARGET from Twitch. See {@link HostTargetEvent }
      *
      * @param hostNotice The host notice we received.
      */
-    public void onHost(HostTarget hostNotice);
+    void onHost(HostTargetEvent hostNotice);
 
     /**
      * Fires whenever we receive information about a subscriber event from Twitch. See {@link SubscriberEvent}
      *
      * @param subscriberEvent The event we received.
      */
-    public void onSubscriberEvent(SubscriberEvent subscriberEvent);
+    void onSubscriberEvent(SubscriberEvent subscriberEvent);
 
     /**
-     * Fires whenever we receive a MODE from Twitch. See {@link Mode}.<br>
+     * Fires whenever we receive a MODE from Twitch. See {@link ModeEvent}.<br>
      * A mode means that a user gained or lost moderator status. However, this
      * is unreliable, and you should consider looking at the {@link TwitchUser } you
      * receive in the {@link #onPrivMsg(TwitchUser, TwitchMessage)} instead. Twitch sends
@@ -107,20 +108,28 @@ public interface TwirkListener
      *
      * @param mode The mode notice
      */
-    public void onMode(Mode mode);
+    void onMode(ModeEvent mode);
 
     /**
-     * Fires whenever we receive a USERSTATE from Twitch. See {@link Userstate }<br>
-     * USERSTATE is sent whenever the bot sends a message to Twirk. You should <b>never</b> respond
+     * Fires whenever we receive a USERSTATE from Twitch. See {@link UserStateEvent }<br>
+     * USERSTATE is sent whenever the bot sends a message to Twirk. You should <b>NEVER</b> respond
      * to a USERSTATE, as that will create a cycle that will get your bot banned for spamming Twitch's
      * server
      *
      * @param userstate The user state we received
      */
-    public void onUserstate(Userstate userstate);
+    void onUserState(UserStateEvent userstate);
 
     /**
-     * Fires whenever we receive a ROOMSTATE from Twitch. See {@link Roomstate }<br>
+     * Fires whenever we receive a GLOBALUSERSTATE from Twitch. See {@link GlobalUserStateEvent}
+     * GLOBALUSERSTATE is sent on successful login, if the capabilities have been acknowledged before then.
+     *
+     * @param event The global user state we received
+     */
+    void onGlobalUserstate(GlobalUserStateEvent event);
+
+    /**
+     * Fires whenever we receive a ROOMSTATE from Twitch. See {@link RoomstateEvent }<br>
      * ROOMSTATE is sent when joining a channel and every time one of the chat room settings,
      * like slow mode, change. <br>
      * The message on join contains all room settings. <br>
@@ -128,10 +137,10 @@ public interface TwirkListener
      *
      * @param roomstate The room state we received
      */
-    public void onRoomstate(Roomstate roomstate);
+    void onRoomstate(RoomstateEvent roomstate);
 
     /**
-     * Fires when we receive a CLEARCHAT from Twitch. See {@link ClearChat }<br>
+     * Fires when we receive a CLEARCHAT from Twitch. See {@link ClearChatEvent }<br>
      * CLEARCHAT comes in two modes: <ul>
      * <li>USER - This clears everything a certain user has written in chat
      * <li>TOTAL - This clear everything in chat
@@ -139,7 +148,7 @@ public interface TwirkListener
      *
      * @param clearChat The clear chat notice we received
      */
-    public void onClearChat(ClearChat clearChat);
+    void onClearChat(ClearChatEvent clearChat);
 
     /**
      * Fires when we've successfully joined a channel and retrieved the list of
@@ -151,16 +160,16 @@ public interface TwirkListener
      *
      * @param namesList The unmodifiable collection of all users that Twitch told us were online in this channel.
      */
-    public void onNamesList(Collection<String> namesList);
+    void onNamesList(Collection<String> namesList);
 
     /**
-     * Fires when we receive a USERNOTICE from Twitch. See {@link Usernotice }<br>
+     * Fires when we receive a USERNOTICE from Twitch. See {@link UserNoticeEvent }<br>
      * A Usernotice tells us about a re-subscription event, either to our channel or to the channel
      * we are hosting.
      *
      * @param usernotice The Usernotice we received
      */
-    public void onUsernotice(Usernotice usernotice);
+    void onUsernotice(UserNoticeEvent usernotice);
 
 
     /**
@@ -169,5 +178,13 @@ public interface TwirkListener
      *
      * @param unformatedMessage The incoming message exactly as it looks from Twitch
      */
-    public void onUnknown(String unformatedMessage);
+    void onUnknown(String unformatedMessage);
+
+    /**
+     * Fires when someone does a /me action
+     *
+     * @param sender  The user who sent the message. Parsed from the incoming message's tag
+     * @param message The message that was sent, with the tag removed
+     */
+    void onAction(TwitchUser sender, TwitchMessage message);
 }

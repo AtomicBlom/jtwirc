@@ -2,14 +2,14 @@ package com.gikk.twirk.types.notice;
 
 import com.gikk.twirk.enums.NOTICE_EVENT;
 
-class NoticeImpl implements Notice
+class NoticeImpl implements NoticeEvent
 {
     private final NOTICE_EVENT event;
     private final String message;
     private final String rawLine;
     private final String rawEvent;
 
-    NoticeImpl(GikkDefault_NoticeBuilder builder)
+    NoticeImpl(DefaultNoticeBuilder builder)
     {
         this.event = builder.event;
         this.message = builder.message;

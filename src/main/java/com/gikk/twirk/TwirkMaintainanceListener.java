@@ -1,15 +1,12 @@
 package com.gikk.twirk;
 
 import com.gikk.twirk.events.TwirkListenerBaseImpl;
-import com.gikk.twirk.types.mode.Mode;
-import com.gikk.twirk.types.mode.Mode.MODE_EVENT;
+import com.gikk.twirk.types.mode.ModeEvent;
 
 /**
  * Class for taking care of basic tasks that our bot should do. However, writing all
  * of these methods directly in the {@link Twirk} class would get messy. Instead, these simple
  * methods are moved to this separate class.
- *
- * @author Gikkman
  */
 class TwirkMaintainanceListener extends TwirkListenerBaseImpl
 {
@@ -48,9 +45,9 @@ class TwirkMaintainanceListener extends TwirkListenerBaseImpl
     }
 
     @Override
-    public void onMode(Mode mode)
+    public void onMode(ModeEvent mode)
     {
-        if (mode.getEvent() == MODE_EVENT.GAINED_MOD)
+        if (mode.getEvent() == ModeEvent.MODE_EVENT.GAINED_MOD)
         {
             instance.moderators.add(mode.getUser());
         }

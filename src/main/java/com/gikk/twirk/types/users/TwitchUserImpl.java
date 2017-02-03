@@ -1,7 +1,7 @@
 package com.gikk.twirk.types.users;
 
-import com.gikk.twirk.enums.USER_TYPE;
 
+import com.gikk.twirk.enums.USER_TYPE;
 
 class TwitchUserImpl implements TwitchUser
 {
@@ -9,6 +9,10 @@ class TwitchUserImpl implements TwitchUser
     // 				VARIABLES
     //***********************************************************
     private final String displayName;
+    private final boolean isStaff;
+    private final boolean isAdmin;
+    private final boolean isGlobalMod;
+    private final boolean isBroadcaster;
     private final boolean isMod;
     private final boolean isSub;
     private final boolean isTurbo;
@@ -21,9 +25,13 @@ class TwitchUserImpl implements TwitchUser
     // 				CONSTRUCTOR
     //***********************************************************
 
-    TwitchUserImpl(GikkDefault_TwitchUserBuilder builder)
+    TwitchUserImpl(DefaultTwitchUserBuilder builder)
     {
         this.displayName = builder.displayName;
+        this.isStaff = builder.isStaff;
+        this.isAdmin = builder.isAdmin;
+        this.isGlobalMod = builder.isGlobalMod;
+        this.isBroadcaster = builder.isBroadcaster;
         this.isMod = builder.isMod;
         this.isSub = builder.isSub;
         this.isTurbo = builder.isTurbo;
@@ -39,6 +47,30 @@ class TwitchUserImpl implements TwitchUser
     public String getName()
     {
         return displayName;
+    }
+
+    @Override
+    public boolean isStaff()
+    {
+        return isStaff;
+    }
+
+    @Override
+    public boolean isAdmin()
+    {
+        return isAdmin;
+    }
+
+    @Override
+    public boolean isGlobalMod()
+    {
+        return isGlobalMod;
+    }
+
+    @Override
+    public boolean isBroadcaster()
+    {
+        return isBroadcaster;
     }
 
     public boolean isMod()

@@ -11,15 +11,13 @@ import java.util.LinkedList;
  * queue.<br><br>
  * <p>
  * Due to these reasons, we cannot use a normal queue. Thus we use this thread safe and blocking implementation.
- *
- * @author Gikkman
  */
 class OutputQueue
 {
     //***********************************************************************************************
     //											VARIABLES
     //***********************************************************************************************
-    private final LinkedList<String> queue = new LinkedList<String>();
+    private final LinkedList<String> queue = new LinkedList<>();
 
     //***********************************************************************************************
     //											PUBLIC
@@ -45,7 +43,7 @@ class OutputQueue
      *
      * @param s The message to add to the queue
      */
-    public void addFirst(String s)
+    void addFirst(String s)
     {
         synchronized (queue)
         {
@@ -60,7 +58,7 @@ class OutputQueue
      *
      * @return The next message OR <code>null</code>(if we were interrupted and there were no message in the queue)
      */
-    public String next()
+    String next()
     {
         synchronized (queue)
         {
@@ -94,7 +92,7 @@ class OutputQueue
      *
      * @return {@code true} if there are any messages in the queue
      */
-    public boolean hasNext()
+    private boolean hasNext()
     {
         synchronized (queue)
         {
