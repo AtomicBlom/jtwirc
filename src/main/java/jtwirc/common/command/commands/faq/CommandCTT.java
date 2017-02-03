@@ -1,7 +1,7 @@
 package jtwirc.common.command.commands.faq;
 
+import jtwirc.TwircBot;
 import jtwirc.common.command.CommandBase;
-import jtwirc.todo.ChirpBot;
 import jtwirc.types.twitchMessage.TwitchMessage;
 import jtwirc.types.users.TwitchUser;
 import jtwirc.utils.Defaults;
@@ -39,7 +39,7 @@ public class CommandCTT extends CommandBase
                 }
 
                 Defaults.cttText = sb.toString();
-                ChirpBot.extra.setProperty("ctt", sb.toString());
+                TwircBot.extra.setProperty("ctt", sb.toString());
                 Save.properties();
                 MessageSending.sendNormalMessage("Changed the CTT text. Also renewed the link.");
                 try

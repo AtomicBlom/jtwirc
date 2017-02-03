@@ -1,7 +1,7 @@
 package jtwirc.common.command.commands.faq;
 
+import jtwirc.TwircBot;
 import jtwirc.common.command.CommandBase;
-import jtwirc.todo.ChirpBot;
 import jtwirc.types.twitchMessage.TwitchMessage;
 import jtwirc.types.users.TwitchUser;
 import jtwirc.utils.JSONParser;
@@ -18,7 +18,7 @@ public class CommandStatus extends CommandBase
         JSONObject json = null;
         try
         {
-            json = new JSONObject(JSONParser.readUrl("https://api.twitch.tv/kraken/channels/" + ChirpBot.config.getProperty("autoJoinChannel")));
+            json = new JSONObject(JSONParser.readUrl("https://api.twitch.tv/kraken/channels/" + TwircBot.config.getProperty("autoJoinChannel")));
         }
         catch (Exception e)
         {

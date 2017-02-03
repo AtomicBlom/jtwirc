@@ -1,12 +1,12 @@
 package jtwirc.common.music;
 
+import jtwirc.TwircBot;
 import jtwirc.common.music.utils.AudioPlayer;
-import jtwirc.events.TwirkListenerBaseImpl;
-import jtwirc.todo.ChirpBot;
+import jtwirc.events.TwircListenerBaseImpl;
 import jtwirc.types.twitchMessage.TwitchMessage;
 import jtwirc.types.users.TwitchUser;
 
-public class MessageListener extends TwirkListenerBaseImpl
+public class MessageListener extends TwircListenerBaseImpl
 {
 
     private AudioPlayer player = new AudioPlayer();
@@ -20,10 +20,10 @@ public class MessageListener extends TwirkListenerBaseImpl
         {
             if (args[0].equalsIgnoreCase("!p") && args[1].equalsIgnoreCase("s"))
             {
-                if (ChirpBot.patronSounds.containsKey(sender.getName()) && !ChirpBot.peopleWhoHaveSpoke.contains(sender.getName()))
+                if (TwircBot.patronSounds.containsKey(sender.getName()) && !TwircBot.peopleWhoHaveSpoke.contains(sender.getName()))
                 {
-                    player.playAudioFile(ChirpBot.patronSounds.get(sender.getName()));
-                    ChirpBot.peopleWhoHaveSpoke.add(sender.getName());
+                    player.playAudioFile(TwircBot.patronSounds.get(sender.getName()));
+                    TwircBot.peopleWhoHaveSpoke.add(sender.getName());
                 }
             }
         }
@@ -32,6 +32,6 @@ public class MessageListener extends TwirkListenerBaseImpl
     @Override
     public void onConnect()
     {
-        ChirpBot.bots.get(ChirpBot.BOT_COMMANDS).channelMessage(String.valueOf(ChirpBot.musicProp.get("intro")));
+        TwircBot.bots.get(TwircBot.BOT_COMMANDS).channelMessage(String.valueOf(TwircBot.musicProp.get("intro")));
     }
 }

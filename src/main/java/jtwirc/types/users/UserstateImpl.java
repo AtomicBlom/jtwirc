@@ -1,15 +1,15 @@
 package jtwirc.types.users;
 
 import jtwirc.enums.USER_TYPE;
-import jtwirc.events.TwirkListener;
+import jtwirc.events.TwircListener;
 import jtwirc.types.twitchMessage.TwitchMessage;
 
 /**
  * Class for representing information about a user<br>
  * Userstate's are received in two different ways:
  * <ul>
- * <li> Whenever you send a message to Twitch's IRC server, you will get a response with YOUR UserState. This response will trigger the  event in the {@link TwirkListener} class.
- * <li> Whenever a user sends a PRIVMSG or a WHISPER that you can see, that message is also accompanied by a UserState for THAT user. That UserState is wrapped in a {@link TwitchUserImpl} object, and will be be one of the arguments for the {@link TwirkListener#onPrivMsg(TwitchUser, TwitchMessage)} or {@link TwirkListener#onWhisper(TwitchUser, TwitchMessage)}  event
+ * <li> Whenever you send a message to Twitch's IRC server, you will get a response with YOUR UserState. This response will trigger the  event in the {@link TwircListener} class.
+ * <li> Whenever a user sends a PRIVMSG or a WHISPER that you can see, that message is also accompanied by a UserState for THAT user. That UserState is wrapped in a {@link TwitchUserImpl} object, and will be be one of the arguments for the {@link TwircListener#onPrivMsg(TwitchUser, TwitchMessage)} or {@link TwircListener#onWhisper(TwitchUser, TwitchMessage)}  event
  * </ul>
  */
 class UserstateImpl implements UserStateEvent

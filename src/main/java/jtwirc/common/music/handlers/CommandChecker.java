@@ -1,11 +1,11 @@
 package jtwirc.common.music.handlers;
 
-import jtwirc.events.TwirkListenerBaseImpl;
-import jtwirc.todo.ChirpBot;
+import jtwirc.TwircBot;
+import jtwirc.events.TwircListenerBaseImpl;
 import jtwirc.types.twitchMessage.TwitchMessage;
 import jtwirc.types.users.TwitchUser;
 
-public class CommandChecker extends TwirkListenerBaseImpl
+public class CommandChecker extends TwircListenerBaseImpl
 {
 
     @Deprecated
@@ -30,14 +30,14 @@ public class CommandChecker extends TwirkListenerBaseImpl
 
     public static void addCommand(String command, String response)
     {
-        ChirpBot.commandList.put(command, response);
+        TwircBot.commandList.put(command, response);
     }
 
     @Override
     public void onPrivMsg(TwitchUser sender, TwitchMessage message)
     {
         String command = message.getContent().split(" ")[0];
-        ChirpBot.commandList.keySet().stream().filter(string -> string.equalsIgnoreCase(command)).forEach(string -> {
+        TwircBot.commandList.keySet().stream().filter(string -> string.equalsIgnoreCase(command)).forEach(string -> {
             //For use later
         });
 

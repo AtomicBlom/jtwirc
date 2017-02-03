@@ -1,7 +1,7 @@
 package jtwirc.common.command.utils;
 
+import jtwirc.TwircBot;
 import jtwirc.common.command.CommandBase;
-import jtwirc.todo.ChirpBot;
 import jtwirc.types.twitchMessage.TwitchMessage;
 import jtwirc.types.users.TwitchUser;
 import jtwirc.utils.MessageSending;
@@ -16,7 +16,7 @@ public class DeleteCommands extends CommandBase
         super.channelCommand(user, message);
         if (user.isMod() || user.isBroadcaster())
         {
-            if (ChirpBot.commandList.containsKey(args[1]))
+            if (TwircBot.commandList.containsKey(args[1]))
             {
                 removeCommand(args[1], user);
             }
@@ -29,16 +29,16 @@ public class DeleteCommands extends CommandBase
 
     private void removeCommand(String command, TwitchUser user)
     {
-        if (ChirpBot.commandList.containsKey(command))
+        if (TwircBot.commandList.containsKey(command))
         {
-            ChirpBot.commandList.remove(command);
-            if (ChirpBot.commandpermList.containsKey(command))
+            TwircBot.commandList.remove(command);
+            if (TwircBot.commandpermList.containsKey(command))
             {
-                ChirpBot.commandpermList.remove(command);
+                TwircBot.commandpermList.remove(command);
             }
             MessageSending.sendWhisper(user.getName(), "Command has been removed");
-            ChirpBot.log.info(command + " removed");
-            ChirpBot.saveAllTheThings();
+            TwircBot.log.info(command + " removed");
+            TwircBot.saveAllTheThings();
         }
         else
         {

@@ -1,7 +1,7 @@
 package jtwirc.common.command.commands.fun;
 
+import jtwirc.TwircBot;
 import jtwirc.common.command.CommandBase;
-import jtwirc.todo.ChirpBot;
 import jtwirc.types.twitchMessage.TwitchMessage;
 import jtwirc.types.users.TwitchUser;
 import jtwirc.utils.Defaults;
@@ -13,7 +13,7 @@ public class CommandRanks extends CommandBase
 
     /*public static String getRankList() {
         String rankListing = "";
-        Set<Map.Entry<String, Long>> mapSet = ChirpBot.rankList.entrySet();
+        Set<Map.Entry<String, Long>> mapSet = TwircBot.rankList.entrySet();
         Iterator<Map.Entry<String, Long>> mapIterator = mapSet.iterator();
         while (mapIterator.hasNext()) {
             Map.Entry<String, Long> mapEntry = mapIterator.next();
@@ -30,7 +30,7 @@ public class CommandRanks extends CommandBase
         super.channelCommand(user, message);
         if (args.length == 1)
         {
-            if (ChirpBot.rankUserList.get(user.getName().toLowerCase()) != null)
+            if (TwircBot.rankUserList.get(user.getName().toLowerCase()) != null)
             {
                 //MessageSending.sendMessageWithPrefix(user.getName() + " is " + getRank(user.getName().toLowerCase()) + "!", user);
             }
@@ -44,8 +44,8 @@ public class CommandRanks extends CommandBase
             if (args[1].equalsIgnoreCase("sell"))
             {
                 sellRank(user);
-                ChirpBot.log.info(user.getName() + "sold his rank.");
-                ChirpBot.saveAllTheThings();
+                TwircBot.log.info(user.getName() + "sold his rank.");
+                TwircBot.saveAllTheThings();
             }
             if (args[1].equalsIgnoreCase("list"))
             {
@@ -57,16 +57,16 @@ public class CommandRanks extends CommandBase
             if (args[1].equalsIgnoreCase("buy"))
             {
                 buyRank(removeUnderscores(args[2]), user);
-                ChirpBot.log.info(user + "bought " + args[2]);
-                ChirpBot.saveAllTheThings();
+                TwircBot.log.info(user + "bought " + args[2]);
+                TwircBot.saveAllTheThings();
             }
             if (args[1].equalsIgnoreCase("remove"))
             {
                 if (user.isMod() || user.isBroadcaster())
                 {
                     removeRank(removeUnderscores(args[2]), user);
-                    ChirpBot.log.info(args[2] + " has got their rank removed.");
-                    ChirpBot.saveAllTheThings();
+                    TwircBot.log.info(args[2] + " has got their rank removed.");
+                    TwircBot.saveAllTheThings();
                 }
             }
         }
@@ -77,8 +77,8 @@ public class CommandRanks extends CommandBase
                 if (user.isBroadcaster())
                 {
                     giveRank(args[2].toLowerCase(), removeUnderscores(args[3]));
-                    ChirpBot.log.info(args[2] + " received a special rank " + args[3]);
-                    ChirpBot.saveAllTheThings();
+                    TwircBot.log.info(args[2] + " received a special rank " + args[3]);
+                    TwircBot.saveAllTheThings();
                 }
             }
             if (args[1].equalsIgnoreCase("add"))
@@ -86,8 +86,8 @@ public class CommandRanks extends CommandBase
                 if (user.isMod() || user.isBroadcaster())
                 {
                     addRank(removeUnderscores(args[2]), Long.parseLong(args[3]), user);
-                    ChirpBot.log.info("A new rank was added: " + args[2]);
-                    ChirpBot.saveAllTheThings();
+                    TwircBot.log.info("A new rank was added: " + args[2]);
+                    TwircBot.saveAllTheThings();
                 }
             }
 
@@ -109,16 +109,16 @@ public class CommandRanks extends CommandBase
 
     private void giveRank(String user, String rank)
     {
-        ChirpBot.rankUserList.put(user, rank);
+        TwircBot.rankUserList.put(user, rank);
     }
 
     private void addRank(String rank, Long amount, TwitchUser user)
     {
-        if (ChirpBot.rankList.get(rank) == null)
+        if (TwircBot.rankList.get(rank) == null)
         {
-            ChirpBot.rankList.put(rank, amount);
+            TwircBot.rankList.put(rank, amount);
             //MessageSending.sendMessageWithPrefix(user.getName() + " added " + rank, user);
-            ChirpBot.saveAllTheThings();
+            TwircBot.saveAllTheThings();
         }
         else
         {
@@ -128,15 +128,15 @@ public class CommandRanks extends CommandBase
 
     private void removeRank(String rank, TwitchUser user)
     {
-        if (ChirpBot.rankList.get(rank) == null)
+        if (TwircBot.rankList.get(rank) == null)
         {
             //MessageSending.sendMessageWithPrefix(user.getName() + " this rank doesn't exist", user);
         }
         else
         {
-            ChirpBot.rankList.remove(rank);
+            TwircBot.rankList.remove(rank);
             //MessageSending.sendMessageWithPrefix(user.getName() + " " + rank + " removed", user);
-            ChirpBot.saveAllTheThings();
+            TwircBot.saveAllTheThings();
         }
     }
 
@@ -144,16 +144,16 @@ public class CommandRanks extends CommandBase
     {
         try
         {
-            Long points = ChirpBot.userList.get(user.getName().toLowerCase());
-            Long rankCost = ChirpBot.rankList.get(rank);
-            if (ChirpBot.rankList.get(rank) != null)
+            Long points = TwircBot.userList.get(user.getName().toLowerCase());
+            Long rankCost = TwircBot.rankList.get(rank);
+            if (TwircBot.rankList.get(rank) != null)
             {
                 if (points >= rankCost)
                 {
-                    ChirpBot.userList.put(user.getName().toLowerCase(), ChirpBot.userList.get(user.getName().toLowerCase()) - rankCost);
-                    ChirpBot.rankUserList.put(user.getName().toLowerCase(), rank);
+                    TwircBot.userList.put(user.getName().toLowerCase(), TwircBot.userList.get(user.getName().toLowerCase()) - rankCost);
+                    TwircBot.rankUserList.put(user.getName().toLowerCase(), rank);
                     //MessageSending.sendMessageWithPrefix(user.getName() + " successfully bought " + rank, user);
-                    ChirpBot.saveAllTheThings();
+                    TwircBot.saveAllTheThings();
                 }
                 else
                 {
@@ -163,7 +163,7 @@ public class CommandRanks extends CommandBase
             else
             {
                 System.out.println(rank);
-                System.out.println(ChirpBot.rankList.get(rank));
+                System.out.println(TwircBot.rankList.get(rank));
                 //MessageSending.sendMessageWithPrefix(user.getName() + " this rank doesn't exist.", user);
             }
         }
@@ -177,14 +177,14 @@ public class CommandRanks extends CommandBase
     {
         try
         {
-            Long rankCost = ChirpBot.rankList.get(getRank(user.getName().toLowerCase()));
-            Long points = ChirpBot.userList.get(user.getName().toLowerCase());
-            if (ChirpBot.rankUserList.get(user.getName().toLowerCase()) != null)
+            Long rankCost = TwircBot.rankList.get(getRank(user.getName().toLowerCase()));
+            Long points = TwircBot.userList.get(user.getName().toLowerCase());
+            if (TwircBot.rankUserList.get(user.getName().toLowerCase()) != null)
             {
-                ChirpBot.rankUserList.remove(user.getName().toLowerCase());
-                ChirpBot.userList.put(user.getName().toLowerCase(), (points + (rankCost / 2)));
+                TwircBot.rankUserList.remove(user.getName().toLowerCase());
+                TwircBot.userList.put(user.getName().toLowerCase(), (points + (rankCost / 2)));
                 //MessageSending.sendMessageWithPrefix(user.getName() + " you have successfully sold your rank. But you only received half of your " + Defaults.getPointName() + " back, because inflation.", user);
-                ChirpBot.saveAllTheThings();
+                TwircBot.saveAllTheThings();
             }
             else
             {
@@ -199,6 +199,6 @@ public class CommandRanks extends CommandBase
 
     private String getRank(String user)
     {
-        return ChirpBot.rankUserList.get(user);
+        return TwircBot.rankUserList.get(user);
     }
 }

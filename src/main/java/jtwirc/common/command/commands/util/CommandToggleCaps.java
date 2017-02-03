@@ -1,7 +1,7 @@
 package jtwirc.common.command.commands.util;
 
+import jtwirc.TwircBot;
 import jtwirc.common.command.CommandBase;
-import jtwirc.todo.ChirpBot;
 import jtwirc.types.twitchMessage.TwitchMessage;
 import jtwirc.types.users.TwitchUser;
 import jtwirc.utils.Defaults;
@@ -19,13 +19,13 @@ public class CommandToggleCaps extends CommandBase
             {
                 Defaults.capsPurge = false;
                 MessageSending.sendWhisper(user.getName(), "Purging of caps has been toggled off.");
-                ChirpBot.extra.setProperty("capsToggle", "false");
+                TwircBot.extra.setProperty("capsToggle", "false");
             }
             else
             {
                 Defaults.capsPurge = true;
                 MessageSending.sendWhisper(user.getName(), "Purging of caps has been toggled on.");
-                ChirpBot.extra.setProperty("capsToggle", "true");
+                TwircBot.extra.setProperty("capsToggle", "true");
             }
         }
     }

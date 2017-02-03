@@ -1,7 +1,7 @@
 package jtwirc.common.command.commands.fun;
 
+import jtwirc.TwircBot;
 import jtwirc.common.command.CommandBase;
-import jtwirc.todo.ChirpBot;
 import jtwirc.types.twitchMessage.TwitchMessage;
 import jtwirc.types.users.TwitchUser;
 import jtwirc.utils.Defaults;
@@ -41,7 +41,7 @@ public class CommandRaffle extends CommandBase
             {
                 if (user.isMod() || user.isBroadcaster())
                 {
-                    ChirpBot.raffleList.clear();
+                    TwircBot.raffleList.clear();
                     try
                     {
                         Save.raffleList();
@@ -63,7 +63,7 @@ public class CommandRaffle extends CommandBase
             }
             if (args[1].equalsIgnoreCase("total"))
             {
-                MessageSending.sendNormalMessage("Currently there have been " + ChirpBot.raffleList.size() + " ticket(s) sold.");
+                MessageSending.sendNormalMessage("Currently there have been " + TwircBot.raffleList.size() + " ticket(s) sold.");
             }
             if (args[1].equalsIgnoreCase("list"))
             {
@@ -107,13 +107,13 @@ public class CommandRaffle extends CommandBase
 
     private void drawRaffle()
     {
-        int size = ChirpBot.raffleList.size();
+        int size = TwircBot.raffleList.size();
         int randomnumber = rand.nextInt((size - 1) + 1) + 1;
-        String user = ChirpBot.raffleList.get((long) randomnumber);
+        String user = TwircBot.raffleList.get((long) randomnumber);
 
         MessageSending.sendNormalMessage(user + " you have won the raffle, the draw ID was " + randomnumber);
 
-        ChirpBot.raffleList.clear();
+        TwircBot.raffleList.clear();
         try
         {
             Save.dataList();
@@ -129,15 +129,15 @@ public class CommandRaffle extends CommandBase
     private void buyTickets(TwitchUser user, Long amount)
     {
         Long totalCost = amount * Defaults.raffleCost;
-        Long points = ChirpBot.userList.get(user.getName());
+        Long points = TwircBot.userList.get(user.getName());
         if (points >= totalCost)
         {
-            Long size = (long) ChirpBot.raffleList.size();
+            Long size = (long) TwircBot.raffleList.size();
             for (int i = 1; i <= amount; i++)
             {
-                ChirpBot.raffleList.put(size + i, user.getName());
+                TwircBot.raffleList.put(size + i, user.getName());
             }
-            ChirpBot.userList.put(user.getName(), ChirpBot.userList.get(user.getName()) - totalCost);
+            TwircBot.userList.put(user.getName(), TwircBot.userList.get(user.getName()) - totalCost);
             MessageSending.sendNormalMessage(user.getName() + " just bought " + amount + " tickets.");
             try
             {
@@ -159,7 +159,7 @@ public class CommandRaffle extends CommandBase
     {
         int tickets = 0;
 
-        Set<Map.Entry<Long, String>> mapSet = ChirpBot.raffleList.entrySet();
+        Set<Map.Entry<Long, String>> mapSet = TwircBot.raffleList.entrySet();
         for (Map.Entry<Long, String> mapEntry : mapSet)
         {
             if (mapEntry.getValue().equals(user))

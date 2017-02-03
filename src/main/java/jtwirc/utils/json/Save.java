@@ -1,6 +1,6 @@
 package jtwirc.utils.json;
 
-import jtwirc.todo.ChirpBot;
+import jtwirc.TwircBot;
 import jtwirc.utils.Defaults;
 import jtwirc.utils.jsonclasses.*;
 import jtwirc.utils.jsonclasses.alerts.Alert;
@@ -20,7 +20,7 @@ public class Save
     {
         JSONObject object = new JSONObject();
         JSONArray list = new JSONArray();
-        Set<Map.Entry<Long, String>> mapSet = ChirpBot.shoutoutList.entrySet();
+        Set<Map.Entry<Long, String>> mapSet = TwircBot.shoutoutList.entrySet();
         for (Map.Entry<Long, String> mapEntry : mapSet)
         {
             Long keyValue = mapEntry.getKey();
@@ -43,7 +43,7 @@ public class Save
         }
         catch (Exception e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
 
         PrintWriter printWriter = new PrintWriter("config/alerts.json", "UTF-8");
@@ -65,12 +65,12 @@ public class Save
         JSONObject object = new JSONObject();
         JSONArray list = new JSONArray();
         list.add(new ChatBubble(
-                (Long) ChirpBot.chatBubbleList.get("timestamp"),
-                (String) ChirpBot.chatBubbleList.get("cbname"),
-                (String) ChirpBot.chatBubbleList.get("cbwho"),
-                (String) ChirpBot.chatBubbleList.get("cbmessage"),
-                (int) ChirpBot.chatBubbleList.get("cbtrue"),
-                (int) ChirpBot.chatBubbleList.get("cbtrollsound")));
+                (Long) TwircBot.chatBubbleList.get("timestamp"),
+                (String) TwircBot.chatBubbleList.get("cbname"),
+                (String) TwircBot.chatBubbleList.get("cbwho"),
+                (String) TwircBot.chatBubbleList.get("cbmessage"),
+                (int) TwircBot.chatBubbleList.get("cbtrue"),
+                (int) TwircBot.chatBubbleList.get("cbtrollsound")));
 
         object.put("Alerts", list);
 
@@ -87,7 +87,7 @@ public class Save
         }
         catch (Exception e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
 
         PrintWriter printWriter = new PrintWriter("config/cb.json", "UTF-8");
@@ -108,7 +108,7 @@ public class Save
     {
         JSONObject object = new JSONObject();
         JSONArray list = new JSONArray();
-        Set<Map.Entry<Long, String>> mapSet = ChirpBot.modHiList.entrySet();
+        Set<Map.Entry<Long, String>> mapSet = TwircBot.modHiList.entrySet();
         for (Map.Entry<Long, String> mapEntry : mapSet)
         {
             Long keyValue = mapEntry.getKey();
@@ -131,7 +131,7 @@ public class Save
         }
         catch (Exception e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
 
         PrintWriter printWriter = new PrintWriter("config/mod.json", "UTF-8");
@@ -152,7 +152,7 @@ public class Save
     {
         JSONObject object = new JSONObject();
         JSONArray list = new JSONArray();
-        Set<Map.Entry<Long, String>> mapSet = ChirpBot.welcomeList.entrySet();
+        Set<Map.Entry<Long, String>> mapSet = TwircBot.welcomeList.entrySet();
         for (Map.Entry<Long, String> mapEntry : mapSet)
         {
             Long keyValue = mapEntry.getKey();
@@ -175,7 +175,7 @@ public class Save
         }
         catch (Exception e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
 
         PrintWriter printWriter = new PrintWriter("config/welcome.json", "UTF-8");
@@ -196,7 +196,7 @@ public class Save
     {
         JSONObject object = new JSONObject();
         JSONArray list = new JSONArray();
-        Set<Map.Entry<String, Long>> mapSet = ChirpBot.rankList.entrySet();
+        Set<Map.Entry<String, Long>> mapSet = TwircBot.rankList.entrySet();
         for (Map.Entry<String, Long> mapEntry : mapSet)
         {
             String keyValue = mapEntry.getKey();
@@ -219,7 +219,7 @@ public class Save
         }
         catch (Exception e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
 
         PrintWriter printWriter = new PrintWriter("config/rankList.json", "UTF-8");
@@ -239,7 +239,7 @@ public class Save
     {
         JSONObject object = new JSONObject();
         JSONArray list = new JSONArray();
-        Set<Map.Entry<Long, Schedule>> mapSet = ChirpBot.scheduledList.entrySet();
+        Set<Map.Entry<Long, Schedule>> mapSet = TwircBot.scheduledList.entrySet();
         for (Map.Entry<Long, Schedule> mapEntry : mapSet)
         {
             Schedule value = mapEntry.getValue();
@@ -261,7 +261,7 @@ public class Save
         }
         catch (Exception e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
 
         PrintWriter printWriter = new PrintWriter("config/scheduleList.json", "UTF-8");
@@ -281,7 +281,7 @@ public class Save
     {
         JSONObject object = new JSONObject();
         JSONArray list = new JSONArray();
-        Set<Map.Entry<YoutubeVideo, String>> mapSet = ChirpBot.songRequestList.entrySet();
+        Set<Map.Entry<YoutubeVideo, String>> mapSet = TwircBot.songRequestList.entrySet();
         for (Map.Entry<YoutubeVideo, String> mapEntry : mapSet)
         {
             YoutubeVideo keyValue = mapEntry.getKey();
@@ -310,7 +310,7 @@ public class Save
         }
         catch (Exception e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
 
         PrintWriter printWriter = null;
@@ -338,7 +338,7 @@ public class Save
     {
         JSONObject object = new JSONObject();
         JSONArray list = new JSONArray();
-        Set<Map.Entry<Long, String>> mapSet = ChirpBot.quoteList.entrySet();
+        Set<Map.Entry<Long, String>> mapSet = TwircBot.quoteList.entrySet();
         for (Map.Entry<Long, String> mapEntry : mapSet)
         {
             Long keyValue = mapEntry.getKey();
@@ -361,7 +361,7 @@ public class Save
         }
         catch (Exception e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
 
         PrintWriter printWriter = new PrintWriter("config/quotes.json", "UTF-8");
@@ -382,7 +382,7 @@ public class Save
     {
         JSONObject object = new JSONObject();
         JSONArray list = new JSONArray();
-        Set<Map.Entry<String, Long>> mapSet = ChirpBot.userList.entrySet();
+        Set<Map.Entry<String, Long>> mapSet = TwircBot.userList.entrySet();
         for (Map.Entry<String, Long> mapEntry : mapSet)
         {
             String keyValue = mapEntry.getKey();
@@ -405,7 +405,7 @@ public class Save
         }
         catch (Exception e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
 
         PrintWriter printWriter = new PrintWriter("config/points.json", "UTF-8");
@@ -425,7 +425,7 @@ public class Save
     {
         JSONObject object = new JSONObject();
         JSONArray list = new JSONArray();
-        Set<Map.Entry<String, String>> mapSet = ChirpBot.rankUserList.entrySet();
+        Set<Map.Entry<String, String>> mapSet = TwircBot.rankUserList.entrySet();
         for (Map.Entry<String, String> mapEntry : mapSet)
         {
             String key = mapEntry.getKey();
@@ -446,7 +446,7 @@ public class Save
         }
         catch (Exception e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
 
         PrintWriter printWriter = new PrintWriter("config/ranks.json", "UTF-8");
@@ -466,7 +466,7 @@ public class Save
     {
         JSONObject object = new JSONObject();
         JSONArray list = new JSONArray();
-        Set<Map.Entry<String, String>> mapSet = ChirpBot.permList.entrySet();
+        Set<Map.Entry<String, String>> mapSet = TwircBot.permList.entrySet();
         for (Map.Entry<String, String> mapEntry : mapSet)
         {
             String key = mapEntry.getKey();
@@ -487,7 +487,7 @@ public class Save
         }
         catch (Exception e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
 
         PrintWriter printWriter = new PrintWriter("config/permissions.json", "UTF-8");
@@ -507,7 +507,7 @@ public class Save
     {
         JSONObject object = new JSONObject();
         JSONArray list = new JSONArray();
-        Set<Map.Entry<String, String>> mapSet = ChirpBot.commandList.entrySet();
+        Set<Map.Entry<String, String>> mapSet = TwircBot.commandList.entrySet();
         for (Map.Entry<String, String> mapEntry : mapSet)
         {
             String key = mapEntry.getKey();
@@ -528,7 +528,7 @@ public class Save
         }
         catch (Exception e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
 
         PrintWriter printWriter = new PrintWriter("config/commands.json", "UTF-8");
@@ -550,7 +550,7 @@ public class Save
     {
         JSONObject object = new JSONObject();
         JSONArray list = new JSONArray();
-        Set<Map.Entry<String, String>> mapSet = ChirpBot.commandpermList.entrySet();
+        Set<Map.Entry<String, String>> mapSet = TwircBot.commandpermList.entrySet();
         for (Map.Entry<String, String> mapEntry : mapSet)
         {
             String key = mapEntry.getKey();
@@ -571,7 +571,7 @@ public class Save
         }
         catch (Exception e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
 
         PrintWriter printWriter = new PrintWriter("config/commandpermissions.json", "UTF-8");
@@ -613,7 +613,7 @@ public class Save
         }
         catch (Exception e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
 
         PrintWriter printWriter = new PrintWriter("config/data.json", "UTF-8");
@@ -634,9 +634,9 @@ public class Save
         JSONObject object = new JSONObject();
         JSONArray list = new JSONArray();
 
-        for (int i = 0; i < ChirpBot.blackList.size(); i++)
+        for (int i = 0; i < TwircBot.blackList.size(); i++)
         {
-            list.add(new Blacklist(ChirpBot.blackList.get(i)));
+            list.add(new Blacklist(TwircBot.blackList.get(i)));
         }
         object.put("Blacklist", list);
 
@@ -660,7 +660,7 @@ public class Save
         }
         catch (Exception e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
 
         PrintWriter printWriter = null;
@@ -689,7 +689,7 @@ public class Save
     {
         JSONObject object = new JSONObject();
         JSONArray list = new JSONArray();
-        Set<Map.Entry<Long, String>> mapSet = ChirpBot.noteList.entrySet();
+        Set<Map.Entry<Long, String>> mapSet = TwircBot.noteList.entrySet();
         for (Map.Entry<Long, String> mapEntry : mapSet)
         {
             Long keyValue = mapEntry.getKey();
@@ -712,7 +712,7 @@ public class Save
         }
         catch (Exception e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
 
         PrintWriter printWriter = new PrintWriter("config/note.json", "UTF-8");
@@ -734,7 +734,7 @@ public class Save
     {
         JSONObject obj = new JSONObject();
         JSONArray array = new JSONArray();
-        Set<Map.Entry<Long, String>> mapSet = ChirpBot.raffleList.entrySet();
+        Set<Map.Entry<Long, String>> mapSet = TwircBot.raffleList.entrySet();
         for (Map.Entry<Long, String> mapEntry : mapSet)
         {
             Long key = mapEntry.getKey();
@@ -755,7 +755,7 @@ public class Save
         }
         catch (Exception e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
 
         PrintWriter printWriter = new PrintWriter("config/raffleTickets.json", "UTF-8");
@@ -798,7 +798,7 @@ public class Save
         }
         catch (Exception e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
 
         PrintWriter printWriter = null;
@@ -829,7 +829,7 @@ public class Save
         {
             File file = new File("extraConfigs.properties");
             FileOutputStream fileOut = new FileOutputStream(file);
-            ChirpBot.extra.store(fileOut, "Extra Configs");
+            TwircBot.extra.store(fileOut, "Extra Configs");
             fileOut.close();
         }
         catch (Exception e)

@@ -1,8 +1,6 @@
-package jtwirc.todo;
+package jtwirc;
 
 import com.mb3364.twitch.api.Twitch;
-import jtwirc.Twirk;
-import jtwirc.TwirkBuilder;
 import jtwirc.annotation.AnnotationSweeper;
 import jtwirc.common.listeners.InfoListener;
 import jtwirc.common.listeners.MessageListener;
@@ -30,9 +28,9 @@ import java.util.*;
  * Code generously donated by https://github.com/TheCricket
  * This needs to be grokked and then dealt with.
  */
-public class ChirpBot
+public class TwircBot
 {
-    public static final Logger log = LoggerFactory.getLogger(ChirpBot.class.getName());
+    public static final Logger log = LoggerFactory.getLogger(TwircBot.class.getName());
     public static final int BOT_COMMANDS = 0;
     public static final int BOT_WHISPER = 1;
     public static final int BOT_MUSIC = 2;
@@ -68,9 +66,9 @@ public class ChirpBot
     public static AudioIO audioIO;
     public static AudioContext audioContext;
     //Bots
-    public static Twirk bot;
-    public static Twirk whisper;
-    public static List<Twirk> bots = new ArrayList<>();
+    public static Twirc bot;
+    public static Twirc whisper;
+    public static List<Twirc> bots = new ArrayList<>();
     public static AnnotationSweeper sweeper = new AnnotationSweeper();
 
     public static void main(String[] args) throws Exception
@@ -81,9 +79,9 @@ public class ChirpBot
         audioIO = new JavaSoundAudioIO();
         audioContext = new AudioContext(audioIO);
 
-        bot = new TwirkBuilder(Defaults.getStreamer().startsWith("#") ? Defaults.getStreamer() : "#" + Defaults.getStreamer(), Defaults.getBotName(), Defaults.getOAuth(), Twirk.BotType.COMMANDS).build();
-        whisper = new TwirkBuilder(Defaults.getBotName().startsWith("#") ? Defaults.getBotName() : "#" + Defaults.getBotName(), Defaults.getBotName(), Defaults.getOAuth(), Twirk.BotType.WHISPER).build();
-        Twirk music = new TwirkBuilder(Defaults.getStreamer().startsWith("#") ? Defaults.getStreamer() : "#" + Defaults.getStreamer(), "ChirpBot", "INSERT OAUTH", Twirk.BotType.MUSIC).build();
+        bot = new TwircBuilder(Defaults.getStreamer().startsWith("#") ? Defaults.getStreamer() : "#" + Defaults.getStreamer(), Defaults.getBotName(), Defaults.getOAuth(), Twirc.BotType.COMMANDS).build();
+        whisper = new TwircBuilder(Defaults.getBotName().startsWith("#") ? Defaults.getBotName() : "#" + Defaults.getBotName(), Defaults.getBotName(), Defaults.getOAuth(), Twirc.BotType.WHISPER).build();
+        Twirc music = new TwircBuilder(Defaults.getStreamer().startsWith("#") ? Defaults.getStreamer() : "#" + Defaults.getStreamer(), "TwircBot", "INSERT OAUTH", Twirc.BotType.MUSIC).build();
 
         bots.add(bot);
         bots.add(whisper);
@@ -183,9 +181,9 @@ public class ChirpBot
             {
                 FileWriter writer = new FileWriter(music);
                 writer.write(
-                        "#--- ChirpBot Properties ---\n" +
+                        "#--- TwircBot Properties ---\n" +
                                 "#You can set a custom bot entry message or make it blank to disable it\n" +
-                                "intro=ChirpBot started. Lets play some tunes!\n" +
+                                "intro=TwircBot started. Lets play some tunes!\n" +
                                 "#--- Patrons ---\n" +
                                 "#Patrons are added by doing patron(number) you can add as many patrons as you want!\n" +
                                 "patron0=cricketnu\n" +
@@ -283,7 +281,7 @@ public class ChirpBot
     private static void bots()
     {
 
-        bots.stream().filter(bot -> bot.getType() != Twirk.BotType.MUSIC).forEach(bot -> {
+        bots.stream().filter(bot -> bot.getType() != Twirc.BotType.MUSIC).forEach(bot -> {
             bot.addIRCListener(new InfoListener(bot.getType()));
             bot.addIRCListener(new MessageListener(bot.getType()));
             bot.addIRCListener(new UnknownListener(bot.getType()));

@@ -14,7 +14,7 @@ import jtwirc.types.users.UserStateEvent;
 
 import java.util.Collection;
 
-public interface TwirkListener
+public interface TwircListener
 {
 
     /**
@@ -112,7 +112,7 @@ public interface TwirkListener
 
     /**
      * Fires whenever we receive a USERSTATE from Twitch. See {@link UserStateEvent }<br>
-     * USERSTATE is sent whenever the bot sends a message to Twirk. You should <b>NEVER</b> respond
+     * USERSTATE is sent whenever the bot sends a message to Twirc. You should <b>NEVER</b> respond
      * to a USERSTATE, as that will create a cycle that will get your bot banned for spamming Twitch's
      * server
      *

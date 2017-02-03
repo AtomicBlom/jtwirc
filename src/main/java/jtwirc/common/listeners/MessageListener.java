@@ -1,8 +1,8 @@
 package jtwirc.common.listeners;
 
-import jtwirc.Twirk;
-import jtwirc.events.TwirkListenerBaseImpl;
-import jtwirc.todo.ChirpBot;
+import jtwirc.Twirc;
+import jtwirc.TwircBot;
+import jtwirc.events.TwircListenerBaseImpl;
 import jtwirc.types.twitchMessage.TwitchMessage;
 import jtwirc.types.users.TwitchUser;
 import jtwirc.utils.Constants;
@@ -10,13 +10,13 @@ import jtwirc.utils.Constants;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MessageListener extends TwirkListenerBaseImpl
+public class MessageListener extends TwircListenerBaseImpl
 {
 
     public static List<String> peopleWhoTalked = new ArrayList<>();
-    private Twirk.BotType type;
+    private Twirc.BotType type;
 
-    public MessageListener(Twirk.BotType type)
+    public MessageListener(Twirc.BotType type)
     {
         this.type = type;
     }
@@ -31,9 +31,9 @@ public class MessageListener extends TwirkListenerBaseImpl
     {
         if (!peopleWhoTalked.contains(sender.getName().toLowerCase()) && containsHello(message))
         {
-            ChirpBot.welcomeList.clear();
-            ChirpBot.welcomeList.put(System.currentTimeMillis(), sender.getName());
-            ChirpBot.saveAllTheThings();
+            TwircBot.welcomeList.clear();
+            TwircBot.welcomeList.put(System.currentTimeMillis(), sender.getName());
+            TwircBot.saveAllTheThings();
             peopleWhoTalked.add(sender.getName().toLowerCase());
         }
     }

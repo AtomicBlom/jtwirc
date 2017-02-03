@@ -12,7 +12,7 @@ public class CommandUptime extends CommandBase
         super.channelCommand(user, message);
         /*final String[] uptime = new String[1];
 
-		ChirpBot.twitch.streams().get("WeAllPlayCast", new StreamResponseHandler() {
+		TwircBot.twitch.streams().get("WeAllPlayCast", new StreamResponseHandler() {
 			@Override
 			public void onSuccess(Stream stream) {
 				uptime[0] = String.valueOf(stream.getCreatedAt());
@@ -75,23 +75,23 @@ public class CommandUptime extends CommandBase
 
 				if (!Defaults.whisperToggle) {
 					if (uptime[0].equals("") || uptime[0] == null) {
-						MessageSending.sendNormalMessage(ChirpBot.config.getProperty("autoJoinChannel") + " is currently offline.");
+						MessageSending.sendNormalMessage(TwircBot.config.getProperty("autoJoinChannel") + " is currently offline.");
 					} else {
 						if (diffHours > 0) {
-							MessageSending.sendNormalMessage(ChirpBot.config.getProperty("autoJoinChannel") + " is currently live for " + diffHours + " hours and " + diffMinutes + " minutes.");
+							MessageSending.sendNormalMessage(TwircBot.config.getProperty("autoJoinChannel") + " is currently live for " + diffHours + " hours and " + diffMinutes + " minutes.");
 						} else {
-							MessageSending.sendNormalMessage(ChirpBot.config.getProperty("autoJoinChannel") + " is currently live for " + diffMinutes + " minutes.");
+							MessageSending.sendNormalMessage(TwircBot.config.getProperty("autoJoinChannel") + " is currently live for " + diffMinutes + " minutes.");
 						}
 					}
 
 				} else {
 					if (uptime[0].equals("") || uptime[0] == null) {
-						MessageSending.sendWhisper(user.getName().toLowerCase(), ChirpBot.config.getProperty("autoJoinChannel") + " is currently offline.");
+						MessageSending.sendWhisper(user.getName().toLowerCase(), TwircBot.config.getProperty("autoJoinChannel") + " is currently offline.");
 					} else {
 						if (diffHours > 0) {
-							MessageSending.sendWhisper(user.getName().toLowerCase(), ChirpBot.config.getProperty("autoJoinChannel") + " is currently live for " + diffHours + " hours and " + diffMinutes + " minutes.");
+							MessageSending.sendWhisper(user.getName().toLowerCase(), TwircBot.config.getProperty("autoJoinChannel") + " is currently live for " + diffHours + " hours and " + diffMinutes + " minutes.");
 						} else {
-							MessageSending.sendWhisper(user.getName().toLowerCase(), ChirpBot.config.getProperty("autoJoinChannel") + " is currently live for " + diffMinutes + " minutes.");
+							MessageSending.sendWhisper(user.getName().toLowerCase(), TwircBot.config.getProperty("autoJoinChannel") + " is currently live for " + diffMinutes + " minutes.");
 						}
 					}
 				}
@@ -101,9 +101,9 @@ public class CommandUptime extends CommandBase
 			}
 		} else {
 			if (!Defaults.whisperToggle) {
-				MessageSending.sendNormalMessage(ChirpBot.config.getProperty("autoJoinChannel") + " is currently offline.");
+				MessageSending.sendNormalMessage(TwircBot.config.getProperty("autoJoinChannel") + " is currently offline.");
 			} else {
-				MessageSending.sendWhisper(user.getName().toLowerCase(), ChirpBot.config.getProperty("autoJoinChannel") + " is currently offline.");
+				MessageSending.sendWhisper(user.getName().toLowerCase(), TwircBot.config.getProperty("autoJoinChannel") + " is currently offline.");
 			}
 		}*/
     }

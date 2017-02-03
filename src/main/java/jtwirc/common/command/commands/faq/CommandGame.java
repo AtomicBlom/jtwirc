@@ -1,7 +1,7 @@
 package jtwirc.common.command.commands.faq;
 
+import jtwirc.TwircBot;
 import jtwirc.common.command.CommandBase;
-import jtwirc.todo.ChirpBot;
 import jtwirc.types.twitchMessage.TwitchMessage;
 import jtwirc.types.users.TwitchUser;
 import jtwirc.utils.Defaults;
@@ -21,7 +21,7 @@ public class CommandGame extends CommandBase
         JSONObject json = null;
         try
         {
-            json = new JSONObject(JSONParser.readUrl("https://api.twitch.tv/kraken/channels/" + ChirpBot.config.getProperty("autoJoinChannel")));
+            json = new JSONObject(JSONParser.readUrl("https://api.twitch.tv/kraken/channels/" + TwircBot.config.getProperty("autoJoinChannel")));
         }
         catch (Exception e)
         {
@@ -38,9 +38,9 @@ public class CommandGame extends CommandBase
             {
                 e.printStackTrace();
             }
-            if (ChirpBot.steamList.containsKey(game))
+            if (TwircBot.steamList.containsKey(game))
             {
-                Integer appid = ChirpBot.steamList.get(game);
+                Integer appid = TwircBot.steamList.get(game);
                 String url = "http://store.steampowered.com/app/" + appid + "/";
                 if (Defaults.whisperToggle)
                 {

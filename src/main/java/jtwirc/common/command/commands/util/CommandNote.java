@@ -1,7 +1,7 @@
 package jtwirc.common.command.commands.util;
 
+import jtwirc.TwircBot;
 import jtwirc.common.command.CommandBase;
-import jtwirc.todo.ChirpBot;
 import jtwirc.types.twitchMessage.TwitchMessage;
 import jtwirc.types.users.TwitchUser;
 import jtwirc.utils.MessageSending;
@@ -17,15 +17,15 @@ public class CommandNote extends CommandBase
             boolean noteAdded = false;
             try
             {
-                long note = (long) ChirpBot.noteList.size() + 1;
+                long note = (long) TwircBot.noteList.size() + 1;
                 while (!noteAdded)
                 {
-                    if (!ChirpBot.noteList.containsKey(note))
+                    if (!TwircBot.noteList.containsKey(note))
                     {
-                        ChirpBot.noteList.put(note, msgWOCommand);
+                        TwircBot.noteList.put(note, msgWOCommand);
                         noteAdded = true;
                         MessageSending.sendWhisper(user.getName().toLowerCase(), " note has been added as #" + note + ".");
-                        ChirpBot.log.info("note " + note + " has been added");
+                        TwircBot.log.info("note " + note + " has been added");
                     }
                     else
                     {
@@ -40,7 +40,7 @@ public class CommandNote extends CommandBase
             }
             finally
             {
-                ChirpBot.saveAllTheThings();
+                TwircBot.saveAllTheThings();
             }
         }
     }

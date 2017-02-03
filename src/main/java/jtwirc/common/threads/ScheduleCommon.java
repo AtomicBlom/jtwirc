@@ -1,7 +1,7 @@
 package jtwirc.common.threads;
 
+import jtwirc.TwircBot;
 import jtwirc.annotation.Unfinished;
-import jtwirc.todo.ChirpBot;
 import jtwirc.utils.Defaults;
 import jtwirc.utils.MessageSending;
 import jtwirc.utils.jsonclasses.Schedule;
@@ -31,7 +31,7 @@ public class ScheduleCommon
                         Thread.sleep(time);
                         if (toggled)
                         {
-                            Schedule scheduleMessage = ChirpBot.scheduledList.get(getMessageNumber());
+                            Schedule scheduleMessage = TwircBot.scheduledList.get(getMessageNumber());
                             if (scheduleMessage.getToggle())
                             {
                                 MessageSending.sendNormalMessage(scheduleMessage.getMessage());
@@ -51,14 +51,14 @@ public class ScheduleCommon
 
     private static Long getMessageNumber()
     {
-        Long messageCount = (long) ChirpBot.scheduledList.size();
+        Long messageCount = (long) TwircBot.scheduledList.size();
         if (messageCount == 0)
         { //2
             Defaults.schedule = false;
             //MessageSending.sendNormalMessage("There are no messages scheduled. Please add these messages");
         }
 
-        while (ChirpBot.scheduledList.get(message) == null || !ChirpBot.scheduledList.get(message).getToggle())
+        while (TwircBot.scheduledList.get(message) == null || !TwircBot.scheduledList.get(message).getToggle())
         {
             message++;
             if (message >= messageCount)

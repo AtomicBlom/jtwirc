@@ -1,8 +1,8 @@
 package jtwirc.common.command.commands.util;
 
+import jtwirc.TwircBot;
 import jtwirc.common.command.CommandBase;
 import jtwirc.common.threads.ScheduleCommon;
-import jtwirc.todo.ChirpBot;
 import jtwirc.types.twitchMessage.TwitchMessage;
 import jtwirc.types.users.TwitchUser;
 import jtwirc.utils.Defaults;
@@ -66,12 +66,12 @@ public class CommandSchedule extends CommandBase
                                 result.append(" ");
                             }
                         }
-                        long quoteSize = (long) ChirpBot.quoteList.size() + 1;
+                        long quoteSize = (long) TwircBot.quoteList.size() + 1;
                         while (!messageAdded)
                         {
-                            if (ChirpBot.scheduledList.get(quoteSize) == null)
+                            if (TwircBot.scheduledList.get(quoteSize) == null)
                             {
-                                ChirpBot.scheduledList.put(quoteSize, new Schedule(quoteSize, result.toString(), true));
+                                TwircBot.scheduledList.put(quoteSize, new Schedule(quoteSize, result.toString(), true));
                                 MessageSending.sendWhisper(user.getName(), "Scheduled message has been added as number " + quoteSize);
                                 messageAdded = true;
                             }
@@ -89,7 +89,7 @@ public class CommandSchedule extends CommandBase
                     }
                     finally
                     {
-                        ChirpBot.saveAllTheThings();
+                        TwircBot.saveAllTheThings();
                     }
                 }
 
@@ -98,37 +98,37 @@ public class CommandSchedule extends CommandBase
             {
                 if (args[1].equalsIgnoreCase("on") && !args[2].isEmpty())
                 {
-                    for (long i = 0; i < ChirpBot.scheduledList.size(); i++)
+                    for (long i = 0; i < TwircBot.scheduledList.size(); i++)
                     {
-                        if (Objects.equals(ChirpBot.scheduledList.get(i).getNumber(), Long.valueOf(args[2])))
+                        if (Objects.equals(TwircBot.scheduledList.get(i).getNumber(), Long.valueOf(args[2])))
                         {
-                            Schedule schedule = ChirpBot.scheduledList.get(i);
+                            Schedule schedule = TwircBot.scheduledList.get(i);
                             schedule.setToggle(true);
-                            ChirpBot.scheduledList.replace(i, schedule);
-                            ChirpBot.extra.setProperty("scheduleToggle", "true");
+                            TwircBot.scheduledList.replace(i, schedule);
+                            TwircBot.extra.setProperty("scheduleToggle", "true");
                         }
                     }
                 }
                 if (args[1].equalsIgnoreCase("off") && !args[2].isEmpty())
                 {
-                    for (long i = 0; i < ChirpBot.scheduledList.size(); i++)
+                    for (long i = 0; i < TwircBot.scheduledList.size(); i++)
                     {
-                        if (Objects.equals(ChirpBot.scheduledList.get(i).getNumber(), Long.valueOf(args[2])))
+                        if (Objects.equals(TwircBot.scheduledList.get(i).getNumber(), Long.valueOf(args[2])))
                         {
-                            Schedule schedule = ChirpBot.scheduledList.get(i);
+                            Schedule schedule = TwircBot.scheduledList.get(i);
                             schedule.setToggle(false);
-                            ChirpBot.scheduledList.replace(i, schedule);
-                            ChirpBot.extra.setProperty("scheduleToggle", "false");
+                            TwircBot.scheduledList.replace(i, schedule);
+                            TwircBot.extra.setProperty("scheduleToggle", "false");
                         }
                     }
                 }
                 if (args[1].equalsIgnoreCase("remove") && !args[2].isEmpty())
                 {
-                    for (long i = 0; i < ChirpBot.scheduledList.size(); i++)
+                    for (long i = 0; i < TwircBot.scheduledList.size(); i++)
                     {
-                        if (Objects.equals(ChirpBot.scheduledList.get(i).getNumber(), Long.valueOf(args[2])))
+                        if (Objects.equals(TwircBot.scheduledList.get(i).getNumber(), Long.valueOf(args[2])))
                         {
-                            ChirpBot.scheduledList.remove(i);
+                            TwircBot.scheduledList.remove(i);
                         }
                     }
                 }

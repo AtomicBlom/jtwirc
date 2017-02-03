@@ -1,8 +1,8 @@
 package jtwirc.common.command.commands.faq;
 
+import jtwirc.TwircBot;
 import jtwirc.common.command.CommandBase;
 import jtwirc.common.threads.ViewerCommon;
-import jtwirc.todo.ChirpBot;
 import jtwirc.types.twitchMessage.TwitchMessage;
 import jtwirc.types.users.TwitchUser;
 import jtwirc.utils.Defaults;
@@ -30,7 +30,7 @@ public class CommandPoints extends CommandBase
                         try
                         {
                             CommandPoints.class.newInstance().autoTickPoints();
-                            ChirpBot.saveAllTheThings();
+                            TwircBot.saveAllTheThings();
                         }
                         catch (Exception e)
                         {
@@ -39,7 +39,7 @@ public class CommandPoints extends CommandBase
                     }
                     else if (!Defaults.toggleStream)
                     {
-                        System.out.println("ChirpBot isn't toggled.");
+                        System.out.println("TwircBot isn't toggled.");
                     }
                     sleep((Defaults.time * 1000 * 60));
                 }
@@ -87,16 +87,16 @@ public class CommandPoints extends CommandBase
 
     private void addPoints(String user, Long amount, boolean auto)
     {
-        if (!ChirpBot.blackList.contains(user))
+        if (!TwircBot.blackList.contains(user))
         {
-            if (ChirpBot.userList.get(user) != null)
+            if (TwircBot.userList.get(user) != null)
             {
-                ChirpBot.userList.put(user, (ChirpBot.userList.get(user) + amount));
+                TwircBot.userList.put(user, (TwircBot.userList.get(user) + amount));
                 Defaults.totalPoints += amount;
             }
             else
             {
-                ChirpBot.userList.put(user, amount);
+                TwircBot.userList.put(user, amount);
                 Defaults.totalPoints += amount;
             }
         }
@@ -115,7 +115,7 @@ public class CommandPoints extends CommandBase
         super.channelCommand(user, message);
         if (args.length <= 1)
         {
-            if (ChirpBot.blackList.contains(user.getName()))
+            if (TwircBot.blackList.contains(user.getName()))
             {
                 MessageSending.sendWhisper(user.getName().toLowerCase(), "Sorry, " + user.getName() + " you are blacklisted and are not eligible to gain any " + Defaults.getPointName() + ". Please contact a mod if you think this is not correct");
             }
@@ -133,10 +133,10 @@ public class CommandPoints extends CommandBase
                     if (args.length >= 3)
                     {
                         addPoints(args[2].toLowerCase(), Long.parseLong(args[3]), false);
-                        if (!ChirpBot.blackList.contains(args[2].toLowerCase()))
+                        if (!TwircBot.blackList.contains(args[2].toLowerCase()))
                         {
                             MessageSending.sendNormalMessage(args[3] + " " + Defaults.getPointName() + " have been added to " + args[2] + " total.");
-                            ChirpBot.log.info("Gave away " + args[3] + " points to " + args[2]);
+                            TwircBot.log.info("Gave away " + args[3] + " points to " + args[2]);
                         }
                     }
                     else
@@ -151,9 +151,9 @@ public class CommandPoints extends CommandBase
                 {
                     if (args.length >= 2)
                     {
-                        if (ChirpBot.userList.get(args[2].toLowerCase()) != null)
+                        if (TwircBot.userList.get(args[2].toLowerCase()) != null)
                         {
-                            ChirpBot.userList.remove(args[2].toLowerCase());
+                            TwircBot.userList.remove(args[2].toLowerCase());
                             MessageSending.sendNormalMessage(args[2] + " has been removed from the points list.");
                         }
                     }
@@ -181,8 +181,8 @@ public class CommandPoints extends CommandBase
                     {
                         addAll(Long.parseLong(args[2]));
                         MessageSending.sendNormalMessage("Everyone got " + args[2] + " " + Defaults.getPointName() + "!");
-                        ChirpBot.log.info("Gave away " + args[2] + " points to everyone");
-                        ChirpBot.saveAllTheThings();
+                        TwircBot.log.info("Gave away " + args[2] + " points to everyone");
+                        TwircBot.saveAllTheThings();
                     }
                     else
                     {
@@ -202,7 +202,7 @@ public class CommandPoints extends CommandBase
 
     private void getTopList()
     {
-        Set<Map.Entry<String, Long>> set = ChirpBot.userList.entrySet();
+        Set<Map.Entry<String, Long>> set = TwircBot.userList.entrySet();
         List<Map.Entry<String, Long>> list = new ArrayList<>(set);
         Collections.sort(list, (a, b) -> b.getValue().compareTo(a.getValue()));
 
@@ -233,7 +233,7 @@ public class CommandPoints extends CommandBase
         }
         for (int i = 0; i < ViewerCommon.viewers.size(); i++)
         {
-            if (!ChirpBot.blackList.contains(ViewerCommon.viewers.get(i)))
+            if (!TwircBot.blackList.contains(ViewerCommon.viewers.get(i)))
             {
                 addPoints(ViewerCommon.viewers.get(i), amount, false);
             }
@@ -242,13 +242,13 @@ public class CommandPoints extends CommandBase
 
     private String getPoints(String user)
     {
-        if (ChirpBot.userList.get(user) == null)
+        if (TwircBot.userList.get(user) == null)
         {
             return "0";
         }
         else
         {
-            return ChirpBot.userList.get(user).toString();
+            return TwircBot.userList.get(user).toString();
         }
     }
 }

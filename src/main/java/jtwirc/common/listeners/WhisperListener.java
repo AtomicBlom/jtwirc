@@ -1,16 +1,16 @@
 package jtwirc.common.listeners;
 
-import jtwirc.Twirk;
-import jtwirc.events.TwirkListenerBaseImpl;
+import jtwirc.Twirc;
+import jtwirc.events.TwircListenerBaseImpl;
 import jtwirc.types.twitchMessage.TwitchMessage;
 import jtwirc.types.users.TwitchUser;
 
-public class WhisperListener extends TwirkListenerBaseImpl
+public class WhisperListener extends TwircListenerBaseImpl
 {
 
-    private Twirk.BotType type;
+    private Twirc.BotType type;
 
-    public WhisperListener(Twirk.BotType type)
+    public WhisperListener(Twirc.BotType type)
     {
         this.type = type;
     }

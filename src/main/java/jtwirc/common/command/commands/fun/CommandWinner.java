@@ -1,8 +1,8 @@
 package jtwirc.common.command.commands.fun;
 
+import jtwirc.TwircBot;
 import jtwirc.common.command.CommandBase;
 import jtwirc.common.threads.ViewerCommon;
-import jtwirc.todo.ChirpBot;
 import jtwirc.types.twitchMessage.TwitchMessage;
 import jtwirc.types.users.TwitchUser;
 import jtwirc.utils.Defaults;
@@ -50,7 +50,7 @@ public class CommandWinner extends CommandBase
             {
                 win = rand.nextInt(ViewerCommon.viewers.size());
                 winner = ViewerCommon.viewers.get(win);
-                breaker = winner.equals(ChirpBot.config.getProperty("autoJoinChannel").toLowerCase()) || winner.equals(Defaults.getBotName().toLowerCase());
+                breaker = winner.equals(TwircBot.config.getProperty("autoJoinChannel").toLowerCase()) || winner.equals(Defaults.getBotName().toLowerCase());
             }
             return winner;
         }
@@ -61,7 +61,7 @@ public class CommandWinner extends CommandBase
             {
                 win = rand.nextInt(ViewerCommon.viewers.size());
                 winner = ViewerCommon.viewers.get(win);
-                if (winner.equals(ChirpBot.config.getProperty("autoJoinChannel").toLowerCase()) || winner.equals(Defaults.getBotName().toLowerCase()))
+                if (winner.equals(TwircBot.config.getProperty("autoJoinChannel").toLowerCase()) || winner.equals(Defaults.getBotName().toLowerCase()))
                 {
                     breaker = true;
                 }
@@ -70,7 +70,7 @@ public class CommandWinner extends CommandBase
                     JSONObject json = null;
                     try
                     {
-                        json = new JSONObject(JSONParser.readUrl("https://api.twitch.tv/kraken/users/" + winner + "/follows/channels/" + ChirpBot.config.getProperty("autoJoinChannel")));
+                        json = new JSONObject(JSONParser.readUrl("https://api.twitch.tv/kraken/users/" + winner + "/follows/channels/" + TwircBot.config.getProperty("autoJoinChannel")));
                     }
                     catch (Exception e)
                     {

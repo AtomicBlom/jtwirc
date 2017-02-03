@@ -11,6 +11,6 @@ public class CommandIssues extends CommandBase
     public void channelCommand(TwitchUser user, TwitchMessage message)
     {
         super.channelCommand(user, message);
-        MessageSending.sendNormalMessage("Any and all issues with the bot, or suggestions, please fill a ticket in here: https://github.com/TheCricket/ChirpBot-Issues/issues");
+        MessageSending.sendNormalMessage("Any and all issues with the bot, or suggestions, please fill a ticket in here: https://github.com/TheCricket/TwircBot-Issues/issues");
     }
 }

@@ -1,19 +1,19 @@
 package jtwirc.common.module;
 
-import jtwirc.Twirk;
-import jtwirc.events.TwirkListenerBaseImpl;
-import jtwirc.todo.ChirpBot;
+import jtwirc.Twirc;
+import jtwirc.TwircBot;
+import jtwirc.events.TwircListenerBaseImpl;
 import jtwirc.types.twitchMessage.TwitchMessage;
 import jtwirc.types.usernotice.UserNoticeEvent;
 import jtwirc.types.users.TwitchUser;
 import jtwirc.utils.Defaults;
 import jtwirc.utils.MessageSending;
 
-public class Alerts extends TwirkListenerBaseImpl
+public class Alerts extends TwircListenerBaseImpl
 {
-	private Twirk.BotType type;
+	private Twirc.BotType type;
 
-    public Alerts(Twirk.BotType type)
+    public Alerts(Twirc.BotType type)
     {
         this.type = type;
     }
@@ -21,7 +21,7 @@ public class Alerts extends TwirkListenerBaseImpl
     @Override
     public void onUsernotice(UserNoticeEvent event)
     {
-		if (type == Twirk.BotType.COMMANDS)
+		if (type == Twirc.BotType.COMMANDS)
 		{
 			if (event.getMessage().toLowerCase().contains("subscribed"))
 			{
@@ -48,7 +48,7 @@ public class Alerts extends TwirkListenerBaseImpl
         {
             if (!message.getContent().contains("just subscribed to"))
             {
-                ChirpBot.log.info(message.getContent());
+                TwircBot.log.info(message.getContent());
                 if (message.getContent().contains("Twitch Prime!"))
                 {
                     String[] messenger = message.getContent().split(" ");

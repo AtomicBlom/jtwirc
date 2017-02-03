@@ -1,6 +1,6 @@
 package jtwirc.utils.json;
 
-import jtwirc.todo.ChirpBot;
+import jtwirc.TwircBot;
 import jtwirc.utils.Defaults;
 import jtwirc.utils.jsonclasses.Schedule;
 import jtwirc.utils.jsonclasses.YoutubeVideo;
@@ -31,7 +31,7 @@ public class Load
             for (Object alert : alerts)
             {
                 JSONObject inner = (JSONObject) alert;
-                ChirpBot.shoutoutList.put((Long) inner.get("timestamp"), (String) inner.get("channel"));
+                TwircBot.shoutoutList.put((Long) inner.get("timestamp"), (String) inner.get("channel"));
             }
         }
         catch (ParseException e)
@@ -66,12 +66,12 @@ public class Load
             for (Object alert : alerts)
             {
                 JSONObject inner = (JSONObject) alert;
-                ChirpBot.chatBubbleList.put("timestamp", inner.get("timestamp"));
-                ChirpBot.chatBubbleList.put("cbname", inner.get("cbname"));
-                ChirpBot.chatBubbleList.put("cbwho", inner.get("cbwho"));
-                ChirpBot.chatBubbleList.put("cbmessage", inner.get("cbmessage"));
-                ChirpBot.chatBubbleList.put("cbtrue", inner.get("cbtrue"));
-                ChirpBot.chatBubbleList.put("cbtrollsound", inner.get("cbtrollsound"));
+                TwircBot.chatBubbleList.put("timestamp", inner.get("timestamp"));
+                TwircBot.chatBubbleList.put("cbname", inner.get("cbname"));
+                TwircBot.chatBubbleList.put("cbwho", inner.get("cbwho"));
+                TwircBot.chatBubbleList.put("cbmessage", inner.get("cbmessage"));
+                TwircBot.chatBubbleList.put("cbtrue", inner.get("cbtrue"));
+                TwircBot.chatBubbleList.put("cbtrollsound", inner.get("cbtrollsound"));
             }
         }
         catch (ParseException e)
@@ -106,7 +106,7 @@ public class Load
             for (Object alert : alerts)
             {
                 JSONObject inner = (JSONObject) alert;
-                ChirpBot.modHiList.put((Long) inner.get("timestamp"), (String) inner.get("modname"));
+                TwircBot.modHiList.put((Long) inner.get("timestamp"), (String) inner.get("modname"));
             }
         }
         catch (ParseException e)
@@ -141,7 +141,7 @@ public class Load
             for (Object alert : alerts)
             {
                 JSONObject inner = (JSONObject) alert;
-                ChirpBot.welcomeList.put((Long) inner.get("timestamp"), (String) inner.get("channel"));
+                TwircBot.welcomeList.put((Long) inner.get("timestamp"), (String) inner.get("channel"));
             }
         }
         catch (ParseException e)
@@ -176,7 +176,7 @@ public class Load
             for (Object quote : quotes)
             {
                 JSONObject inner = (JSONObject) quote;
-                ChirpBot.quoteList.put((Long) inner.get("number"), (String) inner.get("quote"));
+                TwircBot.quoteList.put((Long) inner.get("number"), (String) inner.get("quote"));
             }
         }
         catch (FileNotFoundException e)
@@ -191,11 +191,11 @@ public class Load
             {
                 e1.printStackTrace();
             }
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
         catch (ParseException | IOException e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
 
         }
     }
@@ -213,7 +213,7 @@ public class Load
             for (Object quote : quotes)
             {
                 JSONObject inner = (JSONObject) quote;
-                ChirpBot.blackList.add((String) inner.get("user"));
+                TwircBot.blackList.add((String) inner.get("user"));
             }
         }
         catch (FileNotFoundException e)
@@ -228,11 +228,11 @@ public class Load
                 e1.printStackTrace();
             }
             System.out.println("Blacklist couldn't be found.");
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
         catch (ParseException | IOException e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
 
         }
     }
@@ -250,7 +250,7 @@ public class Load
             for (Object quote : quotes)
             {
                 JSONObject inner = (JSONObject) quote;
-                ChirpBot.noteList.put((Long) inner.get("number"), (String) inner.get("note"));
+                TwircBot.noteList.put((Long) inner.get("number"), (String) inner.get("note"));
             }
         }
         catch (FileNotFoundException e)
@@ -265,11 +265,11 @@ public class Load
                 e1.printStackTrace();
             }
             System.out.println("Note list couldn't be found.");
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
         catch (ParseException | IOException e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
 
         }
     }
@@ -287,7 +287,7 @@ public class Load
             for (Object user : users)
             {
                 JSONObject inner = (JSONObject) user;
-                ChirpBot.rankList.put((String) inner.get("name"), (Long) inner.get("amount"));
+                TwircBot.rankList.put((String) inner.get("name"), (Long) inner.get("amount"));
             }
         }
         catch (FileNotFoundException e)
@@ -302,11 +302,11 @@ public class Load
                 e1.printStackTrace();
             }
             System.out.println("Rank list couldn't be found.");
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
         catch (ParseException | IOException e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
     }
 
@@ -322,7 +322,7 @@ public class Load
             for (Object rank : ranks)
             {
                 JSONObject inner = (JSONObject) rank;
-                ChirpBot.rankUserList.put((String) inner.get("user"), (String) inner.get("rank"));
+                TwircBot.rankUserList.put((String) inner.get("user"), (String) inner.get("rank"));
             }
         }
         catch (FileNotFoundException e)
@@ -337,11 +337,11 @@ public class Load
                 e1.printStackTrace();
             }
             System.out.println("Ranks couldn't be found.");
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
         catch (ParseException | IOException e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
     }
 
@@ -357,7 +357,7 @@ public class Load
             for (Object schedule : messages)
             {
                 JSONObject inner = (JSONObject) schedule;
-                ChirpBot.scheduledList.put((Long) inner.get("number"), new Schedule((Long) inner.get("number"), inner.get("message").toString(), (boolean) inner.get("toggle")));
+                TwircBot.scheduledList.put((Long) inner.get("number"), new Schedule((Long) inner.get("number"), inner.get("message").toString(), (boolean) inner.get("toggle")));
             }
         }
         catch (FileNotFoundException e)
@@ -372,11 +372,11 @@ public class Load
                 e1.printStackTrace();
             }
             System.out.println("Schedule couldn't be found.");
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
         catch (ParseException | IOException e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
     }
 
@@ -393,7 +393,7 @@ public class Load
             for (Object user : users)
             {
                 JSONObject inner = (JSONObject) user;
-                ChirpBot.userList.put((String) inner.get("user"), (Long) inner.get("amount"));
+                TwircBot.userList.put((String) inner.get("user"), (Long) inner.get("amount"));
             }
         }
         catch (FileNotFoundException e)
@@ -408,11 +408,11 @@ public class Load
                 e1.printStackTrace();
             }
             System.out.println("Points couldn't be found.");
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
         catch (ParseException | IOException e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
     }
 
@@ -428,7 +428,7 @@ public class Load
             for (Object rank : ranks)
             {
                 JSONObject inner = (JSONObject) rank;
-                ChirpBot.permList.put((String) inner.get("name"), (String) inner.get("permission"));
+                TwircBot.permList.put((String) inner.get("name"), (String) inner.get("permission"));
             }
         }
         catch (FileNotFoundException e)
@@ -443,11 +443,11 @@ public class Load
                 e1.printStackTrace();
             }
             System.out.println("Permissions couldn't be found.");
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
         catch (ParseException | IOException e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
     }
 
@@ -468,7 +468,7 @@ public class Load
                 {
                     if (command.startsWith("!"))
                     {
-                        ChirpBot.commandList.put(command, (String) inner.get("response"));
+                        TwircBot.commandList.put(command, (String) inner.get("response"));
                     }
                 }
             }
@@ -485,11 +485,11 @@ public class Load
                 e1.printStackTrace();
             }
             System.out.println("Commands couldn't be found.");
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
         catch (ParseException | IOException e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
     }
 
@@ -505,7 +505,7 @@ public class Load
             for (Object rank : ranks)
             {
                 JSONObject inner = (JSONObject) rank;
-                ChirpBot.commandpermList.put((String) inner.get("command"), (String) inner.get("permission"));
+                TwircBot.commandpermList.put((String) inner.get("command"), (String) inner.get("permission"));
             }
         }
         catch (FileNotFoundException e)
@@ -520,11 +520,11 @@ public class Load
                 e1.printStackTrace();
             }
             System.out.println("Command Permissions couldn't be found.");
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
         catch (ParseException | IOException e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
     }
 
@@ -540,7 +540,7 @@ public class Load
             for (Object rank : ranks)
             {
                 JSONObject inner = (JSONObject) rank;
-                ChirpBot.raffleList.put((Long) inner.get("id"), (String) inner.get("user"));
+                TwircBot.raffleList.put((Long) inner.get("id"), (String) inner.get("user"));
             }
         }
         catch (FileNotFoundException e)
@@ -555,11 +555,11 @@ public class Load
                 e1.printStackTrace();
             }
             System.out.println("Raffle Tickets couldn't be found.");
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
         catch (ParseException | IOException e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
     }
 
@@ -575,7 +575,7 @@ public class Load
             for (Object rank : ranks)
             {
                 JSONObject inner = (JSONObject) rank;
-                ChirpBot.songRequestList.put(new YoutubeVideo((String) inner.get("link")), (String) inner.get("request"));
+                TwircBot.songRequestList.put(new YoutubeVideo((String) inner.get("link")), (String) inner.get("request"));
                 Defaults.incSongRequestNumber();
             }
         }
@@ -591,11 +591,11 @@ public class Load
                 e1.printStackTrace();
             }
             System.out.println("Song Requests couldn't be found.");
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
         catch (ParseException | IOException e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
     }
 
@@ -611,14 +611,14 @@ public class Load
             {
                 String name = String.valueOf(app.getJSONObject(i).get("name"));
                 Integer appid = (Integer) app.getJSONObject(i).get("appid");
-                ChirpBot.steamList.put(name, appid);
+                TwircBot.steamList.put(name, appid);
             }
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
-        System.out.println("Done loading steam game list, amount of games loaded " + ChirpBot.steamList.size());
+        System.out.println("Done loading steam game list, amount of games loaded " + TwircBot.steamList.size());
     }
 
     public static void subMessages()
@@ -644,11 +644,11 @@ public class Load
                 e1.printStackTrace();
             }
             System.out.println("Sub messages couldn't be found.");
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
         catch (ParseException | IOException e)
         {
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error(e.getMessage());
         }
     }
 
@@ -659,34 +659,34 @@ public class Load
         List<String> patronRanks = new ArrayList<>();
         List<String> ranks = new ArrayList<>();
 
-        for (Object property : ChirpBot.musicProp.keySet())
+        for (Object property : TwircBot.musicProp.keySet())
         {
             String prop = (String) property;
             if (prop.startsWith("patronSound"))
             {
-                patronSound.add(ChirpBot.musicProp.getProperty(prop));
+                patronSound.add(TwircBot.musicProp.getProperty(prop));
             }
             else if (prop.startsWith("patronRank"))
             {
                 //Unused
-                patronRanks.add(ChirpBot.musicProp.getProperty(prop));
+                patronRanks.add(TwircBot.musicProp.getProperty(prop));
             }
             else if (prop.startsWith("patron"))
             {
-                patrons.add(ChirpBot.musicProp.getProperty(prop));
+                patrons.add(TwircBot.musicProp.getProperty(prop));
             }
             else if (prop.startsWith("rank"))
             {
                 //Unused
-                ranks.add(ChirpBot.musicProp.getProperty(prop));
+                ranks.add(TwircBot.musicProp.getProperty(prop));
             }
         }
 
         for (int c = 0; c < patrons.size(); c++)
         {
-            ChirpBot.patronSounds.put(patrons.get(c), new File("sounds/" + patronSound.get(c)));
-            ChirpBot.commandList.put(patrons.get(c), "!" + patrons.get(c));
-            ChirpBot.commandpermList.put("!" + patrons.get(c), "mod");
+            TwircBot.patronSounds.put(patrons.get(c), new File("sounds/" + patronSound.get(c)));
+            TwircBot.commandList.put(patrons.get(c), "!" + patrons.get(c));
+            TwircBot.commandpermList.put("!" + patrons.get(c), "mod");
         }
     }
 }

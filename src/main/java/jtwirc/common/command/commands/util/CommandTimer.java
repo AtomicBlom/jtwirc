@@ -1,7 +1,7 @@
 package jtwirc.common.command.commands.util;
 
+import jtwirc.TwircBot;
 import jtwirc.common.command.CommandBase;
-import jtwirc.todo.ChirpBot;
 import jtwirc.types.twitchMessage.TwitchMessage;
 import jtwirc.types.users.TwitchUser;
 import jtwirc.utils.MessageSending;
@@ -25,16 +25,16 @@ public class CommandTimer extends CommandBase
             }
             if (args.length == 4)
             {
-                if (ChirpBot.commandList.containsKey(args[1]) && ChirpBot.commandList.containsKey(args[3]))
+                if (TwircBot.commandList.containsKey(args[1]) && TwircBot.commandList.containsKey(args[3]))
                 {
-                    MessageSending.sendNormalMessage(ChirpBot.commandList.get(args[1]));
+                    MessageSending.sendNormalMessage(TwircBot.commandList.get(args[1]));
                     Timer timer = new Timer();
                     timer.schedule(new TimerTask()
                     {
                         @Override
                         public void run()
                         {
-                            MessageSending.sendNormalMessage(ChirpBot.commandList.get(args[3]));
+                            MessageSending.sendNormalMessage(TwircBot.commandList.get(args[3]));
                         }
                     }, Integer.parseInt(args[2]) * 60 * 1000);
 

@@ -17,22 +17,22 @@ public class CommandChirpBot extends CommandBase
         {
             if (!Defaults.isVip)
             {
-                MessageSending.sendWhisper(user.getName().toLowerCase(), "This is ChirpBot. A Twitch bot specifically designed for WAPC!");
+                MessageSending.sendWhisper(user.getName().toLowerCase(), "This is TwircBot. A Twitch bot specifically designed for WAPC!");
             }
             else
             {
-                MessageSending.sendWhisper(user.getName().toLowerCase(), "This is ChirpBot. A Twitch bot specifically designed for WAPC!");
+                MessageSending.sendWhisper(user.getName().toLowerCase(), "This is TwircBot. A Twitch bot specifically designed for WAPC!");
             }
         }
         else
         {
             if (!Defaults.isVip)
             {
-                MessageSending.sendNormalMessage("This is ChirpBot. A Twitch bot specifically designed for WAPC!");
+                MessageSending.sendNormalMessage("This is TwircBot. A Twitch bot specifically designed for WAPC!");
             }
             else
             {
-                MessageSending.sendNormalMessage("This is ChirpBot. A Twitch bot specifically designed for WAPC!");
+                MessageSending.sendNormalMessage("This is TwircBot. A Twitch bot specifically designed for WAPC!");
             }
         }
     }

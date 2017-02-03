@@ -1,7 +1,7 @@
 package jtwirc.common.command.commands.util;
 
+import jtwirc.TwircBot;
 import jtwirc.common.command.CommandBase;
-import jtwirc.todo.ChirpBot;
 import jtwirc.types.twitchMessage.TwitchMessage;
 import jtwirc.types.users.TwitchUser;
 import jtwirc.utils.Defaults;
@@ -19,13 +19,13 @@ public class CommandToggleLinks extends CommandBase
             {
                 Defaults.linkPurge = false;
                 MessageSending.sendWhisper(user.getName(), "Purging of links has been toggled off.");
-                ChirpBot.extra.setProperty("linkToggle", "false");
+                TwircBot.extra.setProperty("linkToggle", "false");
             }
             else
             {
                 Defaults.linkPurge = true;
                 MessageSending.sendWhisper(user.getName(), "Purging of links has been toggled on.");
-                ChirpBot.extra.setProperty("linkToggle", "true");
+                TwircBot.extra.setProperty("linkToggle", "true");
             }
         }
     }

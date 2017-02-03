@@ -1,7 +1,7 @@
 package jtwirc.utils;
 
 import com.rosaloves.bitlyj.Url;
-import jtwirc.todo.ChirpBot;
+import jtwirc.TwircBot;
 
 import static com.rosaloves.bitlyj.Bitly.as;
 import static com.rosaloves.bitlyj.Bitly.shorten;
@@ -9,7 +9,7 @@ import static com.rosaloves.bitlyj.Bitly.shorten;
 public class Defaults
 {
 
-    //ChirpBot Stuff
+    //TwircBot Stuff
 	public static final String VERSION = "3.0";
     public static final String CHANGELOG = "N/A";
 
@@ -18,11 +18,11 @@ public class Defaults
     public static boolean toggleStream = false;
     public static boolean isVip = true;
 
-    public static boolean linkPurge = Boolean.getBoolean(ChirpBot.extra.getProperty("linkToggle"));
-    public static boolean capsPurge = Boolean.getBoolean(ChirpBot.extra.getProperty("capsToggle"));
-    public static boolean wotPurge = Boolean.getBoolean(ChirpBot.extra.getProperty("wotToggle"));
-    public static boolean schedule = Boolean.getBoolean(ChirpBot.extra.getProperty("scheduleToggle"));
-    public static boolean whisperToggle = Boolean.getBoolean(ChirpBot.extra.getProperty("whisperToggle"));
+    public static boolean linkPurge = Boolean.getBoolean(TwircBot.extra.getProperty("linkToggle"));
+    public static boolean capsPurge = Boolean.getBoolean(TwircBot.extra.getProperty("capsToggle"));
+    public static boolean wotPurge = Boolean.getBoolean(TwircBot.extra.getProperty("wotToggle"));
+    public static boolean schedule = Boolean.getBoolean(TwircBot.extra.getProperty("scheduleToggle"));
+    public static boolean whisperToggle = Boolean.getBoolean(TwircBot.extra.getProperty("whisperToggle"));
 
     //Default values
     public static int lastStrawpoll = 0;
@@ -35,7 +35,7 @@ public class Defaults
     public static String freeSub = "/me Welcome to the WeAllSubCrew #user!";
     public static String oldSub = "/me Welcome back #user and thanks for #months months of support!";
 
-    public static String cttText = ChirpBot.extra.getProperty("ctt");
+    public static String cttText = TwircBot.extra.getProperty("ctt");
     public static boolean songRequestBoolean = true;
     private static int songRequestNumber = 1;
 
@@ -71,7 +71,7 @@ public class Defaults
     {
         if (isVip)
         {
-            return ChirpBot.config.getProperty("points");
+            return TwircBot.config.getProperty("points");
         }
         else
         {
@@ -83,11 +83,11 @@ public class Defaults
     {
         if (isVip)
         {
-            return ChirpBot.config.getProperty("nick");
+            return TwircBot.config.getProperty("nick");
         }
         else
         {
-            return "ChirpBot";
+            return "TwircBot";
         }
     }
 
@@ -95,7 +95,7 @@ public class Defaults
     {
         if (isVip)
         {
-            return ChirpBot.config.getProperty("oauth");
+            return TwircBot.config.getProperty("oauth");
         }
         else
         {
@@ -105,7 +105,7 @@ public class Defaults
 
     public static String getStreamer()
     {
-        if (ChirpBot.config.getProperty("autoJoinChannel") == null)
+        if (TwircBot.config.getProperty("autoJoinChannel") == null)
         {
             try
             {
@@ -118,9 +118,9 @@ public class Defaults
         }
         else
         {
-            return ChirpBot.config.getProperty("autoJoinChannel").toLowerCase();
+            return TwircBot.config.getProperty("autoJoinChannel").toLowerCase();
         }
-        return ChirpBot.config.getProperty("autoJoinChannel").toLowerCase();
+        return TwircBot.config.getProperty("autoJoinChannel").toLowerCase();
     }
 
     public static void setLastStrawpoll(int i)

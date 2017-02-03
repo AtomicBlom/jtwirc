@@ -1,6 +1,6 @@
 package jtwirc;
 
-import jtwirc.Twirk.BotType;
+import jtwirc.Twirc.BotType;
 import jtwirc.types.action.ActionBuilder;
 import jtwirc.types.action.DefaultActionBuilder;
 import jtwirc.types.clearChat.ClearChatBuilder;
@@ -27,15 +27,15 @@ import jtwirc.types.users.TwitchUserBuilder;
 import jtwirc.types.users.UserstateBuilder;
 
 /**
- * Class for creating instances of {@link Twirk}.<br>
- * To build an instance of {@link Twirk}, the user has to supply the bot's nick and
+ * Class for creating instances of {@link Twirc}.<br>
+ * To build an instance of {@link Twirc}, the user has to supply the bot's nick and
  * oAuth token. To generate a oAuth token, visit <a href="https://twitchapps.com/tmi/">https://twitchapps.com/tmi/</a><br><br>
  * <p>
  * If you want to change any setting except the required once, use one of the
  * setter methods related to this object. When all settings are performed, use the
  * {@link #build()} method.
  */
-public class TwirkBuilder
+public class TwircBuilder
 {
     //***********************************************************
     // 				VARIABLES
@@ -70,16 +70,16 @@ public class TwirkBuilder
     //***********************************************************
 
     /**
-     * Creates a new {@link TwirkBuilder}. To build an instance of {@link Twirk}, we must have
+     * Creates a new {@link TwircBuilder}. To build an instance of {@link Twirc}, we must have
      * the bot's account nick, and the bot's IRC oAuth token (which can be retrieved from Twitch).
-     * See {@link TwirkBuilder}
+     * See {@link TwircBuilder}
      *
      * @param channel The channel the bot should join
      * @param nick    The bot's account name (on Twitch)
      * @param oauth   The bot's IRC oAuth token (on Twitch)
      * @param type    bot type
      */
-    public TwirkBuilder(String channel, String nick, String oauth, BotType type)
+    public TwircBuilder(String channel, String nick, String oauth, BotType type)
     {
         this.channel = channel;
         this.nick = nick;
@@ -92,24 +92,24 @@ public class TwirkBuilder
     //***********************************************************
 
     /**
-     * Sets the server which {@link Twirk} will try to connect to Twitch via
+     * Sets the server which {@link Twirc} will try to connect to Twitch via
      *
      * @param server The server adress
      * @return this
      */
-    public TwirkBuilder setServer(String server)
+    public TwircBuilder setServer(String server)
     {
         this.server = server;
         return this;
     }
 
     /**
-     * Sets the port which the {@link Twirk} object will try to connect to Twitch via
+     * Sets the port which the {@link Twirc} object will try to connect to Twitch via
      *
      * @param port The port number
      * @return this
      */
-    public TwirkBuilder setPort(int port)
+    public TwircBuilder setPort(int port)
     {
         this.port = port;
         return this;
@@ -125,20 +125,20 @@ public class TwirkBuilder
      * @param ssl Whether we should use SSL connection or not.
      * @return this
      */
-    public TwirkBuilder setSSL(boolean ssl)
+    public TwircBuilder setSSL(boolean ssl)
     {
         this.useSSL = ssl;
         return this;
     }
 
     /**
-     * Sets the {@link Twirk} object to VerboseMode<br>
-     * In VerboseMode, every message that is received by {@link Twirk} will be printed to console. Default value is {@code false}
+     * Sets the {@link Twirc} object to VerboseMode<br>
+     * In VerboseMode, every message that is received by {@link Twirc} will be printed to console. Default value is {@code false}
      *
-     * @param verboseMode {@code true} is you want {@link Twirk} in VerboseMode
+     * @param verboseMode {@code true} is you want {@link Twirc} in VerboseMode
      * @return this
      */
-    public TwirkBuilder setVerboseMode(boolean verboseMode)
+    public TwircBuilder setVerboseMode(boolean verboseMode)
     {
         this.verboseMode = verboseMode;
         return this;
@@ -156,12 +156,12 @@ public class TwirkBuilder
 
     /**
      * Sets the {@link ClearChatBuilder}. Useful if you want to use your custom implementations of a {@link ClearChatBuilder}. If
-     * no {@link ClearChatBuilder} is assigned, the created {@link Twirk} object will use the default implementation.
+     * no {@link ClearChatBuilder} is assigned, the created {@link Twirc} object will use the default implementation.
      *
-     * @param clearChatBuilder The {@link UserstateBuilder} you want the {@link Twirk} object to use
+     * @param clearChatBuilder The {@link UserstateBuilder} you want the {@link Twirc} object to use
      * @return this
      */
-    public TwirkBuilder setClearChatBuilder(ClearChatBuilder clearChatBuilder)
+    public TwircBuilder setClearChatBuilder(ClearChatBuilder clearChatBuilder)
     {
         this.clearChatBuilder = clearChatBuilder;
         return this;
@@ -179,12 +179,12 @@ public class TwirkBuilder
 
     /**
      * Sets the HostTargetBuilder. Useful if you want to use your custom implementations of a HostTargetBuilder. If
-     * no HostTargetBuilder is assigned, the created {@link Twirk} object will use the default implementation.
+     * no HostTargetBuilder is assigned, the created {@link Twirc} object will use the default implementation.
      *
-     * @param hostTargetBuilder The {@link HostTargetBuilder} you want the {@link Twirk} object to use
+     * @param hostTargetBuilder The {@link HostTargetBuilder} you want the {@link Twirc} object to use
      * @return this
      */
-    public TwirkBuilder setHostTargetBuilder(HostTargetBuilder hostTargetBuilder)
+    public TwircBuilder setHostTargetBuilder(HostTargetBuilder hostTargetBuilder)
     {
         this.hostTargetBuilder = hostTargetBuilder;
         return this;
@@ -202,12 +202,12 @@ public class TwirkBuilder
 
     /**
      * Sets the {@link ModeBuilder}. Useful if you want to use your custom implementations of a {@link ModeBuilder}. If
-     * no {@link ModeBuilder} is assigned, the created {@link Twirk} object will use the default implementation.
+     * no {@link ModeBuilder} is assigned, the created {@link Twirc} object will use the default implementation.
      *
-     * @param modeBuilder The {@link ModeBuilder} you want the {@link Twirk} object to use
+     * @param modeBuilder The {@link ModeBuilder} you want the {@link Twirc} object to use
      * @return this
      */
-    public TwirkBuilder setModeBuilder(ModeBuilder modeBuilder)
+    public TwircBuilder setModeBuilder(ModeBuilder modeBuilder)
     {
         this.modeBuilder = modeBuilder;
         return this;
@@ -225,12 +225,12 @@ public class TwirkBuilder
 
     /**
      * Sets the {@link NoticeBuilder}. Useful if you want to use your custom implementations of a {@link NoticeBuilder}. If
-     * no {@link NoticeBuilder} is assigned, the created {@link Twirk} object will use the default implementation.
+     * no {@link NoticeBuilder} is assigned, the created {@link Twirc} object will use the default implementation.
      *
-     * @param noticeBuilder The {@link NoticeBuilder} you want the {@link Twirk} object to use
+     * @param noticeBuilder The {@link NoticeBuilder} you want the {@link Twirc} object to use
      * @return this
      */
-    public TwirkBuilder setNoticeBuilder(NoticeBuilder noticeBuilder)
+    public TwircBuilder setNoticeBuilder(NoticeBuilder noticeBuilder)
     {
         this.noticeBuilder = noticeBuilder;
         return this;
@@ -248,12 +248,12 @@ public class TwirkBuilder
 
     /**
      * Sets the {@link RoomstateBuilder}. Useful if you want to use your custom implementations of a {@link RoomstateBuilder}. If
-     * no {@link RoomstateBuilder} is assigned, the created {@link Twirk} object will use the default implementation.
+     * no {@link RoomstateBuilder} is assigned, the created {@link Twirc} object will use the default implementation.
      *
-     * @param roomstateBuilder The {@link RoomstateBuilder} you want the {@link Twirk} object to use
+     * @param roomstateBuilder The {@link RoomstateBuilder} you want the {@link Twirc} object to use
      * @return this
      */
-    public TwirkBuilder setRoomstateBuilder(RoomstateBuilder roomstateBuilder)
+    public TwircBuilder setRoomstateBuilder(RoomstateBuilder roomstateBuilder)
     {
         this.roomstateBuilder = roomstateBuilder;
         return this;
@@ -271,12 +271,12 @@ public class TwirkBuilder
 
     /**
      * Sets the {@link TwitchMessageBuilder}. Useful if you want to use your custom implementations of a {@link TwitchMessageBuilder}. If
-     * no {@link TwitchMessageBuilder} is assigned, the created {@link Twirk} object will use the default implementation.
+     * no {@link TwitchMessageBuilder} is assigned, the created {@link Twirc} object will use the default implementation.
      *
-     * @param twitchMessageBuilder The {@link TwitchMessageBuilder} you want the {@link Twirk} object to use
+     * @param twitchMessageBuilder The {@link TwitchMessageBuilder} you want the {@link Twirc} object to use
      * @return this
      */
-    public TwirkBuilder setTwitchMessageBuilder(TwitchMessageBuilder twitchMessageBuilder)
+    public TwircBuilder setTwitchMessageBuilder(TwitchMessageBuilder twitchMessageBuilder)
     {
         this.twitchMessageBuilder = twitchMessageBuilder;
         return this;
@@ -294,12 +294,12 @@ public class TwirkBuilder
 
     /**
      * Sets the {@link TwitchUserBuilder}. Useful if you want to use your custom implementations of a {@link TwitchUserBuilder}. If
-     * no {@link TwitchUserBuilder} is assigned, the created {@link Twirk} object will use the default implementation.
+     * no {@link TwitchUserBuilder} is assigned, the created {@link Twirc} object will use the default implementation.
      *
-     * @param twitchUserBuilder The {@link TwitchUserBuilder} you want the {@link Twirk} object to use
+     * @param twitchUserBuilder The {@link TwitchUserBuilder} you want the {@link Twirc} object to use
      * @return this
      */
-    public TwirkBuilder setTwitchUserBuilder(TwitchUserBuilder twitchUserBuilder)
+    public TwircBuilder setTwitchUserBuilder(TwitchUserBuilder twitchUserBuilder)
     {
         this.twitchUserBuilder = twitchUserBuilder;
         return this;
@@ -317,12 +317,12 @@ public class TwirkBuilder
 
     /**
      * Sets the {@link UserstateBuilder}. Useful if you want to use your custom implementations of a {@link UserstateBuilder}. If
-     * no {@link UserstateBuilder} is assigned, the created {@link Twirk} object will use the default implementation.
+     * no {@link UserstateBuilder} is assigned, the created {@link Twirc} object will use the default implementation.
      *
-     * @param userstateBuilder The {@link UserstateBuilder} you want the {@link Twirk} object to use
+     * @param userstateBuilder The {@link UserstateBuilder} you want the {@link Twirc} object to use
      * @return this
      */
-    public TwirkBuilder setUserstateBuilder(UserstateBuilder userstateBuilder)
+    public TwircBuilder setUserstateBuilder(UserstateBuilder userstateBuilder)
     {
         this.userstateBuilder = userstateBuilder;
         return this;
@@ -340,12 +340,12 @@ public class TwirkBuilder
 
     /**
      * Sets the {@link SubscriberEventBuilder}. Useful if you want to use your custom implementations of a {@link SubscriberEventBuilder}. If
-     * no {@link SubscriberEventBuilder} is assigned, the created {@link Twirk} object will use the default implementation.
+     * no {@link SubscriberEventBuilder} is assigned, the created {@link Twirc} object will use the default implementation.
      *
-     * @param subEventBuilder The {@link SubscriberEventBuilder} you want the {@link Twirk} object to use
+     * @param subEventBuilder The {@link SubscriberEventBuilder} you want the {@link Twirc} object to use
      * @return this
      */
-    public TwirkBuilder setSubscriberEventBuilder(SubscriberEventBuilder subEventBuilder)
+    public TwircBuilder setSubscriberEventBuilder(SubscriberEventBuilder subEventBuilder)
     {
         this.subEventBuilder = subEventBuilder;
         return this;
@@ -378,26 +378,26 @@ public class TwirkBuilder
 
     /**
      * Sets the {@link ActionBuilder}. Useful if you want to use your custom implementations of a {@link ActionBuilder}. If
-     * no {@link ActionBuilder} is assigned, the created {@link Twirk} object will use the default implementation.
+     * no {@link ActionBuilder} is assigned, the created {@link Twirc} object will use the default implementation.
      *
-     * @param actionBuilder The {@link ActionBuilder} you want the {@link Twirk} object to use
+     * @param actionBuilder The {@link ActionBuilder} you want the {@link Twirc} object to use
      * @return this
      */
-    public TwirkBuilder setActionBuilder(ActionBuilder actionBuilder)
+    public TwircBuilder setActionBuilder(ActionBuilder actionBuilder)
     {
         this.actionBuilder = actionBuilder;
         return this;
     }
 
     /**
-     * Creates a Twirk object, with the parameters assigned to this
+     * Creates a Twirc object, with the parameters assigned to this
      * builder.
      *
-     * @return A configured Twirk object
+     * @return A configured Twirc object
      */
-    public Twirk build()
+    public Twirc build()
     {
-        return new Twirk(this);
+        return new Twirc(this);
     }
 
 }

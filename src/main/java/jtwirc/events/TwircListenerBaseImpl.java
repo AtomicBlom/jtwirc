@@ -16,12 +16,12 @@ import java.util.Collection;
 
 /**
  * Convenience class.<br>
- * Instead if extending the TwirkListener interface, you can instead extend this class. That
+ * Instead if extending the TwircListener interface, you can instead extend this class. That
  * way, you only need to implement those methods that you want to use. This class implements
  * all required methods, but leaves the method body blank. Thus, you don't need to call the
  * {@code .super()} methods at all.
  */
-public abstract class TwirkListenerBaseImpl implements TwirkListener
+public abstract class TwircListenerBaseImpl implements TwircListener
 {
 
     @Override

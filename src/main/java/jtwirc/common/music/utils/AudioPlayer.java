@@ -1,6 +1,6 @@
 package jtwirc.common.music.utils;
 
-import jtwirc.todo.ChirpBot;
+import jtwirc.TwircBot;
 import net.beadsproject.beads.data.SampleManager;
 import net.beadsproject.beads.ugens.Gain;
 import net.beadsproject.beads.ugens.SamplePlayer;
@@ -13,12 +13,12 @@ public class AudioPlayer
     public void playAudioFile(File audio)
     {
 
-        SamplePlayer player = new SamplePlayer(ChirpBot.audioContext, SampleManager.sample(audio.getPath()));
-        System.out.println("[ChirpBot] Playing audio file " + audio.getPath());
-        Gain g = new Gain(ChirpBot.audioContext, Integer.valueOf(ChirpBot.config.getProperty("inouts")), Float.valueOf(ChirpBot.config.getProperty("gain")));
+        SamplePlayer player = new SamplePlayer(TwircBot.audioContext, SampleManager.sample(audio.getPath()));
+        System.out.println("[TwircBot] Playing audio file " + audio.getPath());
+        Gain g = new Gain(TwircBot.audioContext, Integer.valueOf(TwircBot.config.getProperty("inouts")), Float.valueOf(TwircBot.config.getProperty("gain")));
         g.addInput(player);
-        ChirpBot.audioContext.out.addInput(g);
-        ChirpBot.audioContext.start();
+        TwircBot.audioContext.out.addInput(g);
+        TwircBot.audioContext.start();
         AudioTimerThread thread = new AudioTimerThread();
         thread.iloveyou(System.currentTimeMillis());
         thread.start();

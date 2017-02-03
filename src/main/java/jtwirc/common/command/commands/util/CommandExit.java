@@ -1,8 +1,8 @@
 package jtwirc.common.command.commands.util;
 
-import jtwirc.Twirk;
+import jtwirc.Twirc;
+import jtwirc.TwircBot;
 import jtwirc.common.command.CommandBase;
-import jtwirc.todo.ChirpBot;
 import jtwirc.types.twitchMessage.TwitchMessage;
 import jtwirc.types.users.TwitchUser;
 import jtwirc.utils.MessageSending;
@@ -29,7 +29,7 @@ public class CommandExit extends CommandBase
         {
             MessageSending.sendNormalMessage("Shutting down the bot.");
             System.out.println("Shutting down.");
-            ChirpBot.bots.forEach(Twirk::close);
+            TwircBot.bots.forEach(Twirc::close);
             System.out.println("Shut down!");
             exit();
         }

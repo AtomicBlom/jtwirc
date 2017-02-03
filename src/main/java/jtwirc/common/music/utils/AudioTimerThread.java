@@ -1,6 +1,6 @@
 package jtwirc.common.music.utils;
 
-import jtwirc.todo.ChirpBot;
+import jtwirc.TwircBot;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,7 +15,7 @@ public class AudioTimerThread extends Thread
     {
         if (TimeUnit.SECONDS.convert(System.currentTimeMillis(), TimeUnit.MILLISECONDS) >= 7)
         {
-            ChirpBot.audioContext.reset();
+            TwircBot.audioContext.reset();
             stop();
         }
     }

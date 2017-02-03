@@ -1,12 +1,12 @@
 package jtwirc.types.users;
 
 import jtwirc.enums.USER_TYPE;
-import jtwirc.events.TwirkListener;
+import jtwirc.events.TwircListener;
 
 /**
  * Class for representing a Twitch User's attributes<br><br>
  * <p>
- * Whenever we receive a PRIVMSG or WHISPER from Twitch (see {@link TwirkListener}, Twitch always sends us some
+ * Whenever we receive a PRIVMSG or WHISPER from Twitch (see {@link TwircListener}, Twitch always sends us some
  * information about the sender, such as what color the user has in chat on Twitch, how the users name should
  * be capitalized, if the user has Turbo, and so on. This class encapsulates all that info, and makes it easy
  * to work with.

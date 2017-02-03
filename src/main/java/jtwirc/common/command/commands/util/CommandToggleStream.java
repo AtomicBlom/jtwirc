@@ -1,8 +1,8 @@
 package jtwirc.common.command.commands.util;
 
+import jtwirc.TwircBot;
 import jtwirc.common.command.CommandBase;
 import jtwirc.common.listeners.MessageListener;
-import jtwirc.todo.ChirpBot;
 import jtwirc.types.twitchMessage.TwitchMessage;
 import jtwirc.types.users.TwitchUser;
 import jtwirc.utils.Defaults;
@@ -28,11 +28,11 @@ public class CommandToggleStream extends CommandBase
                 MessageSending.sendNormalMessage("This time I gave away " + Defaults.totalPoints + " " + Defaults.getPointName() + " in total!");
                 Defaults.toggleStream = false;
             }
-            ChirpBot.shoutoutList.clear();
-            ChirpBot.welcomeList.clear();
-            ChirpBot.chatBubbleList.clear();
+            TwircBot.shoutoutList.clear();
+            TwircBot.welcomeList.clear();
+            TwircBot.chatBubbleList.clear();
             MessageListener.peopleWhoTalked.clear();
-            ChirpBot.saveAllTheThings();
+            TwircBot.saveAllTheThings();
         }
     }
 }

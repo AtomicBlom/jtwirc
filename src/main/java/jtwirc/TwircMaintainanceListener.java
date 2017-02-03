@@ -1,20 +1,20 @@
 package jtwirc;
 
-import jtwirc.events.TwirkListenerBaseImpl;
+import jtwirc.events.TwircListenerBaseImpl;
 import jtwirc.types.mode.ModeEvent;
 
 /**
  * Class for taking care of basic tasks that our bot should do. However, writing all
- * of these methods directly in the {@link Twirk} class would get messy. Instead, these simple
+ * of these methods directly in the {@link Twirc} class would get messy. Instead, these simple
  * methods are moved to this separate class.
  */
-class TwirkMaintainanceListener extends TwirkListenerBaseImpl
+class TwircMaintainanceListener extends TwircListenerBaseImpl
 {
-    private final Twirk instance;
+    private final Twirc instance;
 
-    TwirkMaintainanceListener(Twirk twirk)
+    TwircMaintainanceListener(Twirc Twirc)
     {
-        this.instance = twirk;
+        this.instance = Twirc;
     }
 
     @Override

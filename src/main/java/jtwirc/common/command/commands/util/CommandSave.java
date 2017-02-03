@@ -1,7 +1,7 @@
 package jtwirc.common.command.commands.util;
 
+import jtwirc.TwircBot;
 import jtwirc.common.command.CommandBase;
-import jtwirc.todo.ChirpBot;
 import jtwirc.types.twitchMessage.TwitchMessage;
 import jtwirc.types.users.TwitchUser;
 
@@ -13,7 +13,7 @@ public class CommandSave extends CommandBase
         super.channelCommand(user, message);
         if (user.isMod() || user.isBroadcaster())
         {
-            ChirpBot.saveAllTheThings();
+            TwircBot.saveAllTheThings();
         }
     }
 }

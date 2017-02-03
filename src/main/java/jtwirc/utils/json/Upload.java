@@ -1,6 +1,6 @@
 package jtwirc.utils.json;
 
-import jtwirc.todo.ChirpBot;
+import jtwirc.TwircBot;
 import jtwirc.utils.Defaults;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
@@ -28,14 +28,14 @@ public class Upload
         {
             for (String aReply : replies)
             {
-                ChirpBot.log.info("SERVER: " + aReply);
+                TwircBot.log.info("SERVER: " + aReply);
             }
         }
     }
 
     public static void uploadFiles()
     {
-        ChirpBot.log.info("Uploading files to FTP.");
+        TwircBot.log.info("Uploading files to FTP.");
         try
         {
             FTPClient ftpClient = new FTPClient();
@@ -47,7 +47,7 @@ public class Upload
                 {
                     ftpClient.enterLocalPassiveMode();
                     ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-                    ftpClient.makeDirectory(uploadPath + "" + ChirpBot.config.getProperty("autoJoinChannel"));
+                    ftpClient.makeDirectory(uploadPath + "" + TwircBot.config.getProperty("autoJoinChannel"));
                     showServerReply(ftpClient);
 
                     for (String file : files)
@@ -57,7 +57,7 @@ public class Upload
                             File upload = new File("config/" + file + ".json");
 
                             InputStream inputStream = new FileInputStream(upload);
-                            OutputStream outputStream = ftpClient.storeFileStream(uploadPath + ChirpBot.config.getProperty("autoJoinChannel") + "/" + file + ".json");
+                            OutputStream outputStream = ftpClient.storeFileStream(uploadPath + TwircBot.config.getProperty("autoJoinChannel") + "/" + file + ".json");
                             byte[] bytesIn = new byte[4096];
                             int read;
 
@@ -92,13 +92,13 @@ public class Upload
         }
         finally
         {
-            ChirpBot.log.info("Finished uploading files to FTP.");
+            TwircBot.log.info("Finished uploading files to FTP.");
         }
     }
 
     public static void uploadDataFiles()
     {
-        ChirpBot.log.info("Uploading raffle files to FTP.");
+        TwircBot.log.info("Uploading raffle files to FTP.");
         try
         {
             FTPClient ftpClient = new FTPClient();
@@ -147,7 +147,7 @@ public class Upload
         }
         finally
         {
-            ChirpBot.log.info("Finished uploading raffle files to FTP.");
+            TwircBot.log.info("Finished uploading raffle files to FTP.");
         }
     }
 }

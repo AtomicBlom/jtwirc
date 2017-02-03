@@ -1,11 +1,11 @@
 package jtwirc.common.module;
 
-import jtwirc.Twirk.BotType;
-import jtwirc.events.TwirkListenerBaseImpl;
+import jtwirc.Twirc.BotType;
+import jtwirc.events.TwircListenerBaseImpl;
 import jtwirc.types.notice.NoticeEvent;
 import jtwirc.utils.MessageSending;
 
-public class HooksWhisperer extends TwirkListenerBaseImpl
+public class HooksWhisperer extends TwircListenerBaseImpl
 {
 
     private BotType type;

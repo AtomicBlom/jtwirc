@@ -1,7 +1,7 @@
 package jtwirc.common.command.utils;
 
+import jtwirc.TwircBot;
 import jtwirc.common.command.CommandBase;
-import jtwirc.todo.ChirpBot;
 import jtwirc.types.twitchMessage.TwitchMessage;
 import jtwirc.types.users.TwitchUser;
 import jtwirc.utils.MessageSending;
@@ -21,7 +21,7 @@ public class EditCommands extends CommandBase
 
         if (user.isMod() || user.isBroadcaster())
         {
-            if (ChirpBot.commandList.containsKey(args[1]))
+            if (TwircBot.commandList.containsKey(args[1]))
             {
                 List<String> response = new ArrayList<>();
                 response.addAll(Arrays.asList(args).subList(2, args.length));
@@ -46,16 +46,16 @@ public class EditCommands extends CommandBase
 
     private void editCommand(String command, String responseComplete, TwitchUser user)
     {
-        if (ChirpBot.commandList.containsKey(command))
+        if (TwircBot.commandList.containsKey(command))
         {
-            ChirpBot.commandList.put(command, responseComplete);
-            if (ChirpBot.commandpermList.containsKey(command))
+            TwircBot.commandList.put(command, responseComplete);
+            if (TwircBot.commandpermList.containsKey(command))
             {
-                ChirpBot.commandpermList.put(command, responseComplete);
+                TwircBot.commandpermList.put(command, responseComplete);
             }
             MessageSending.sendWhisper(user.getName(), "Command has been edited");
-            ChirpBot.log.info(command + " edited");
-            ChirpBot.saveAllTheThings();
+            TwircBot.log.info(command + " edited");
+            TwircBot.saveAllTheThings();
         }
         else
         {

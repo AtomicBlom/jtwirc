@@ -1,22 +1,22 @@
 package jtwirc.common.module;
 
-import jtwirc.Twirk;
+import jtwirc.Twirc;
 import jtwirc.common.command.commands.faq.CommandPoints;
 import jtwirc.common.threads.ModCommon;
 import jtwirc.common.threads.ScheduleCommon;
 import jtwirc.common.threads.ViewerCommon;
-import jtwirc.events.TwirkListenerBaseImpl;
+import jtwirc.events.TwircListenerBaseImpl;
 import jtwirc.types.twitchMessage.TwitchMessage;
 import jtwirc.types.users.TwitchUser;
 import jtwirc.utils.Defaults;
 import jtwirc.utils.MessageSending;
 
-public class Hooks extends TwirkListenerBaseImpl
+public class Hooks extends TwircListenerBaseImpl
 {
 
-    private Twirk.BotType type;
+    private Twirc.BotType type;
 
-    public Hooks(Twirk.BotType type)
+    public Hooks(Twirc.BotType type)
     {
         this.type = type;
     }
@@ -24,17 +24,17 @@ public class Hooks extends TwirkListenerBaseImpl
     @Override
     public void onConnect()
     {
-        if (type == Twirk.BotType.COMMANDS)
+        if (type == Twirc.BotType.COMMANDS)
         {
-            System.out.println("ChirpBot started and joined " + Defaults.getStreamer() + "'s channel.\nPlease enjoy ChirpBot");
-            MessageSending.sendNormalMessage("ChirpBot started. Please enjoy ChirpBot");
+            System.out.println("TwircBot started and joined " + Defaults.getStreamer() + "'s channel.\nPlease enjoy TwircBot");
+            MessageSending.sendNormalMessage("TwircBot started. Please enjoy TwircBot");
         }
     }
 
     @Override
     public void onPrivMsg(TwitchUser user, TwitchMessage message)
     {
-        if (type == Twirk.BotType.COMMANDS)
+        if (type == Twirc.BotType.COMMANDS)
         {
             if (ViewerCommon.updateViewers.getState().equals(Thread.State.NEW))
             {

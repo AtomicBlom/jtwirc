@@ -13,7 +13,7 @@ class InputThread extends Thread
 	//***********************************************************************************************
     //											VARIABLES
     //***********************************************************************************************
-    private final Twirk connection;
+    private final Twirc connection;
     private final BufferedReader reader;
 
     private boolean isConnected = true;
@@ -22,12 +22,12 @@ class InputThread extends Thread
     //***********************************************************************************************
     //											CONSTRUCTOR
     //***********************************************************************************************
-    InputThread(Twirk connection, BufferedReader reader, BufferedWriter writer)
+    InputThread(Twirc connection, BufferedReader reader, BufferedWriter writer)
     {
         this.connection = connection;
         this.reader = reader;
 
-        this.setName("Twirk-InputThread");
+        this.setName("Twirc-InputThread");
     }
 
     @Override

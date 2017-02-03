@@ -1,6 +1,6 @@
 package jtwirc;
 
-import jtwirc.events.TwirkListener;
+import jtwirc.events.TwircListener;
 import jtwirc.types.action.ActionBuilder;
 import jtwirc.types.action.ActionEvent;
 import jtwirc.types.clearChat.ClearChatBuilder;
@@ -34,7 +34,7 @@ import java.util.*;
 
 /**
  * Class for communicating with the TwitchIrc chat.<br>
- * To create instances of Twirk, see {@link TwirkBuilder}.<br><br>
+ * To create instances of Twirc, see {@link TwircBuilder}.<br><br>
  * <p>
  * TwitchIrc behaves a bit different from regular IRC, in that it uses only a few types of message types
  * and it has a few message types of its own. This class is intended to cover all of Twitch's special
@@ -47,7 +47,7 @@ import java.util.*;
  * see <a href="https://github.com/justintv/Twitch-API/blob/master/IRC.md">
  * https://github.com/justintv/Twitch-API/blob/master/IRC.md </a>
  */
-public class Twirk
+public class Twirc
 {
     final boolean verboseMode;
     final Set<String> moderators = Collections.synchronizedSet(new HashSet<String>());
@@ -63,7 +63,7 @@ public class Twirk
     private final int port;
     private final boolean useSSL;
     private final OutputQueue queue;
-    private final ArrayList<TwirkListener> listeners = new ArrayList<>();
+    private final ArrayList<TwircListener> listeners = new ArrayList<>();
     private final ClearChatBuilder clearChatBuilder;
     private final HostTargetBuilder hostTargetBuilder;
     private final ModeBuilder modeBuilder;
@@ -88,7 +88,7 @@ public class Twirk
     //***********************************************************************************************
     //											CONSTRUCTOR
     //***********************************************************************************************
-    Twirk(TwirkBuilder builder)
+    Twirc(TwircBuilder builder)
     {
         this.type = builder.type;
         this.nick = builder.nick;
@@ -114,7 +114,7 @@ public class Twirk
 
         this.queue = new OutputQueue();
 
-        addIRCListener(new TwirkMaintainanceListener(this));
+        addIRCListener(new TwircMaintainanceListener(this));
     }
 
     public BotType getType()
@@ -162,7 +162,7 @@ public class Twirk
     }
 
     /**
-     * Check if this Twirk instance is currently connected to Twitch. If we are not, and we are not
+     * Check if this Twirc instance is currently connected to Twitch. If we are not, and we are not
      * {@link #isDisposed()}, then we may try to reconenct. See {@link #connect()}
      *
      * @return <code>True</code> if we are connected
@@ -173,7 +173,7 @@ public class Twirk
     }
 
     /**
-     * Check if this Twirk instance has beed disposed. If it has, no further
+     * Check if this Twirc instance has beed disposed. If it has, no further
      * connect attempts will succeed.
      *
      * @return <code>True</code> if it is disposed
@@ -189,7 +189,7 @@ public class Twirk
      * in the returned set, and changes to the returned set will not affect the original set.<br><br>
      * <p>
      * For getting all users online as soon as we connect, and the server has told us who are online,
-     * see {@link TwirkListener#onNamesList(java.util.Collection)}
+     * see {@link TwircListener#onNamesList(java.util.Collection)}
      * <p>
      * Also worth noting is that the set only contains the users names in lower case letters.
      *
@@ -245,7 +245,7 @@ public class Twirk
      *
      * @param listener Listener to be added
      */
-    public void addIRCListener(TwirkListener listener)
+    public void addIRCListener(TwircListener listener)
     {
         synchronized (listeners)
         {
@@ -259,7 +259,7 @@ public class Twirk
      * @param listener Listener to be removed
      * @return <code>true</code> if the listener was removed
      */
-    public boolean removeIRCListener(TwirkListener listener)
+    public boolean removeIRCListener(TwircListener listener)
     {
         synchronized (listeners)
         {
@@ -268,17 +268,17 @@ public class Twirk
     }
 
     /**
-     * Connects to the Twitch server and joins the channel which was designated in the TwirkBuilder.
+     * Connects to the Twitch server and joins the channel which was designated in the TwircBuilder.
      *
      * @return {@code true} if connection was successful
      * @throws IOException          In case the BufferedReader or BufferedWriter throws an error during connection. Might be due to timeout, socket closing or something else
-     * @throws InterruptedException In case the Twirk process is interrupted while connecting
+     * @throws InterruptedException In case the Twirc process is interrupted while connecting
      */
     public synchronized boolean connect() throws IOException, InterruptedException
     {
         if (isDisposed)
         {
-            System.err.println("\tError. Cannot connect. This Twirk instance has been disposed.");
+            System.err.println("\tError. Cannot connect. This Twirc instance has been disposed.");
             return false;
         }
         if (isConnected)
@@ -312,7 +312,7 @@ public class Twirk
             //Join the channel
             serverMessage("JOIN " + channel);
 
-            for (TwirkListener listener : listeners)
+            for (TwircListener listener : listeners)
             {
                 listener.onConnect();
             }
@@ -328,7 +328,7 @@ public class Twirk
      * <p>
      * It is safe to call this method even if connections are already closed.<br><br>
      * <p>
-     * This method is different from {@link #close()} in that it calls the {@link TwirkListener#onDisconnect()} method
+     * This method is different from {@link #close()} in that it calls the {@link TwircListener#onDisconnect()} method
      * of all the listeners. A listener may thus attempt to reconnect
      */
     synchronized void disconnect()
@@ -346,7 +346,7 @@ public class Twirk
         releaseResources();
         System.out.println("\tDisconnected from Twitch chat\n");
 
-        for (TwirkListener l : listeners)
+        for (TwircListener l : listeners)
         {
             l.onDisconnect();
         }
@@ -358,7 +358,7 @@ public class Twirk
      * <p>
      * It is safe to call this method even if connections are already closed.<br><br>
      * <p>
-     * This method is different from {@link Twirk#disconnect()} in that it <b>does not</b> call the {@link TwirkListener#onDisconnect()} method
+     * This method is different from {@link Twirc#disconnect()} in that it <b>does not</b> call the {@link TwircListener#onDisconnect()} method
      * of any of the listeners. Thus, this method is intended to be called if you want to make sure no reconnect attempts are performed.
      */
     public synchronized void close()
@@ -500,7 +500,7 @@ public class Twirk
         synchronized (listeners)
         {
             //First, we call all onAnything messages
-            for (TwirkListener l : listeners)
+            for (TwircListener l : listeners)
             {
                 l.onAnything(line);
             }
@@ -511,7 +511,7 @@ public class Twirk
             if (message.getCommand().equals("JOIN"))
             {
                 String userName = parseUsername(message.getPrefix());
-                for (TwirkListener l : listeners)
+                for (TwircListener l : listeners)
                 {
                     l.onJoin(userName);
                 }
@@ -519,7 +519,7 @@ public class Twirk
             else if (message.getCommand().equals("PART"))
             {
                 String userName = parseUsername(message.getPrefix());
-                for (TwirkListener l : listeners)
+                for (TwircListener l : listeners)
                 {
                     l.onPart(userName);
                 }
@@ -533,7 +533,7 @@ public class Twirk
                 }
                 else
                 {
-                    for (TwirkListener l : listeners)
+                    for (TwircListener l : listeners)
                     {
                         l.onPrivMsg(user, message);
                     }
@@ -542,7 +542,7 @@ public class Twirk
             else if (message.getCommand().equals("WHISPER"))
             {
                 TwitchUser user = twitchUserBuilder.build(message);
-                for (TwirkListener l : listeners)
+                for (TwircListener l : listeners)
                 {
                     l.onWhisper(user, message);
                 }
@@ -550,7 +550,7 @@ public class Twirk
             else if (message.getCommand().equals("NOTICE"))
             {
                 NoticeEvent notice = noticeBuilder.build(message);
-                for (TwirkListener l : listeners)
+                for (TwircListener l : listeners)
                 {
                     l.onNotice(notice);
                 }
@@ -558,7 +558,7 @@ public class Twirk
             else if (message.getCommand().equals("MODE"))
             {
                 ModeEvent mode = modeBuilder.build(message);
-                for (TwirkListener l : listeners)
+                for (TwircListener l : listeners)
                 {
                     l.onMode(mode);
                 }
@@ -566,7 +566,7 @@ public class Twirk
             else if (message.getCommand().equals("USERSTATE"))
             {
                 UserStateEvent userstate = userstateBuilder.build(message);
-                for (TwirkListener l : listeners)
+                for (TwircListener l : listeners)
                 {
                     l.onUserState(userstate);
                 }
@@ -574,7 +574,7 @@ public class Twirk
             else if (message.getCommand().equals("USERNOTICE"))
             {
                 UserNoticeEvent usernotice = usernoticeBuilder.build(message);
-                for (TwirkListener l : listeners)
+                for (TwircListener l : listeners)
                 {
                     l.onUsernotice(usernotice);
                 }
@@ -582,7 +582,7 @@ public class Twirk
             else if (message.getCommand().equals("ROOMSTATE"))
             {
                 RoomstateEvent roomstate = roomstateBuilder.build(message);
-                for (TwirkListener l : listeners)
+                for (TwircListener l : listeners)
                 {
                     l.onRoomstate(roomstate);
                 }
@@ -591,7 +591,7 @@ public class Twirk
             {
                 ActionEvent action = actionBuilder.build(message);
                 TwitchUser user = twitchUserBuilder.build(message);
-                for (TwirkListener l : listeners)
+                for (TwircListener l : listeners)
                 {
                     l.onAction(user, message);
                 }
@@ -599,7 +599,7 @@ public class Twirk
             else if (message.getCommand().equals("CLEARCHAT"))
             {
                 ClearChatEvent clearChat = clearChatBuilder.build(message);
-                for (TwirkListener l : listeners)
+                for (TwircListener l : listeners)
                 {
                     l.onClearChat(clearChat);
                 }
@@ -607,7 +607,7 @@ public class Twirk
             else if (message.getCommand().equals("HOSTTARGET"))
             {
                 HostTargetEvent hostTarget = hostTargetBuilder.build(message);
-                for (TwirkListener l : listeners)
+                for (TwircListener l : listeners)
                 {
                     l.onHost(hostTarget);
                 }
@@ -615,13 +615,13 @@ public class Twirk
             else if (message.getCommand().equals("CAP"))
             {
                 System.out.println("a CAP event??");
-                //ChirpBot.log.info("Oh shit a CAP event");
+                //TwircBot.log.info("Oh shit a CAP event");
                 //Twitch might in the future implement more of these...
             }
             else if (message.getCommand().equals("GLOBALUSERSTATE"))
             {
                 GlobalUserStateEvent globalUserState = globalUserStateBuilder.build(message);
-                for (TwirkListener l : listeners)
+                for (TwircListener l : listeners)
                 {
                     l.onGlobalUserstate(globalUserState);
                 }
@@ -637,7 +637,7 @@ public class Twirk
                 else if (message.getCommand().equals("366"))
                 {
                     Set<String> users = Collections.unmodifiableSet(online);
-                    for (TwirkListener l : listeners)
+                    for (TwircListener l : listeners)
                     {
                         l.onNamesList(users);
                     }
@@ -646,7 +646,7 @@ public class Twirk
             else
             {
                 //If we've gotten all the way down here, we don't know this message's type
-                for (TwirkListener l : listeners)
+                for (TwircListener l : listeners)
                 {
                     l.onUnknown(line);
                 }
@@ -659,7 +659,7 @@ public class Twirk
         SubscriberEvent subEvent = subscriberBuilder.build(message);
         if (subEvent != null)
         {
-            for (TwirkListener l : listeners)
+            for (TwircListener l : listeners)
             {
                 l.onSubscriberEvent(subEvent);
             }

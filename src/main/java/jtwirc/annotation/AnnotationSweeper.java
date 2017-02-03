@@ -80,7 +80,7 @@ public class AnnotationSweeper
     private Class[] sweep(Class<? extends java.lang.annotation.Annotation> annotation) throws ClassNotFoundException, IOException
     {
         List<Class> classes = new ArrayList<>();
-        for (Class clazz : getClasses("com.gikk.twirk"))
+        for (Class clazz : getClasses("jtwirc"))
         {
             if (clazz.isAnnotationPresent(annotation))
             {

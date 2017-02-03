@@ -1,7 +1,7 @@
 package jtwirc.common.listeners;
 
-import jtwirc.Twirk;
-import jtwirc.events.TwirkListenerBaseImpl;
+import jtwirc.Twirc;
+import jtwirc.events.TwircListenerBaseImpl;
 import jtwirc.types.clearChat.ClearChatEvent;
 import jtwirc.types.hostTarget.HostTargetEvent;
 import jtwirc.types.mode.ModeEvent;
@@ -11,12 +11,12 @@ import jtwirc.types.users.UserStateEvent;
 
 import java.util.Collection;
 
-public class InfoListener extends TwirkListenerBaseImpl
+public class InfoListener extends TwircListenerBaseImpl
 {
 
-    private Twirk.BotType type;
+    private Twirc.BotType type;
 
-    public InfoListener(Twirk.BotType type)
+    public InfoListener(Twirc.BotType type)
     {
         this.type = type;
     }

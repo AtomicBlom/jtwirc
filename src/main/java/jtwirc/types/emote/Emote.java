@@ -12,7 +12,7 @@ import java.util.LinkedList;
  * <li>Pattern - The emote's string pattern (Ex. 'Kappa')
  * <li>Indices - For each time an emote is present in a message, the emotes begin- and end index must be listed. Begin is inclusive, end is exclusive
  * </ul>
- * For example, if the message is: {@code Kappa PogChamp Kappa}<br> the TwirkEmote for Kappa will be:<ul>
+ * For example, if the message is: {@code Kappa PogChamp Kappa}<br> the TwircEmote for Kappa will be:<ul>
  * <li>EmoteID = 25
  * <li>Pattern = Kappa
  * <li>Indices = (0,5), (15,20)

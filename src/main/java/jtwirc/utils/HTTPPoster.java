@@ -71,7 +71,7 @@ public class HTTPPoster
         {
             URL url = new URL(urlString);
             URLConnection conn = url.openConnection();
-            conn.setRequestProperty("User-Agent", "ChirpBot");
+            conn.setRequestProperty("User-Agent", "TwircBot");
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     conn.getInputStream()));
             String inputLine;

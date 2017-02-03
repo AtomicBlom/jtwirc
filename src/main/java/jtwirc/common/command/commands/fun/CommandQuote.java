@@ -2,8 +2,8 @@ package jtwirc.common.command.commands.fun;
 
 import com.mb3364.twitch.api.handlers.ChannelResponseHandler;
 import com.mb3364.twitch.api.models.Channel;
+import jtwirc.TwircBot;
 import jtwirc.common.command.CommandBase;
-import jtwirc.todo.ChirpBot;
 import jtwirc.types.twitchMessage.TwitchMessage;
 import jtwirc.types.users.TwitchUser;
 import jtwirc.utils.Defaults;
@@ -27,14 +27,14 @@ public class CommandQuote extends CommandBase
         {
             Random rand = new Random();
 
-            long quote = rand.nextInt(ChirpBot.quoteList.size()) + 1;
+            long quote = rand.nextInt(TwircBot.quoteList.size()) + 1;
             while (!quoteSend)
             {
-                if (ChirpBot.quoteList.containsKey(quote))
+                if (TwircBot.quoteList.containsKey(quote))
                 {
-                    if (ChirpBot.quoteList.get(quote) != null)
+                    if (TwircBot.quoteList.get(quote) != null)
                     {
-                        MessageSending.sendNormalMessage("Quote #" + quote + " : " + ChirpBot.quoteList.get(quote));
+                        MessageSending.sendNormalMessage("Quote #" + quote + " : " + TwircBot.quoteList.get(quote));
                         quoteSend = true;
                     }
                 }
@@ -52,9 +52,9 @@ public class CommandQuote extends CommandBase
             {
                 MessageSending.sendNormalMessage("Want to know all the quotes? Go here : http://duskbot.nl/botpages/quotes.php?streamer=" + Defaults.getStreamer());
             }
-            else if (ChirpBot.quoteList.get(Long.parseLong(args[1])) != null)
+            else if (TwircBot.quoteList.get(Long.parseLong(args[1])) != null)
             {
-                MessageSending.sendNormalMessage("Quote #" + Long.parseLong(args[1]) + " : " + ChirpBot.quoteList.get(Long.parseLong(args[1])));
+                MessageSending.sendNormalMessage("Quote #" + Long.parseLong(args[1]) + " : " + TwircBot.quoteList.get(Long.parseLong(args[1])));
             }
             else
             {
@@ -82,7 +82,7 @@ public class CommandQuote extends CommandBase
                             }
                         }
                         final String[] game = new String[1];
-                        ChirpBot.twitch.channels().get(ChirpBot.config.getProperty("autoJoinChannel"), new ChannelResponseHandler()
+                        TwircBot.twitch.channels().get(TwircBot.config.getProperty("autoJoinChannel"), new ChannelResponseHandler()
                         {
                             @Override
                             public void onSuccess(Channel channel)
@@ -107,16 +107,16 @@ public class CommandQuote extends CommandBase
                         //get current date time with Date()
                         Date date = new Date();
                         String completeQuote = result.toString() + " ~" + game[0] + " " + dateFormat.format(date);
-                        long quoted = (long) ChirpBot.quoteList.size() + 1;
+                        long quoted = (long) TwircBot.quoteList.size() + 1;
 
                         while (!quoteAdded)
                         {
-                            if (!ChirpBot.quoteList.containsKey(quoted))
+                            if (!TwircBot.quoteList.containsKey(quoted))
                             {
-                                ChirpBot.quoteList.put(quoted, completeQuote);
+                                TwircBot.quoteList.put(quoted, completeQuote);
                                 quoteAdded = true;
                                 MessageSending.sendNormalMessage("Quote has been added as #" + quoted + ".");
-                                ChirpBot.log.info("Quote " + quoted + " has been added");
+                                TwircBot.log.info("Quote " + quoted + " has been added");
                             }
                             else
                             {
@@ -132,16 +132,16 @@ public class CommandQuote extends CommandBase
                     }
                     finally
                     {
-                        ChirpBot.saveAllTheThings();
+                        TwircBot.saveAllTheThings();
                     }
                 }
                 else if (args[1].equals("remove"))
                 {
                     try
                     {
-                        ChirpBot.quoteList.remove(Long.parseLong(args[2]));
+                        TwircBot.quoteList.remove(Long.parseLong(args[2]));
                         MessageSending.sendNormalMessage("Quote " + args[2] + " removed.");
-                        ChirpBot.log.info("Quote " + args[2] + " has been removed");
+                        TwircBot.log.info("Quote " + args[2] + " has been removed");
                     }
                     catch (Exception e)
                     {
@@ -149,7 +149,7 @@ public class CommandQuote extends CommandBase
                     }
                     finally
                     {
-                        ChirpBot.saveAllTheThings();
+                        TwircBot.saveAllTheThings();
                     }
                 }
             }

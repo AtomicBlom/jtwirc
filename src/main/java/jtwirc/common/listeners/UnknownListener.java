@@ -1,14 +1,14 @@
 package jtwirc.common.listeners;
 
-import jtwirc.Twirk;
-import jtwirc.events.TwirkListenerBaseImpl;
+import jtwirc.Twirc;
+import jtwirc.events.TwircListenerBaseImpl;
 
-public class UnknownListener extends TwirkListenerBaseImpl
+public class UnknownListener extends TwircListenerBaseImpl
 {
 
-    private Twirk.BotType type;
+    private Twirc.BotType type;
 
-    public UnknownListener(Twirk.BotType type)
+    public UnknownListener(Twirc.BotType type)
     {
         this.type = type;
     }

@@ -1,7 +1,7 @@
 package jtwirc.common.threads;
 
+import jtwirc.TwircBot;
 import jtwirc.annotation.Unfinished;
-import jtwirc.todo.ChirpBot;
 import jtwirc.utils.JSONParser;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -29,7 +29,7 @@ public class ModCommon
                 catch (Exception e)
                 {
                     e.printStackTrace();
-                    ChirpBot.log.error(e.getMessage());
+                    TwircBot.log.error(e.getMessage());
                 }
             }
         }
@@ -40,25 +40,25 @@ public class ModCommon
         try
         {
             moderators.clear();
-            JSONObject json = new JSONObject(JSONParser.readUrl("http://tmi.twitch.tv/group/user/" + ChirpBot.config.getProperty("autoJoinChannel") + "/chatters"));
+            JSONObject json = new JSONObject(JSONParser.readUrl("http://tmi.twitch.tv/group/user/" + TwircBot.config.getProperty("autoJoinChannel") + "/chatters"));
             for (int i = 0; i < json.length(); i++)
             {
                 JSONArray mods = json.getJSONObject("chatters").getJSONArray("moderators");
                 for (int j = 0; j < mods.length(); j++)
                 {
                     moderators.add(mods.getString(j));
-                    if (!ChirpBot.permList.containsKey(mods.getString(j)))
+                    if (!TwircBot.permList.containsKey(mods.getString(j)))
                     {
-                        ChirpBot.permList.put(mods.getString(j).toLowerCase(), "mod");
-                        ChirpBot.saveAllTheThings();
+                        TwircBot.permList.put(mods.getString(j).toLowerCase(), "mod");
+                        TwircBot.saveAllTheThings();
                     }
                 }
             }
         }
         catch (Exception e)
         {
-            ChirpBot.log.error("Can't reach Twitch.");
-            ChirpBot.log.error(e.getMessage());
+            TwircBot.log.error("Can't reach Twitch.");
+            TwircBot.log.error(e.getMessage());
         }
     }
 }

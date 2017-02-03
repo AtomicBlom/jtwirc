@@ -1,6 +1,7 @@
 package jtwirc.common.module;
 
-import jtwirc.Twirk;
+import jtwirc.Twirc;
+import jtwirc.TwircBot;
 import jtwirc.common.command.CommandBase;
 import jtwirc.common.command.commands.faq.*;
 import jtwirc.common.command.commands.fun.CommandQuote;
@@ -14,8 +15,7 @@ import jtwirc.common.command.commands.util.*;
 import jtwirc.common.command.utils.AddCommands;
 import jtwirc.common.command.utils.DeleteCommands;
 import jtwirc.common.command.utils.EditCommands;
-import jtwirc.events.TwirkListenerBaseImpl;
-import jtwirc.todo.ChirpBot;
+import jtwirc.events.TwircListenerBaseImpl;
 import jtwirc.types.twitchMessage.TwitchMessage;
 import jtwirc.types.users.TwitchUser;
 import jtwirc.utils.Defaults;
@@ -23,13 +23,13 @@ import jtwirc.utils.MessageSending;
 
 import java.util.HashMap;
 
-public class Commands extends TwirkListenerBaseImpl
+public class Commands extends TwircListenerBaseImpl
 {
     public HashMap<String, CommandBase> commands = new HashMap<>();
 
-    private Twirk.BotType type;
+    private Twirc.BotType type;
 
-    public Commands(Twirk.BotType type)
+    public Commands(Twirc.BotType type)
     {
         commands.clear();
         String points = Defaults.getPointName();
@@ -75,7 +75,7 @@ public class Commands extends TwirkListenerBaseImpl
 
     private static String getResponseFromCommand(TwitchUser user, TwitchMessage message, String command)
     {
-        String response = ChirpBot.commandList.get(command);
+        String response = TwircBot.commandList.get(command);
         if (message.getContent().split(" ").length > 1)
         {
             response = response.replace("%user%", message.getContent().split(" ")[1]); //!so %user%
@@ -93,10 +93,10 @@ public class Commands extends TwirkListenerBaseImpl
     public void onPrivMsg(TwitchUser user, TwitchMessage message)
     {
         super.onPrivMsg(user, message);
-        if (ChirpBot.commandList.containsKey(message.getContent().split(" ")[0]))
+        if (TwircBot.commandList.containsKey(message.getContent().split(" ")[0]))
         {
-            String userPerm = ChirpBot.permList.get(user.getName().toLowerCase());
-            String commandPerm = ChirpBot.commandpermList.get(parseCommandFromMSG(message));
+            String userPerm = TwircBot.permList.get(user.getName().toLowerCase());
+            String commandPerm = TwircBot.commandpermList.get(parseCommandFromMSG(message));
             if (commandPerm == null)
             {
                 commandPerm = "null";

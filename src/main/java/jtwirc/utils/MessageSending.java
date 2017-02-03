@@ -1,24 +1,24 @@
 package jtwirc.utils;
 
 
-import jtwirc.todo.ChirpBot;
+import jtwirc.TwircBot;
 
 public class MessageSending
 {
 
     public static void sendNormalMessage(String message)
     {
-        if (!ChirpBot.DEBUG)
+        if (!TwircBot.DEBUG)
         {
-            ChirpBot.bots.get(ChirpBot.BOT_COMMANDS).channelMessage(message);
+            TwircBot.bots.get(TwircBot.BOT_COMMANDS).channelMessage(message);
         }
     }
 
     public static void sendWhisper(String user, String message)
     {
-        if (!ChirpBot.DEBUG)
+        if (!TwircBot.DEBUG)
         {
-            ChirpBot.bots.get(ChirpBot.BOT_WHISPER).channelMessage("/w " + user + " " + message);
+            TwircBot.bots.get(TwircBot.BOT_WHISPER).channelMessage("/w " + user + " " + message);
         }
     }
 

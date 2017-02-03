@@ -1,7 +1,7 @@
 package jtwirc.common.command.utils;
 
+import jtwirc.TwircBot;
 import jtwirc.common.command.CommandBase;
-import jtwirc.todo.ChirpBot;
 import jtwirc.types.twitchMessage.TwitchMessage;
 import jtwirc.types.users.TwitchUser;
 import jtwirc.utils.MessageSending;
@@ -73,12 +73,12 @@ public class AddCommands extends CommandBase
 
     private void addCommand(String command, String response, TwitchUser user)
     {
-        if (!ChirpBot.commandList.containsKey(command))
+        if (!TwircBot.commandList.containsKey(command))
         {
-            ChirpBot.commandList.put(command, response);
+            TwircBot.commandList.put(command, response);
             MessageSending.sendWhisper(user.getName(), "Command added");
-            ChirpBot.log.info(command + " added");
-            ChirpBot.saveAllTheThings();
+            TwircBot.log.info(command + " added");
+            TwircBot.saveAllTheThings();
         }
         else
         {
@@ -88,13 +88,13 @@ public class AddCommands extends CommandBase
 
     private void addCommand(String command, String response, String permission, TwitchUser user)
     {
-        if (!ChirpBot.commandList.containsKey(command))
+        if (!TwircBot.commandList.containsKey(command))
         {
-            ChirpBot.commandList.put(command, response);
-            ChirpBot.commandpermList.put(command, permission);
+            TwircBot.commandList.put(command, response);
+            TwircBot.commandpermList.put(command, permission);
             MessageSending.sendWhisper(user.getName(), "Command added");
-            ChirpBot.log.info(command + " added");
-            ChirpBot.saveAllTheThings();
+            TwircBot.log.info(command + " added");
+            TwircBot.saveAllTheThings();
         }
         else
         {

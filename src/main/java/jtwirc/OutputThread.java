@@ -18,7 +18,7 @@ class OutputThread extends Thread
     //***********************************************************************************************
     //											VARIABLES
     //***********************************************************************************************
-    private final Twirk connection;
+    private final Twirc connection;
     private final BufferedWriter writer;
     private final OutputQueue queue;
 
@@ -27,13 +27,13 @@ class OutputThread extends Thread
     //***********************************************************************************************
     //											CONSTRUCTOR
     //***********************************************************************************************
-    OutputThread(Twirk connection, OutputQueue queue, BufferedReader reader, BufferedWriter writer)
+    OutputThread(Twirc connection, OutputQueue queue, BufferedReader reader, BufferedWriter writer)
     {
         this.connection = connection;
         this.queue = queue;
         this.writer = writer;
 
-        this.setName("Twirk-OutputThread");
+        this.setName("Twirc-OutputThread");
     }
 
     @Override
@@ -87,7 +87,7 @@ class OutputThread extends Thread
         }
         catch (SocketException e)
         {
-            System.err.println("Could not QuickSend message. Socket was closed (OutputThread @ Twirk)");
+            System.err.println("Could not QuickSend message. Socket was closed (OutputThread @ Twirc)");
         }
     }
 
@@ -118,7 +118,7 @@ class OutputThread extends Thread
     {
         if (!isConnected)
         {
-            System.err.println("Twirk is not connected! Sending messages will not succeed!");
+            System.err.println("Twirc is not connected! Sending messages will not succeed!");
         }
 		/*An IRC message may not be longer than 512 characters. Also, they must end with \r\n,
 		  so if the supplied message is longer than 510 characters, we have to cut it short.
