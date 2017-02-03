@@ -1,0 +1,71 @@
+/*
+ * For more details take a look at the Java Quickstart chapter in the Gradle
+ * user guide available at http://gradle.org/docs/2.5/userguide/tutorial_java_projects.html
+ */
+
+group 'com.github.techbrew-mc'
+version '0.2.1'
+
+// Apply the java plugin to add support for Java
+apply plugin: 'java'
+targetCompatibility = 1.8
+sourceCompatibility = 1.8
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    jcenter()
+    maven {
+        url 'https://jitpack.io'
+    }
+}
+
+// In this section you declare the dependencies for your production and test code
+dependencies {
+
+    compile fileTree(dir: 'lib', include: ['*.jar'])
+
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.1.1'
+    compile group: 'com.github.orsjb', name: 'beads', version: 'master'
+    compile group: 'com.github.techbrew-mc', name: 'twitch-api-wrapper', version: '0.3.1'
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.3'
+    compile group: 'com.google.guava', name: 'guava', version: '18.0'
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+    compile group: 'com.hierynomus', name: 'sshj', version: '0.19.0'
+    compile group: 'com.rosaloves', name: 'bitlyj', version: '2.0.0'
+    compile group: 'com.rosaloves', name: 'bitlyj', version: '2.0.0'
+    compile group: 'commons-io', name: 'commons-io', version: '2.4'
+    compile group: 'commons-net', name: 'commons-net', version: '1.4.0'
+    compile group: 'javax.json', name: 'javax.json-api', version: '1.0'
+    compile group: 'net.sourceforge.jeval', name: 'jeval', version: '0.9.4'
+    compile group: 'org.apache.commons', name: 'commons-io', version: '1.3.2'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.1'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.5'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.1'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.1'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.1'
+    compile group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version: '1.9.13'
+    compile group: 'org.fxmisc.richtext', name: 'richtextfx', version: '0.7-M3'
+    compile group: 'org.json', name: 'json', version: '20090211'
+    compile group: 'org.luaj', name: 'luaj-jse', version: '2.0'
+    compile group: 'org.mozilla', name: 'rhino', version: '1.7R4'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.+'
+    compile group: 'org.yaml', name: 'snakeyaml', version: '1.13'
+
+    // Test framework
+    testCompile 'junit:junit:4.12'
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
